@@ -977,6 +977,35 @@ a,img{-webkit-user-drag:none}
 .pull-hint{position:absolute;top:0;height:3px;width:30%;z-index:79;pointer-events:none}
 .status{touch-action:none}
 
+/* reels feed */
+.rl-feed{position:absolute;inset:0;overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none}
+.rl-feed::-webkit-scrollbar{display:none}
+.rl-item{position:relative;height:100%;scroll-snap-align:start;scroll-snap-stop:always;background:#000}
+.rl-item video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rl-top{position:absolute;top:0;left:0;right:0;z-index:2;pointer-events:none;text-shadow:0 1px 3px rgba(0,0,0,.5)}
+.rl-like.on svg path{fill:#ff3040;stroke:#ff3040}
+.rl-info .rl-fol{border:1px solid rgba(255,255,255,.8);border-radius:8px;padding:3px 10px;font-size:13px;font-weight:600}
+/* kakao emoticons */
+.kt-emo-btn{width:36px;height:36px;border-radius:50%;font-size:22px;color:#777;flex:none;align-self:center;background:transparent!important;padding:0!important}
+.kt-emo-btn.on{color:#f5a300}
+.kt-emo{background:#fff;border-top:1px solid #eee;flex:none;height:250px;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0px)}
+.kt-emo[hidden]{display:none}
+.ke-tabs{display:flex;gap:6px;padding:8px 10px;border-bottom:1px solid #f0f0f0}
+.ke-tabs button{font-size:12.5px;padding:5px 10px;border-radius:14px;background:#f3f3f3;color:#555}
+.ke-tabs button.on{background:#ffe44d;color:#222;font-weight:700}
+.ke-grid{flex:1;overflow-y:auto;display:grid;gap:6px;padding:8px 10px;align-content:start}
+.ke-grid.stk{grid-template-columns:repeat(4,1fr)}
+.ke-grid.emo{grid-template-columns:repeat(6,1fr)}
+.ke-grid button{display:flex;flex-direction:column;align-items:center;font-size:10.5px;color:#666;border-radius:10px;padding:4px 0}
+.ke-grid button:active{background:#f3f3f3}
+.ke-grid.stk svg{width:62px;height:62px}
+.ke-grid.emo button{font-size:30px}
+.kstk{display:flex;flex-direction:column;align-items:center;width:120px}
+.kstk svg{width:110px;height:110px}
+.kstk span{font-size:15px;font-weight:800;color:#5a3a1c;background:#fff;border:2.5px solid #5a3a1c;border-radius:12px;padding:1px 10px;margin-top:-10px;white-space:nowrap}
+.kemo{font-size:52px;line-height:1.1}
+#ktForm{align-items:center}
+
 .toast{position:absolute;top:64px;left:50%;transform:translateX(-50%);background:rgba(30,30,36,.94);color:#fff;padding:10px 16px;border-radius:14px;font-size:14px;z-index:90;max-width:86%;text-align:center;line-height:1.45}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -1154,10 +1183,8 @@ a,img{-webkit-user-drag:none}
         <form class="ch-in" id="chForm"><input id="chInput" placeholder="메시지 보내기..." autocomplete="off" aria-label="메시지"><button>보내기</button></form>
       </div>
       <div class="igv reels" id="igReels" hidden>
-        <video id="rlVid" src="reels.mp4" loop playsinline preload="none"></video>
+        <div class="rl-feed" id="rlFeed"></div>
         <div class="rl-top"><b>릴스</b></div>
-        <div class="rl-side"><button id="rlLike"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9"><path d="M12 20.5s-7-4.4-9-8.6A4.9 4.9 0 0 1 12 6.6a4.9 4.9 0 0 1 9 5.3c-2 4.2-9 8.6-9 8.6z"/></svg><small>1,024</small></button><button id="rlCm"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linejoin="round"><path d="M20.5 11.6a8.4 8.4 0 0 1-12.4 7.4L3.5 20.5l1.5-4.4A8.4 8.4 0 1 1 20.5 11.6z"/></svg><small>6</small></button><button><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linejoin="round"><path d="M21.5 2.5 2.5 9.8l7.4 3.3 3.3 7.4zM9.9 13.1l11.6-10.6"/></svg><small>공유</small></button></div>
-        <div class="rl-info"><div><span id="rlAv"></span><b data-user="sion.ii">sion.ii</b><button id="rlFollow">팔로우</button></div><p>🐰🐰🐰 I WISH 💚</p><small>♫ 원본 오디오 · sion.ii</small></div>
       </div>
       <div class="igcm" id="igCm" hidden><div class="cm-sheet"><div class="cm-grab"></div><div class="cm-h"><b>댓글</b><button id="cmClose" aria-label="닫기">×</button></div><div class="cm-list" id="cmList"></div><form class="cm-in" id="cmForm"><span id="cmMe"></span><input id="cmInput" placeholder="댓글 달기..." autocomplete="off" aria-label="댓글"><button>게시</button></form></div></div>
       <div class="ig-tabs" id="igTabs">
@@ -1408,7 +1435,7 @@ a,img{-webkit-user-drag:none}
         <div class="call-top"><span id="callAv"></span><h3 id="callName"></h3><small id="callState"></small></div>
         <div class="call-grid" id="callGrid"><button class="cbtn"><i>🔇</i>소리 끔</button><button class="cbtn"><i>⌗</i>키패드</button><button class="cbtn"><i>🔊</i>스피커</button><button class="cbtn"><i>＋</i>통화 추가</button><button class="cbtn"><i>📹</i>FaceTime</button><button class="cbtn"><i>👤</i>연락처</button></div>
         <button class="call-end" id="callEnd" aria-label="통화 종료"><svg viewBox="0 0 24 24"><path fill="#fff" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .6 3.6 1 1 0 0 1-.25 1z"/></svg></button>
-        <div class="ftscr" id="ftScr" hidden><video id="ftVid" src="facetime.mp4" loop playsinline preload="none"></video><div class="ft-top"><button id="ftBack" aria-label="통화 화면으로">‹</button><b>오시온♥</b><small>FaceTime</small></div><span class="ft-self" id="ftSelf"></span><div class="ft-bar"><button class="ft-end" id="ftEnd" aria-label="통화 종료"><svg viewBox="0 0 24 24"><path fill="#fff" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .6 3.6 1 1 0 0 1-.25 1z"/></svg></button></div></div><div class="call-in" id="callIn" hidden><div><button class="ci-no" id="ciNo" aria-label="거절"><svg viewBox="0 0 24 24"><path fill="#fff" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .6 3.6 1 1 0 0 1-.25 1z"/></svg></button>거절</div><div><button class="ci-yes" id="ciYes" aria-label="수락"><svg viewBox="0 0 24 24"><path fill="#fff" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .6 3.6 1 1 0 0 1-.25 1z"/></svg></button>수락</div></div>
+        <div class="ftscr" id="ftScr" hidden><video id="ftVid" src="facetime.mp4" loop playsinline preload="none"></video><div class="ft-top"><button id="ftBack" aria-label="통화 화면으로">‹</button><b id="ftName">오시온♥</b><small>FaceTime</small></div><span class="ft-self" id="ftSelf"></span><div class="ft-bar"><button class="ft-end" id="ftEnd" aria-label="통화 종료"><svg viewBox="0 0 24 24"><path fill="#fff" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .6 3.6 1 1 0 0 1-.25 1z"/></svg></button></div></div><div class="call-in" id="callIn" hidden><div><button class="ci-no" id="ciNo" aria-label="거절"><svg viewBox="0 0 24 24"><path fill="#fff" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .6 3.6 1 1 0 0 1-.25 1z"/></svg></button>거절</div><div><button class="ci-yes" id="ciYes" aria-label="수락"><svg viewBox="0 0 24 24"><path fill="#fff" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .6 3.6 1 1 0 0 1-.25 1z"/></svg></button>수락</div></div>
       </div>
     <div class="dimmer" id="dimmer"></div>
     <div class="cc" id="cc" hidden>
@@ -3188,20 +3215,8 @@ $("#igCm").addEventListener("click",e=>{if(e.target.id==="igCm")$("#igCm").hidde
 $("#cmForm").onsubmit=e=>{e.preventDefault();const v=$("#cmInput").value.trim();if(!v)return;(cmExtra[cmKey]=cmExtra[cmKey]||[]).push({u:IGME.id,t:v,w:"방금",l:0});$("#cmInput").value="";drawComments();const c=$("#cmList");c.scrollTop=c.scrollHeight;
   const meta=$$(`#insta .cmb.pmeta[data-key="${CSS.escape(cmKey)}"]`);const n=commentsFor(cmKey).length;meta.forEach(m=>m.textContent=`댓글 ${n}개 모두 보기`)};
 
-/* ===== 릴스 ===== */
-function openReels(){
-  igShow("igReels");$$("#igTabs button").forEach(b=>b.classList.toggle("on",b.dataset.v==="reels"));$("#igTabs").classList.add("dark");
-  $("#rlAv").innerHTML=avHTML("sion.ii",32);const v=$("#rlVid");v.currentTime=0;v.muted=false;v.play().catch(()=>{v.muted=true;v.play().catch(()=>{})});
-}
-const _igShow=igShow;
-igShow=function(v){_igShow(v);$("#igTabs").classList.toggle("dark",v==="igReels");if(v!=="igReels")try{$("#rlVid").pause()}catch(e){}};
-$$("#igTabs button").forEach(b=>{if(b.dataset.v==="reels")b.onclick=openReels});
-$("#rlVid").onclick=()=>{const v=$("#rlVid");if(v.muted){v.muted=false;return}v.paused?v.play():v.pause()};
-$("#rlLike").onclick=()=>{const b=$("#rlLike"),on=b.classList.toggle("on");b.querySelector("small").textContent=on?"1,025":"1,024"};
-$("#rlCm").onclick=()=>{POSTREG.reel={u:"sion.ii",cm:6};openComments("reel")};
-$("#rlFollow").onclick=e=>{const b=e.currentTarget;b.textContent=b.textContent==="팔로우"?"팔로잉":"팔로우"};
 const _closeSheets=closeSheets;
-closeSheets=function(){try{$("#rlVid").pause();$("#ftVid").pause()}catch(e){}$("#igCm").hidden=true;return _closeSheets()};
+closeSheets=function(){try{rlPauseAll();$("#ftVid").pause()}catch(e){}$("#igCm").hidden=true;return _closeSheets()};
 
 /* ===== 인스타 DM 답장 ===== */
 const DM_POOL={
@@ -3245,12 +3260,6 @@ function bannerIG(title,text,id){
 
 /* ===== 페이스타임 (오시온) ===== */
 const ftBtn=$$("#callGrid .cbtn")[4];
-ftBtn.onclick=()=>{
-  if(callWho!=="오시온♥"){toast("FaceTime을 사용할 수 없어요");return}
-  if(!$("#callIn").hidden)return;
-  const F=$("#ftScr"),v=$("#ftVid");F.hidden=false;v.currentTime=0;v.muted=false;v.play().catch(()=>{v.muted=true;v.play().catch(()=>{})});
-  $("#ftSelf").style.backgroundImage=`url("${IMG.p1}")`;
-};
 $("#ftEnd").onclick=()=>{$("#ftVid").pause();$("#ftScr").hidden=true;endCall()};
 $("#ftBack").onclick=()=>{$("#ftVid").pause();$("#ftScr").hidden=true};
 const _endCall=endCall;
@@ -3432,6 +3441,145 @@ function ccSlider(el,fn){
 }
 ccSlider($("#ccBright"),v=>$("#dimmer").style.opacity=(1-v)*.7);
 ccSlider($("#ccVol"),v=>{try{mu.volume=v;vAudio.volume=v;$("#ytVid").volume=v}catch(e){}});
+
+/* ===== 릴스 (스크롤) ===== */
+const RL_HEART='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9"><path d="M12 20.5s-7-4.4-9-8.6A4.9 4.9 0 0 1 12 6.6a4.9 4.9 0 0 1 9 5.3c-2 4.2-9 8.6-9 8.6z"/></svg>';
+const RL_CM='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linejoin="round"><path d="M20.5 11.6a8.4 8.4 0 0 1-12.4 7.4L3.5 20.5l1.5-4.4A8.4 8.4 0 1 1 20.5 11.6z"/></svg>';
+const RL_SEND='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linejoin="round"><path d="M21.5 2.5 2.5 9.8l7.4 3.3 3.3 7.4zM9.9 13.1l11.6-10.6"/></svg>';
+const REELS=[
+ {u:"sion.ii",src:"reels.mp4",cap:"🐰🐰🐰 I WISH 💚",likes:1024,cm:6},
+ {u:"roha_0505",src:"roha.mp4",cap:"오늘의 로하 💢🖤",likes:812,cm:9}
+];
+let rlCur=0,rlBuilt=false;
+function buildReels(){
+  $("#rlFeed").innerHTML=REELS.map((r,i)=>`<div class="rl-item" data-i="${i}"><video src="${r.src}" loop playsinline preload="none"></video>
+    <div class="rl-side"><button class="rl-like" data-i="${i}">${RL_HEART}<small>${r.likes.toLocaleString("en-US")}</small></button><button class="rl-cm" data-i="${i}">${RL_CM}<small>${r.cm}</small></button><button>${RL_SEND}<small>공유</small></button></div>
+    <div class="rl-info"><div>${avHTML(r.u,32)}<b data-user="${r.u}">${r.u}</b><button class="rl-fol">팔로우</button></div><p>${esc(r.cap)}</p><small>♫ 원본 오디오 · ${r.u}</small></div></div>`).join("");
+  $$("#rlFeed .rl-like").forEach(b=>b.onclick=()=>{const r=REELS[+b.dataset.i],on=b.classList.toggle("on");b.querySelector("small").textContent=(r.likes+(on?1:0)).toLocaleString("en-US")});
+  $$("#rlFeed .rl-cm").forEach(b=>b.onclick=()=>{const r=REELS[+b.dataset.i];POSTREG["reel"+b.dataset.i]={u:r.u,cm:r.cm};openComments("reel"+b.dataset.i)});
+  $$("#rlFeed .rl-fol").forEach(b=>b.onclick=()=>{b.textContent=b.textContent==="팔로우"?"팔로잉":"팔로우"});
+  $$("#rlFeed video").forEach(v=>v.onclick=()=>{if(v.muted){v.muted=false;return}v.paused?v.play():v.pause()});
+  rlBuilt=true;
+}
+function rlPauseAll(){$$("#rlFeed video").forEach(v=>v.pause())}
+function rlPlay(i){
+  rlCur=i;$$("#rlFeed video").forEach((v,k)=>{if(k===i){v.currentTime=0;v.muted=false;v.play().catch(()=>{v.muted=true;v.play().catch(()=>{})})}else v.pause()});
+}
+function openReels(){
+  if(!rlBuilt)buildReels();
+  igShow("igReels");$$("#igTabs button").forEach(b=>b.classList.toggle("on",b.dataset.v==="reels"));$("#igTabs").classList.add("dark");
+  const f=$("#rlFeed");f.scrollTop=0;rlPlay(0);
+}
+{let t=null;$("#rlFeed").addEventListener("scroll",()=>{clearTimeout(t);t=setTimeout(()=>{const f=$("#rlFeed"),i=Math.round(f.scrollTop/f.clientHeight);if(i!==rlCur)rlPlay(i)},120)})}
+const _igShow2=igShow;
+igShow=function(v){_igShow2(v);$("#igTabs").classList.toggle("dark",v==="igReels");if(v!=="igReels")rlPauseAll()};
+$$("#igTabs button").forEach(b=>{if(b.dataset.v==="reels")b.onclick=openReels});
+
+/* ===== 영상통화 ===== */
+const FT={"오시온♥":"facetime.mp4","곰":"bobokko.mp4"};
+ftBtn.onclick=()=>{
+  if(!FT[callWho]){toast("FaceTime을 사용할 수 없어요");return}
+  if(!$("#callIn").hidden)return;
+  const F=$("#ftScr"),v=$("#ftVid");$("#ftName").textContent=callWho;
+  if(!v.src.endsWith(FT[callWho]))v.src=FT[callWho];
+  F.hidden=false;v.currentTime=0;v.muted=false;v.play().catch(()=>{v.muted=true;v.play().catch(()=>{})});
+  $("#ftSelf").style.backgroundImage=`url("${IMG.p1}")`;
+};
+
+/* ===== 카톡 이모티콘 ===== */
+function bearSVG(x){
+  const face=x.face||"#c8915a",ear=x.ear||"#a8743f";
+  return`<svg viewBox="0 0 120 120"><circle cx="30" cy="30" r="15" fill="${ear}"/><circle cx="90" cy="30" r="15" fill="${ear}"/><circle cx="30" cy="30" r="7" fill="#f1d3a8"/><circle cx="90" cy="30" r="7" fill="#f1d3a8"/><ellipse cx="60" cy="64" rx="42" ry="38" fill="${face}"/><ellipse cx="60" cy="78" rx="18" ry="13" fill="#f6e2c3"/><ellipse cx="60" cy="72" rx="6" ry="4.5" fill="#3a2412"/>${x.eyes}${x.mouth||'<path d="M54 82q6 5 12 0" stroke="#3a2412" stroke-width="2.5" fill="none" stroke-linecap="round"/>'}${x.extra||""}</svg>`;
+}
+const DOT='<circle cx="44" cy="58" r="4.5" fill="#3a2412"/><circle cx="76" cy="58" r="4.5" fill="#3a2412"/>';
+const BLUSH='<ellipse cx="34" cy="72" rx="7" ry="4" fill="#ff8fa3" opacity=".7"/><ellipse cx="86" cy="72" rx="7" ry="4" fill="#ff8fa3" opacity=".7"/>';
+const HEART=(x,y,s,c)=>`<path transform="translate(${x} ${y}) scale(${s})" d="M0 4C0-2 8-3 8 3c0-6 8-5 8 1 0 5-8 10-8 10S0 9 0 4z" fill="${c||"#ff4d6d"}"/>`;
+const STICKERS=[
+ {id:"love",txt:"사랑해",x:{eyes:HEART(36,52,1)+HEART(68,52,1),extra:BLUSH+HEART(94,8,1.3)+HEART(8,10,.9,"#ff8fa3")}},
+ {id:"happy",txt:"곰랄라~",x:{eyes:'<path d="M38 60q6-8 12 0M70 60q6-8 12 0" stroke="#3a2412" stroke-width="3" fill="none" stroke-linecap="round"/>',extra:BLUSH+'<text x="96" y="22" font-size="16">♪</text>'}},
+ {id:"angry",txt:"곰발사!!",x:{face:"#d27a52",eyes:'<path d="M36 50l14 6M84 50l-14 6" stroke="#3a2412" stroke-width="3.5" stroke-linecap="round"/>'+DOT,mouth:'<path d="M53 86q7-6 14 0" stroke="#3a2412" stroke-width="2.5" fill="none" stroke-linecap="round"/>',extra:'<path d="M96 16l6 6M108 16l-6 6M96 28l6-6M108 28l-6-6" stroke="#ff3b30" stroke-width="3.5" stroke-linecap="round"/>'}},
+ {id:"ha",txt:"하.",x:{eyes:'<path d="M38 58h12M70 58h12" stroke="#3a2412" stroke-width="3.5" stroke-linecap="round"/>',mouth:'<path d="M54 85h12" stroke="#3a2412" stroke-width="2.5" stroke-linecap="round"/>'}},
+ {id:"faint",txt:"(기절)",x:{eyes:'<path d="M39 53l10 10M49 53l-10 10M71 53l10 10M81 53l-10 10" stroke="#3a2412" stroke-width="3" stroke-linecap="round"/>',mouth:'<ellipse cx="60" cy="86" rx="4" ry="5" fill="#3a2412"/>',extra:'<text x="88" y="24" font-size="14" fill="#7a7a7a">~@</text>'}},
+ {id:"cry",txt:"흑흑",x:{eyes:'<path d="M38 58q6 5 12 0M70 58q6 5 12 0" stroke="#3a2412" stroke-width="3" fill="none" stroke-linecap="round"/>',mouth:'<path d="M53 88q7-6 14 0" stroke="#3a2412" stroke-width="2.5" fill="none" stroke-linecap="round"/>',extra:'<path d="M42 64q-3 10 0 16q3-6 0-16zM78 64q-3 10 0 16q3-6 0-16z" fill="#5ac8fa"/>'}},
+ {id:"honey",txt:"꿀 주세요",x:{eyes:DOT+'<circle cx="46" cy="56" r="1.5" fill="#fff"/><circle cx="78" cy="56" r="1.5" fill="#fff"/>',extra:BLUSH+'<rect x="80" y="84" width="30" height="28" rx="8" fill="#f2b632"/><rect x="78" y="80" width="34" height="8" rx="3" fill="#c98a1b"/><text x="85" y="104" font-size="10" font-weight="700" fill="#7a4a00">꿀</text>'}},
+ {id:"sleep",txt:"잘자",x:{eyes:'<path d="M38 60q6 4 12 0M70 60q6 4 12 0" stroke="#3a2412" stroke-width="3" fill="none" stroke-linecap="round"/>',mouth:'<ellipse cx="60" cy="86" rx="3" ry="2.5" fill="#3a2412"/>',extra:'<text x="88" y="26" font-size="18" font-weight="700" fill="#5e5ce6">z</text><text x="100" y="14" font-size="13" font-weight="700" fill="#5e5ce6">z</text>'}},
+ {id:"lol",txt:"ㅋㅋㅋㅋ",x:{eyes:'<path d="M38 56l10 4-10 4M82 56l-10 4 10 4" stroke="#3a2412" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',mouth:'<path d="M50 82q10 14 20 0z" fill="#3a2412"/><path d="M54 88q6 4 12 0" fill="#ff8fa3"/>',extra:BLUSH}},
+ {id:"ok",txt:"알겠곰",x:{eyes:DOT,extra:BLUSH+'<circle cx="104" cy="96" r="13" fill="#34c759"/><path d="M97 96l5 5 9-10" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'}},
+ {id:"hi",txt:"안녕!",x:{eyes:DOT,extra:BLUSH+'<ellipse cx="104" cy="70" rx="10" ry="12" fill="#a8743f"/><path d="M98 54l-4-6M106 52l0-7M113 55l4-6" stroke="#a8743f" stroke-width="3" stroke-linecap="round"/>'}},
+ {id:"what",txt:"이건 또 뭐야",x:{eyes:'<circle cx="44" cy="58" r="6" fill="#fff" stroke="#3a2412" stroke-width="2"/><circle cx="76" cy="58" r="6" fill="#fff" stroke="#3a2412" stroke-width="2"/><circle cx="44" cy="58" r="2.5" fill="#3a2412"/><circle cx="76" cy="58" r="2.5" fill="#3a2412"/>',mouth:'<ellipse cx="60" cy="87" rx="3.5" ry="3" fill="#3a2412"/>',extra:'<text x="96" y="30" font-size="22" font-weight="800" fill="#ff9500">?</text>'}}
+];
+const STK=id=>{const s=STICKERS.find(x=>x.id===id)||STICKERS[0];return`<div class="kstk">${bearSVG(s.x)}<span>${s.txt}</span></div>`};
+const EMOS=["😂","🥺","❤️","🐻","🍯","🔥","👍","😭","🥹","💕","🫶","😳"];
+const _ktBody=ktBody;
+ktBody=function(m){if(m.st)return STK(m.st);if(m.emo)return`<div class="kemo">${m.emo}</div>`;return _ktBody(m)};
+const _ktLast=ktLast;
+ktLast=function(r){const m=ktAll(r).filter(x=>!x.d).pop();if(m&&m.st)return"이모티콘을 보냈습니다.";return _ktLast(r)};
+$("#ktForm").insertAdjacentHTML("afterbegin",'<button type="button" class="kt-emo-btn" id="ktEmoBtn" aria-label="이모티콘">☺</button>');
+$("#ktForm").insertAdjacentHTML("afterend",`<div class="kt-emo" id="ktEmo" hidden><div class="ke-tabs"><button class="on" data-k="stk">🐻 곰곰 이모티콘</button><button data-k="emo">😊 이모지</button></div><div class="ke-grid" id="keGrid"></div></div>`);
+let keTab="stk";
+function drawEmo(){
+  $$("#ktEmo .ke-tabs button").forEach(b=>b.classList.toggle("on",b.dataset.k===keTab));
+  $("#keGrid").className="ke-grid "+keTab;
+  $("#keGrid").innerHTML=keTab==="stk"?STICKERS.map(s=>`<button data-st="${s.id}" aria-label="${s.txt}">${bearSVG(s.x)}<span>${s.txt}</span></button>`).join(""):EMOS.map(e=>`<button data-emo="${e}">${e}</button>`).join("");
+  $$("#keGrid button").forEach(b=>b.onclick=()=>{if(b.dataset.st)ktSendMine({f:"me",st:b.dataset.st,t:"이모티콘을 보냈습니다."},"");else ktSendMine({f:"me",emo:b.dataset.emo,t:b.dataset.emo},b.dataset.emo)});
+}
+$$("#ktEmo .ke-tabs button").forEach(b=>b.onclick=()=>{keTab=b.dataset.k;drawEmo()});
+$("#ktEmoBtn").onclick=()=>{const p=$("#ktEmo");p.hidden=!p.hidden;if(!p.hidden)drawEmo();$("#ktEmoBtn").classList.toggle("on",!p.hidden);requestAnimationFrame(()=>{const c=$("#ktMsgs");c.scrollTop=c.scrollHeight})};
+$("#ktInput").addEventListener("focus",()=>{$("#ktEmo").hidden=true;$("#ktEmoBtn").classList.remove("on")});
+const _ktOpenRoom2=ktOpenRoom;
+ktOpenRoom=function(id){$("#ktEmo").hidden=true;$("#ktEmoBtn").classList.remove("on");_ktOpenRoom2(id)};
+
+/* ===== 카톡 연달아 보내기 ===== */
+const FOLLOW={
+ bok:["제이야?","읽씹하냐 ʕ•ᴥ•ʔ","대답해 줘ㅠㅠ","곰곰...","뭐해??","나 심심해","꿀 먹으러 갈래?"],
+ eun:["야","야야","답장해라","곰발사한다!!!","딸쥬밀 먹으러 가자","띵띵~ 어디야"],
+ jin:["ㅋ","ㅋㅋ","제이","제이야","블로그 봤냐고","명작 하나 더 찾음","#전기고문시작"],
+ mom:["바쁘니?","밥은 먹었어?","전화 한번 해"],
+ roha:["엄마!!","엄마 뭐해","엄마아아아","보고싶어ㅠㅠ"],
+ sion:["제이야~","바빠?","사랑해 진심이야"],
+ sky:["혹시 확인하셨나요?"],jun:["넵"],yuna:["저도 확인했어요!"]
+};
+const STK_FAV={bok:["honey","happy","love","ha","faint","hi"],eun:["angry","lol","love","cry"],jin:["lol","what","faint","love"],roha:["love","cry","hi"],sion:["love","hi","happy"],mom:["ok","love"]};
+let lastMine={},followT={},roomTimers={};
+function burstFrom(f,base,n){const out=[];for(let i=0;i<n;i++){if(STK_FAV[f]&&Math.random()<.18)out.push({f,st:pick(STK_FAV[f]),t:"이모티콘을 보냈습니다."});else out.push({f,t:i===0&&base?base:pick((POOL[f]||[]).concat(FOLLOW[f]||[]))})}return out}
+function playOut(id,list,startDelay){
+  let t=startDelay||0;(roomTimers[id]=roomTimers[id]||[]);
+  list.forEach(m=>{t+=900+Math.random()*1800+(m.t?Math.min(m.t.length*60,1500):0);roomTimers[id].push(setTimeout(()=>ktPush(id,m),t))});
+  return t;
+}
+function scheduleFollow(id,stage){
+  clearTimeout(followT[id]);if(stage>3)return;
+  const sent=lastMine[id];
+  followT[id]=setTimeout(()=>{
+    if(lastMine[id]!==sent)return;
+    const r=KROOMS.find(x=>x.id===id),f=pick(r.mem),n=1+Math.floor(Math.random()*3),list=[];
+    for(let i=0;i<n;i++){if(STK_FAV[f]&&Math.random()<.2)list.push({f,st:pick(STK_FAV[f]),t:"이모티콘을 보냈습니다."});else list.push({f,t:pick(FOLLOW[f]||POOL[f]||["?"])})}
+    if(r.mem.length>1&&Math.random()<.5){const g=pick(r.mem.filter(x=>x!==f));list.push({f:g,t:pick(FOLLOW[g]||POOL[g])})}
+    const end=playOut(id,list,0);
+    scheduleFollow(id,stage+1);
+  },(9+Math.random()*14)*1000+(stage*4000));
+}
+function ktSendMine(m,text){
+  const id=ktCur;lastMine[id]=Date.now();
+  (roomTimers[id]||[]).forEach(clearTimeout);roomTimers[id]=[];clearTimeout(followT[id]);
+  ktPush(id,m);ktRender();
+  clearTimeout(replyQ[id]);
+  replyQ[id]=setTimeout(()=>{
+    let plan=replyPlan(id,text||"");
+    const out=[];plan.forEach(p=>{out.push(p);if(Math.random()<.45)out.push(...burstFrom(p.f,null,1+Math.floor(Math.random()*2)))});
+    if(!text&&Math.random()<.5){const f=out[0]&&out[0].f;if(f&&STK_FAV[f])out.splice(1,0,{f,st:pick(STK_FAV[f]),t:"이모티콘을 보냈습니다."})}
+    const end=playOut(id,out,0);
+    setTimeout(()=>scheduleFollow(id,0),end);
+  },700+Math.random()*1000);
+}
+$("#ktForm").onsubmit=e=>{e.preventDefault();const v=$("#ktInput").value.trim();if(!v)return;$("#ktInput").value="";ktSendMine({f:"me",t:v},v)};
+/* 가끔 먼저 오는 카톡 */
+let spontT=null;
+function scheduleSpont(){clearTimeout(spontT);spontT=setTimeout(()=>{
+  if(!$("#home").hidden||!$("#lock").hidden){const r=pick(KROOMS.filter(x=>x.id!=="team")),f=pick(r.mem);playOut(r.id,burstFrom(f,null,1+Math.floor(Math.random()*3)),0)}
+  scheduleSpont()},(50+Math.random()*90)*1000)}
+const _onUnlock=onUnlock;
+onUnlock=function(){_onUnlock();if(!spontT)scheduleSpont()};
 
 let tt;function toast(s){$(".toast")?.remove();const d=document.createElement("div");d.className="toast";d.innerHTML=esc(s).replace(/\n/g,"<br>");$("#phone").append(d);clearTimeout(tt);tt=setTimeout(()=>d.remove(),2200)}
 </script>
