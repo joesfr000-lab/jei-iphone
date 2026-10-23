@@ -922,6 +922,61 @@ a,img{-webkit-user-drag:none}
 .dict-row{display:flex;justify-content:space-between;gap:10px;padding:10px 12px;border:2px solid #e5e5e5;border-radius:12px;margin-bottom:6px;font-size:14.5px}
 .dict-row b{color:#8b5a2b}.dict-row span{color:#555;text-align:right}
 
+/* calendar day view */
+.cd-nav{padding:0 16px 6px;flex:none}
+.cd-back{color:var(--red);font-size:17px}
+.cd-week{display:grid;grid-template-columns:repeat(7,1fr);padding:0 8px 6px;border-bottom:1px solid #eee;flex:none}
+.cd-week button{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:#8e8e93}
+.cd-week b{width:32px;height:32px;line-height:32px;border-radius:50%;font-size:17px;font-weight:500;color:#111;text-align:center;font-variant-numeric:tabular-nums}
+.cd-week .sel b{background:#111;color:#fff}.cd-week .today b{color:var(--red)}.cd-week .today.sel b{background:var(--red);color:#fff}
+.cd-week i{width:5px;height:5px;border-radius:50%;background:transparent}.cd-week i.has{background:#c7c7cc}
+.cd-title{padding:10px 18px 6px;font-size:17px;font-weight:700;flex:none}
+.cd-all{padding:0 14px 6px 60px;display:flex;flex-direction:column;gap:4px;flex:none}
+.cd-all button{border-radius:6px;padding:6px 10px;color:#fff;font-size:13.5px;font-weight:600;text-align:left}
+.cd-all:empty{display:none}
+.cd-scroll{flex:1;overflow-y:auto;min-height:0;border-top:1px solid #eee;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))}
+.cd-grid{position:relative;height:1320px;margin:8px 0}
+.cd-grid .hr{left:56px}.cd-grid .hl{width:48px}
+.cd-ev{position:absolute;left:60px;right:12px;border-radius:6px;border-left:4px solid;padding:4px 8px;font-size:13px;font-weight:600;text-align:left;overflow:hidden}
+.cd-ev small{display:block;font-weight:400;font-size:12px}
+.cd-now{position:absolute;left:50px;right:0;height:2px;background:var(--red)}
+.cd-now::before{content:"";position:absolute;left:-4px;top:-3px;width:8px;height:8px;border-radius:50%;background:var(--red)}
+.cd-none{color:#8e8e93;font-size:14px;padding:0 18px}
+/* control center */
+.dimmer{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;z-index:84}
+.cc{position:absolute;inset:0;z-index:96;background:rgba(20,20,24,.45);backdrop-filter:blur(26px) saturate(1.4);-webkit-backdrop-filter:blur(26px) saturate(1.4);display:flex;flex-direction:column;padding:calc(64px + env(safe-area-inset-top,0px)) 22px 30px;color:#fff;touch-action:none}
+.cc[hidden]{display:none}
+.cc.in{animation:ccin .3s cubic-bezier(.2,.9,.3,1)}
+@keyframes ccin{from{opacity:0;transform:translateY(-30px) scale(.97)}}
+.cc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-content:start}
+.cc-tile{background:rgba(120,120,128,.35);border-radius:22px;color:#fff}
+.cc-conn{grid-column:span 2;grid-row:span 2;display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px;aspect-ratio:1}
+.cc-r{border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;aspect-ratio:1}
+.cc-r svg{width:24px;height:24px}
+.cc-r.on{background:var(--on)}
+.cc-r[data-cc="air"]:not(.on)~*{}
+.cc-music{grid-column:span 2;grid-row:span 2;padding:14px;display:flex;flex-direction:column;justify-content:space-between;aspect-ratio:1;min-width:0}
+.ccm-top{display:flex;gap:10px;align-items:center;min-width:0}
+.ccm-art{width:44px;height:44px;border-radius:8px;background:rgba(255,255,255,.2) center/cover;flex:none}
+.ccm-top div{min-width:0}.ccm-top b{display:block;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ccm-top small{font-size:12px;opacity:.7}
+.ccm-ctrl{display:flex;justify-content:space-around;align-items:center}
+.ccm-ctrl button{width:36px;height:36px;display:grid;place-items:center}.ccm-ctrl svg{width:24px;height:24px}
+#ccmPP svg{width:30px;height:30px}
+.cc-sq{aspect-ratio:1;display:grid;place-items:center}
+.cc-sq svg{width:26px;height:26px}
+.cc-sq.on{background:#fff;color:#111}
+.cc-sq[data-cc="torch"].on{color:#111}
+.cc-slider{grid-row:span 2;border-radius:22px;background:rgba(120,120,128,.35);position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:center;padding-bottom:16px;touch-action:none;cursor:ns-resize}
+.cc-slider i{position:absolute;left:0;right:0;bottom:0;height:calc(var(--v)*100%);background:#fff}
+.cc-slider svg{position:relative;width:26px;height:26px}
+.cc-focus{grid-column:span 2;display:flex;align-items:center;gap:10px;padding:0 14px;text-align:left;font-size:13.5px;font-weight:600}
+.cc-focus svg{width:30px;height:30px;padding:6px;border-radius:50%;background:rgba(255,255,255,.2);flex:none}
+.cc-focus.on svg{background:#fff;color:#5e5ce6}
+.cc-focus span small{display:block;font-weight:400;opacity:.7;font-size:12px}
+.cc-hint{margin-top:auto;text-align:center;font-size:13px;opacity:.6}
+.pull-hint{position:absolute;top:0;height:3px;width:30%;z-index:79;pointer-events:none}
+.status{touch-action:none}
+
 .toast{position:absolute;top:64px;left:50%;transform:translateX(-50%);background:rgba(30,30,36,.94);color:#fff;padding:10px 16px;border-radius:14px;font-size:14px;z-index:90;max-width:86%;text-align:center;line-height:1.45}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -1267,6 +1322,13 @@ a,img{-webkit-user-drag:none}
         <div class="cm-grid" id="cmGrid"></div>
         <div class="cm-list" id="cmList"></div>
       </div>
+      <div class="mv" id="calDayV" hidden>
+        <div class="cd-nav"><button id="cdBack" class="cd-back">‹ <span id="cdMonth"></span></button></div>
+        <div class="cd-week" id="cdWeek"></div>
+        <div class="cd-title" id="cdTitle"></div>
+        <div class="cd-all" id="cdAll"></div>
+        <div class="cd-scroll" id="cdScroll"><div class="cd-grid" id="cdGrid"></div></div>
+      </div>
       <div class="mv" id="calWeekV" hidden>
       <div class="wk-head" id="wkHead"></div>
       <div class="wk-all" id="wkAll"></div>
@@ -1348,6 +1410,29 @@ a,img{-webkit-user-drag:none}
         <button class="call-end" id="callEnd" aria-label="통화 종료"><svg viewBox="0 0 24 24"><path fill="#fff" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .6 3.6 1 1 0 0 1-.25 1z"/></svg></button>
         <div class="ftscr" id="ftScr" hidden><video id="ftVid" src="facetime.mp4" loop playsinline preload="none"></video><div class="ft-top"><button id="ftBack" aria-label="통화 화면으로">‹</button><b>오시온♥</b><small>FaceTime</small></div><span class="ft-self" id="ftSelf"></span><div class="ft-bar"><button class="ft-end" id="ftEnd" aria-label="통화 종료"><svg viewBox="0 0 24 24"><path fill="#fff" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .6 3.6 1 1 0 0 1-.25 1z"/></svg></button></div></div><div class="call-in" id="callIn" hidden><div><button class="ci-no" id="ciNo" aria-label="거절"><svg viewBox="0 0 24 24"><path fill="#fff" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .6 3.6 1 1 0 0 1-.25 1z"/></svg></button>거절</div><div><button class="ci-yes" id="ciYes" aria-label="수락"><svg viewBox="0 0 24 24"><path fill="#fff" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .6 3.6 1 1 0 0 1-.25 1z"/></svg></button>수락</div></div>
       </div>
+    <div class="dimmer" id="dimmer"></div>
+    <div class="cc" id="cc" hidden>
+      <div class="cc-grid">
+        <div class="cc-tile cc-conn">
+          <button class="cc-r" data-cc="air" style="--on:#ff9f0a" aria-label="에어플레인 모드"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg></button>
+          <button class="cc-r on" data-cc="cell" style="--on:#30d158" aria-label="셀룰러"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 5a2 2 0 0 1 1 3.7V21h-2V8.7A2 2 0 0 1 12 5zM6.3 3.3l1.4 1.4a7.5 7.5 0 0 0 0 10.6l-1.4 1.4a9.5 9.5 0 0 1 0-13.4zm11.4 0a9.5 9.5 0 0 1 0 13.4l-1.4-1.4a7.5 7.5 0 0 0 0-10.6z"/></svg></button>
+          <button class="cc-r on" data-cc="wifi" style="--on:#0a84ff" aria-label="Wi-Fi"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 18.5a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6zM12 13c2 0 3.8.8 5.1 2.1l-1.5 1.5a5 5 0 0 0-7.2 0l-1.5-1.5A7.2 7.2 0 0 1 12 13zm0-5c3.4 0 6.4 1.4 8.6 3.6l-1.5 1.5A10 10 0 0 0 12 10a10 10 0 0 0-7.1 3.1l-1.5-1.5A12.2 12.2 0 0 1 12 8zm0-5c4.7 0 9 1.9 12 5l-1.5 1.5A14.8 14.8 0 0 0 12 5 14.8 14.8 0 0 0 1.5 9.5L0 8c3-3.1 7.3-5 12-5z"/></svg></button>
+          <button class="cc-r on" data-cc="bt" style="--on:#0a84ff" aria-label="블루투스"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 7 10 10-5 4V3l5 4L7 17"/></svg></button>
+        </div>
+        <div class="cc-tile cc-music"><div class="ccm-top"><span class="ccm-art" id="ccmArt"></span><div><b id="ccmT">재생 중이 아님</b><small id="ccmA">음악</small></div></div><div class="ccm-ctrl"><button id="ccmPrev" aria-label="이전 곡"><svg viewBox="0 0 24 24" fill="#fff"><path d="M21 5.5v13L12 12zm-9 0v13L3 12z"/></svg></button><button id="ccmPP" aria-label="재생/일시정지"></button><button id="ccmNext" aria-label="다음 곡"><svg viewBox="0 0 24 24" fill="#fff"><path d="M3 5.5v13L12 12zm9 0v13L21 12z"/></svg></button></div></div>
+        <button class="cc-tile cc-sq" data-cc="lock" aria-label="화면 회전 잠금"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 12a8 8 0 1 1-3-6.2M20 4v4h-4"/><rect x="9" y="10.5" width="6" height="5" rx="1" fill="currentColor"/><path d="M10 10.5V9a2 2 0 0 1 4 0v1.5"/></svg></button>
+        <button class="cc-tile cc-sq" data-cc="mirror" aria-label="화면 미러링"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="m8 21 4-5 4 5z" fill="currentColor"/></svg></button>
+        <div class="cc-slider" id="ccBright" style="--v:.8"><i></i><svg viewBox="0 0 24 24" fill="#888"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1" stroke="#888" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <div class="cc-slider" id="ccVol" style="--v:.7"><i></i><svg viewBox="0 0 24 24" fill="#888"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <button class="cc-tile cc-focus on" data-cc="dnd"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 14.5A9 9 0 0 1 9.5 3a9 9 0 1 0 11.5 11.5z"/></svg><span>방해금지 모드<small id="ccDndS">켬</small></span></button>
+        <button class="cc-tile cc-sq" data-cc="torch" aria-label="손전등"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10v3l-3 4v13h-4V9L7 5zm4.2 10v3h1.6v-3z"/></svg></button>
+        <button class="cc-tile cc-sq" data-cc="timer" aria-label="타이머"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 13V9M10 2h4"/></svg></button>
+        <button class="cc-tile cc-sq" data-cc="calc" aria-label="계산기"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="5" y="3" width="14" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="8" y="6" width="8" height="3" rx=".6"/><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></svg></button>
+        <button class="cc-tile cc-sq" data-cc="cam" aria-label="카메라"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 4h6l1.6 2.2H20a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8.2a2 2 0 0 1 2-2h3.4zm3 4.4a4.3 4.3 0 1 0 0 8.6 4.3 4.3 0 0 0 0-8.6z"/></svg></button>
+      </div>
+      <div class="cc-hint">위로 쓸어올려서 닫기</div>
+    </div>
+    <div class="pull-hint left"></div><div class="pull-hint right"></div>
     <button class="nbanner" id="nBanner" hidden><span id="nbIc"></span><div><b id="nbTitle"></b><small id="nbText"></small></div><em>지금</em></button>
     <div class="homebar" id="homebar" role="button" aria-label="홈으로" tabindex="0"></div>
   </section>
@@ -3255,6 +3340,98 @@ function glAtt(){
 function glDict(){
   $("#gl-dict").innerHTML=`<div class="dict-h"><b>곰어 사전</b><small>단어 ${GOMEO.length}개</small></div>`+UNITS.map((u,ui)=>`<div class="dict-u">${u}</div>`+GOMEO.filter(x=>x.u===ui).map(x=>`<div class="dict-row"><b>${esc(x.w)}</b><span>${esc(x.m)}</span></div>`).join("")).join("");
 }
+
+/* ===== 캘린더 하루 보기 ===== */
+let cdDate=null;
+function openDay(d){
+  cdDate=new Date(d.getFullYear(),d.getMonth(),d.getDate());
+  $("#calMonthV").hidden=true;$("#calWeekV").hidden=true;$("#calDayV").hidden=false;$("#calMode").hidden=true;renderDay();
+}
+function renderDay(){
+  const d=cdDate,t=today0(),sun=new Date(d.getFullYear(),d.getMonth(),d.getDate()-d.getDay());
+  $("#cdMonth").textContent=`${d.getMonth()+1}월`;
+  $("#cdWeek").innerHTML=Array.from({length:7},(_,i)=>{const x=new Date(sun.getFullYear(),sun.getMonth(),sun.getDate()+i);
+    return`<button class="${x.getTime()===d.getTime()?"sel":""}${x.getTime()===t.getTime()?" today":""}" data-o="${i}">${DOW[i]}<b>${x.getDate()}</b><i class="${eventsOn(x).length?"has":""}"></i></button>`}).join("");
+  $$("#cdWeek button").forEach(b=>b.onclick=()=>{cdDate=new Date(sun.getFullYear(),sun.getMonth(),sun.getDate()+(+b.dataset.o));renderDay()});
+  $("#cdTitle").textContent=`${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일 ${DOW[d.getDay()]}요일`;
+  const ev=eventsOn(d),all=ev.filter(e=>e.all),timed=ev.filter(e=>!e.all);
+  $("#cdAll").innerHTML=all.map(e=>`<button style="background:${e.c}" data-t="${esc(e.t)}">${esc(e.t)}</button>`).join("");
+  const HH2=55;let g="";
+  for(let h=0;h<24;h++)g+=`<div class="hr" style="top:${h*HH2}px"></div><div class="hl" style="top:${h*HH2}px">${h===0?"오전 12시":`${h<12?"오전":"오후"} ${h%12||12}시`}</div>`;
+  timed.forEach(e=>{g+=`<button class="cd-ev" style="top:${e.s*HH2+1}px;height:${(e.e-e.s)*HH2-2}px;background:${e.c}2e;border-color:${e.c};color:#0b3a73">${esc(e.t)}<small>${hm(e.s)} – ${hm(e.e)}</small></button>`});
+  if(d.getTime()===t.getTime()){const n=new Date();g+=`<div class="cd-now" style="top:${(n.getHours()+n.getMinutes()/60)*HH2}px"></div>`}
+  if(!ev.length)g+=`<div class="cd-none" style="position:absolute;top:${8*HH2-30}px;left:60px">일정 없음</div>`;
+  $("#cdGrid").innerHTML=g;
+  [...$("#cdAll").children,...$$("#cdGrid .cd-ev")].forEach(b=>b.onclick=()=>{const e=ev.find(x=>x.t===(b.dataset.t||b.firstChild.textContent));if(e)toast(`${e.t}\n${evTime(e)}${e.mo?" · 매년":""}`)});
+  requestAnimationFrame(()=>$("#cdScroll").scrollTop=(timed.length?Math.max(0,timed[0].s-1):8)*HH2);
+}
+$("#cdBack").onclick=()=>{cmY=cdDate.getFullYear();cmM=cdDate.getMonth();cmSel=cdDate;$("#calDayV").hidden=true;$("#calMode").hidden=false;calModeShow("month")};
+const _calModeShow=calModeShow;
+calModeShow=function(m){$("#calDayV").hidden=true;$("#calMode").hidden=false;_calModeShow(m)};
+const _renderMonth=renderMonth;
+renderMonth=function(){_renderMonth();$$("#cmGrid .cm-d").forEach(b=>b.onclick=()=>{const d=new Date(cmY,cmM,+b.dataset.d);cmSel=d;openDay(d)})};
+const _renderWeek=renderWeek;
+renderWeek=function(){_renderWeek();$$("#wkHead>div").forEach((el,i)=>{el.style.cursor="pointer";el.onclick=()=>openDay(dayAt(i))})};
+$$("#cwWeek .cw-day");
+const _renderCalWidget=renderCalWidget;
+renderCalWidget=function(){_renderCalWidget();$$("#cwWeek .cw-day").forEach(b=>b.ondblclick=()=>{openSheet("cal");openDay(dayAt(+b.dataset.d))})};
+renderCalWidget();
+
+/* ===== 위에서 끌어내리기 ===== */
+let pull=null,ncMode=false;
+const phoneEl=$("#phone");
+function pRect(){return phoneEl.getBoundingClientRect()}
+phoneEl.addEventListener("pointerdown",e=>{
+  if(!$("#cc").hidden){pull={cc:true,y:e.clientY};return}
+  const r=pRect(),y=e.clientY-r.top,x=e.clientX-r.left;
+  if(y>56)return;
+  if(!$("#pass").hidden)return;
+  pull={side:x<r.width/2?"left":"right",y:e.clientY};
+},true);
+window.addEventListener("pointerup",e=>{
+  if(!pull)return;const dy=e.clientY-pull.y,p=pull;pull=null;
+  if(p.cc){if(dy<-50)closeCC();return}
+  if(dy<50)return;
+  if(p.side==="right")openCC();
+  else if(!$("#home").hidden){ncMode=true;show("lock")}
+});
+window.addEventListener("pointercancel",()=>{pull=null});
+// 잠금 화면에서 다시 올리면 (끌어내린 경우) 바로 홈으로
+const _openPass=openPass;
+openPass=function(){if(ncMode){ncMode=false;show("home");return}_openPass()};
+$("#openBtn").onclick=()=>openPass();
+const _lockPhone=lockPhone;
+lockPhone=function(){ncMode=false;_lockPhone()};
+$("#homebar").onclick=()=>{$$(".sheet").some(s=>!s.hidden)?closeSheets():lockPhone()};
+
+/* ===== 제어센터 ===== */
+function openCC(){const c=$("#cc");c.hidden=false;c.classList.remove("in");void c.offsetWidth;c.classList.add("in");ccSync()}
+function closeCC(){$("#cc").hidden=true}
+$("#cc").addEventListener("click",e=>{if(e.target.id==="cc"||e.target.classList.contains("cc-hint"))closeCC()});
+function ccSync(){
+  $('[data-cc="torch"]').classList.toggle("on",$("#torch").getAttribute("aria-pressed")==="true");
+  const s=SONGS[muIdx];$("#ccmT").textContent=s?s.t:"재생 중이 아님";$("#ccmA").textContent=s?s.a:"음악";
+  $("#ccmArt").style.backgroundImage=s?`url('${IMG[s.img]}')`:"none";
+  $("#ccmPP").innerHTML=(s&&!mu.paused)?'<svg viewBox="0 0 24 24" fill="#fff"><path d="M6 4h4.5v16H6zm7.5 0H18v16h-4.5z"/></svg>':'<svg viewBox="0 0 24 24" fill="#fff"><path d="M7 4.5v15l12.5-7.5z"/></svg>';
+}
+["play","pause"].forEach(ev=>mu.addEventListener(ev,()=>{if(!$("#cc").hidden)ccSync()}));
+$("#ccmPP").onclick=()=>{muToggle();setTimeout(ccSync,80)};$("#ccmNext").onclick=()=>{if(muIdx<0)muToggle();else muStep(1);setTimeout(ccSync,80)};$("#ccmPrev").onclick=()=>{if(muIdx<0)muToggle();else muStep(-1);setTimeout(ccSync,80)};
+$$(".cc-r").forEach(b=>b.onclick=()=>{b.classList.toggle("on");if(b.dataset.cc==="air"){}});
+$("#cc").querySelectorAll("[data-cc]").forEach(b=>{if(b.classList.contains("cc-r"))return;b.onclick=()=>{
+  const k=b.dataset.cc;
+  if(k==="torch"){$("#torch").click();ccSync()}
+  else if(k==="dnd"){const on=b.classList.toggle("on");$("#ccDndS").textContent=on?"켬":"끔";$$(".dnd").forEach(d=>d.hidden=!on)}
+  else if(k==="lock"||k==="mirror"){b.classList.toggle("on");if(k==="mirror"&&b.classList.contains("on"))toast("화면을 미러링할 기기를 찾는 중...")}
+  else if(!$("#home").hidden){closeCC();if(k==="timer"){openSheet("clock");clTabShow("timer")}else if(k==="calc")openSheet("calc");else if(k==="cam")openSheet("camera")}
+  else toast("잠금 해제 후에 사용할 수 있습니다");
+}});
+function ccSlider(el,fn){
+  const set=e=>{const r=el.getBoundingClientRect(),v=Math.min(1,Math.max(0,(r.bottom-e.clientY)/r.height));el.style.setProperty("--v",v);fn(v)};
+  el.addEventListener("pointerdown",e=>{e.stopPropagation();el.setPointerCapture(e.pointerId);set(e);el.onpointermove=set});
+  el.addEventListener("pointerup",()=>el.onpointermove=null);
+}
+ccSlider($("#ccBright"),v=>$("#dimmer").style.opacity=(1-v)*.7);
+ccSlider($("#ccVol"),v=>{try{mu.volume=v;vAudio.volume=v;$("#ytVid").volume=v}catch(e){}});
 
 let tt;function toast(s){$(".toast")?.remove();const d=document.createElement("div");d.className="toast";d.innerHTML=esc(s).replace(/\n/g,"<br>");$("#phone").append(d);clearTimeout(tt);tt=setTimeout(()=>d.remove(),2200)}
 </script>
