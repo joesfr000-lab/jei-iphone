@@ -792,6 +792,136 @@ a,img{-webkit-user-drag:none}
 .vfav.pop svg{animation:hpop .35s}
 @keyframes hpop{50%{transform:scale(1.35)}}
 
+/* insta extras */
+.cmb{display:block}
+.pmeta.cmb{text-align:left;width:100%}
+.pact .cmb svg{width:25px;height:25px;display:block}
+.lk.pop svg{animation:hpop .35s}
+.pimg{position:relative}
+.bigheart{position:absolute;left:50%;top:50%;width:90px;height:90px;transform:translate(-50%,-50%);animation:bigh .9s forwards;pointer-events:none}
+.bigheart svg{width:100%;height:100%}.bigheart svg path{fill:#fff;stroke:none;filter:drop-shadow(0 4px 12px rgba(0,0,0,.35))}
+@keyframes bigh{0%{transform:translate(-50%,-50%) scale(0);opacity:0}15%{transform:translate(-50%,-50%) scale(1.15);opacity:1}30%{transform:translate(-50%,-50%) scale(1)}80%{opacity:1}100%{opacity:0;transform:translate(-50%,-70%) scale(.9)}}
+.igcm{position:absolute;inset:0;z-index:8;background:rgba(0,0,0,.4);display:flex;align-items:flex-end}
+.igcm[hidden]{display:none}
+.cm-sheet{background:#fff;width:100%;height:72%;border-radius:16px 16px 0 0;display:flex;flex-direction:column;color:#000}
+.igcm.in .cm-sheet{animation:sheetup .3s cubic-bezier(.2,.9,.3,1)}
+@keyframes sheetup{from{transform:translateY(100%)}}
+.cm-grab{width:40px;height:4px;border-radius:2px;background:#dbdbdb;align-self:center;margin:8px 0 4px}
+.cm-h{display:flex;justify-content:center;position:relative;padding:4px 0 10px;border-bottom:1px solid #efefef;font-size:15px}
+.cm-h button{position:absolute;right:14px;top:-2px;font-size:24px}
+.cm-list{flex:1;overflow-y:auto;padding:8px 14px;min-height:0}
+.cm{display:flex;gap:10px;padding:8px 0;align-items:flex-start}
+.cm.re{padding-left:44px}
+.cm>div{flex:1;min-width:0;font-size:13.5px}
+.cm b{font-weight:600}.cm small{color:#737373;font-size:12px}
+.cm p{margin:2px 0;line-height:1.4;user-select:text}
+.cmh{display:flex;flex-direction:column;align-items:center;gap:1px;padding-top:6px}
+.cmh svg{width:14px;height:14px}.cmh svg path{stroke:#737373}
+.cmh.on svg path{fill:#ff3040;stroke:#ff3040}
+.cm-empty{text-align:center;padding:40px 0;display:flex;flex-direction:column;gap:4px}
+.cm-in{display:flex;gap:10px;align-items:center;padding:8px 14px calc(26px + env(safe-area-inset-bottom,0px));border-top:1px solid #efefef}
+.cm-in input{flex:1;min-width:0;border:1px solid #dbdbdb;border-radius:20px;padding:9px 14px;font:inherit;font-size:14px;color:#000;background:#fff;color-scheme:light;outline:none}
+.cm-in button{color:#0095f6;font-weight:700}
+.igv.reels{background:#000;color:#fff;position:relative}
+.reels video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rl-top{position:relative;padding:4px 16px;font-size:20px}
+.rl-side{position:absolute;right:10px;bottom:120px;display:flex;flex-direction:column;gap:18px;align-items:center}
+.rl-side button{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:12px}
+.rl-side svg{width:28px;height:28px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.5))}
+#rlLike.on svg path{fill:#ff3040;stroke:#ff3040}
+.rl-info{position:absolute;left:14px;right:70px;bottom:20px;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.rl-info>div{display:flex;align-items:center;gap:8px;font-size:14px}
+.rl-info #rlFollow{border:1px solid rgba(255,255,255,.8);border-radius:8px;padding:3px 10px;font-size:13px;font-weight:600}
+.rl-info p{margin:8px 0 4px;font-size:14px}.rl-info small{font-size:12.5px}
+.ig-tabs.dark{background:#000;border-top-color:#222}
+.ig-tabs.dark svg{stroke:#fff}.ig-tabs.dark svg *{stroke:#fff}
+.ch-typing{display:flex;gap:4px;margin:0 12px 6px;background:#efefef;border-radius:18px;padding:11px 14px;width:max-content;flex:none}
+.ch-typing[hidden]{display:none}
+.ch-typing i{width:7px;height:7px;border-radius:50%;background:#8e8e8e;animation:typ 1s infinite}
+.ch-typing i:nth-child(2){animation-delay:.15s}.ch-typing i:nth-child(3){animation-delay:.3s}
+@keyframes typ{50%{transform:translateY(-4px);opacity:.5}}
+/* facetime */
+.ftscr{position:absolute;inset:0;z-index:5;background:#000}
+.ftscr[hidden]{display:none}
+.ftscr video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ft-top{position:absolute;top:calc(48px + env(safe-area-inset-top,0px));left:0;right:0;display:flex;flex-direction:column;align-items:center;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.ft-top b{font-size:22px;font-weight:500}.ft-top small{font-size:14px;opacity:.85}
+.ft-top button{position:absolute;left:16px;top:0;font-size:30px}
+.ft-self{position:absolute;right:16px;bottom:150px;width:96px;height:140px;border-radius:14px;background:#333 center/cover;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.ft-bar{position:absolute;left:0;right:0;bottom:calc(46px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center}
+.ft-end{width:70px;height:70px;border-radius:50%;background:#ff3b30;display:grid;place-items:center}
+.ft-end svg{width:32px;height:32px;transform:rotate(135deg)}
+/* gomlingo */
+#gomlingo{background:#fff;color:#3c3c3c;font-family:"Noto Sans KR",system-ui,sans-serif}
+.gl-top{display:flex;align-items:center;gap:12px;padding:2px 16px 10px;border-bottom:2px solid #e5e5e5;flex:none}
+.gl-flag{background:#fff3d6;border:2px solid #e5e5e5;border-radius:10px;padding:2px 6px;font-size:13px;color:#8b5a2b;font-weight:700;margin-right:auto}
+.gl-st{font-size:15px;color:#afafaf;font-weight:700}.gl-st b{font-weight:800}
+#glStreakI.lit{color:#ff9600}.gl-st.gem{color:#1cb0f6}.gl-st.heart{color:#ff4b4b}
+.gl-main{flex:1;overflow-y:auto;min-height:0}
+.gl-pane{padding:14px 18px 30px}
+.gl-unit{background:var(--uc);color:#fff;border-radius:14px;padding:12px 16px;margin:6px 0 18px;box-shadow:0 4px 0 rgba(0,0,0,.15)}
+.gl-unit small{display:block;font-size:12px;font-weight:700;opacity:.85}.gl-unit b{font-size:19px}
+.gl-nodes{display:flex;flex-direction:column;align-items:center;gap:18px;margin-bottom:26px}
+.gl-node{width:68px;height:62px;border-radius:50%;background:var(--uc);color:#fff;font-size:26px;font-weight:800;box-shadow:0 6px 0 rgba(0,0,0,.2)}
+.gl-node:active{box-shadow:0 2px 0 rgba(0,0,0,.2);translate:0 4px}
+.gl-node.done{background:#ffc800;box-shadow:0 6px 0 #e5a000}
+.gl-node.lock{background:#e5e5e5;color:#afafaf;box-shadow:0 6px 0 #cecece;font-size:20px}
+.gl-tabs{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid #e5e5e5;padding:8px 0 calc(24px + env(safe-area-inset-bottom,0px));flex:none;background:#fff}
+.gl-tabs button{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:22px;border-radius:12px;margin:0 8px;padding:4px 0;filter:grayscale(1);opacity:.6}
+.gl-tabs button span{font-size:11px;font-weight:700;color:#777}
+.gl-tabs button.on{filter:none;opacity:1;background:#ddf4ff;outline:2px solid #84d8ff}
+.gl-tabs button.on span{color:#1899d6}
+.gl-lesson{position:absolute;inset:0;z-index:4;background:#fff;display:flex;flex-direction:column;padding-top:50px}
+.gl-lesson[hidden]{display:none}
+.gl-lt{display:flex;align-items:center;gap:12px;padding:6px 16px;flex:none;color:#ff4b4b;font-weight:800}
+.gl-lt button{font-size:28px;color:#afafaf;line-height:1}
+.gl-pb{flex:1;height:16px;border-radius:8px;background:#e5e5e5;overflow:hidden}
+.gl-pb i{display:block;height:100%;width:0;background:#58cc02;border-radius:8px;transition:width .3s}
+.gl-body{flex:1;overflow-y:auto;padding:16px 20px;min-height:0}
+.gl-new{color:#ce82ff;font-weight:800;font-size:13px}
+.gl-body h3{font-size:22px;margin:4px 0 14px;color:#3c3c3c}
+.gl-bear{display:flex;align-items:center;gap:12px;font-size:30px;color:#8b5a2b;margin-bottom:20px}
+.gl-bear span{font-size:15px;border:2px solid #e5e5e5;border-radius:14px;padding:10px 14px;color:#3c3c3c;font-weight:600}
+.gl-opts{display:grid;gap:10px}
+.gl-opts button{border:2px solid #e5e5e5;border-bottom-width:4px;border-radius:14px;padding:14px;font-size:16px;font-weight:600;text-align:left;color:#3c3c3c}
+.gl-opts button.sel{border-color:#84d8ff;background:#ddf4ff;color:#1899d6}
+.gl-opts button.right{border-color:#58cc02;background:#d7ffb8;color:#58a700}
+.gl-opts button.wrong{border-color:#ff4b4b;background:#ffdfe0;color:#ea2b2b}
+.gl-foot{padding:14px 20px calc(30px + env(safe-area-inset-bottom,0px));border-top:2px solid #e5e5e5;flex:none;display:flex;flex-direction:column;gap:10px}
+.gl-foot.ok{background:#d7ffb8;border-color:#d7ffb8;color:#58a700}.gl-foot.bad{background:#ffdfe0;border-color:#ffdfe0;color:#ea2b2b}
+#glFb{font-size:16px}#glFb:empty{display:none}
+#glCheck{background:#58cc02;color:#fff;border-radius:14px;padding:14px;font-size:16px;font-weight:800;box-shadow:0 4px 0 #58a700}
+#glCheck:disabled{background:#e5e5e5;color:#afafaf;box-shadow:0 4px 0 #cecece}
+.gl-foot.bad #glCheck{background:#ff4b4b;box-shadow:0 4px 0 #ea2b2b}
+.gl-end{text-align:center;padding-top:20px}
+.gl-trophy{font-size:70px}
+.gl-end h3{font-size:26px;color:#ffc800}
+.gl-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}
+.gl-stats div{border:2px solid #ffc800;border-radius:14px;padding:10px}
+.gl-stats small{display:block;color:#ffc800;font-weight:800}.gl-stats b{font-size:22px}
+.gl-bear.big{justify-content:center;font-size:26px}
+.att-card{display:flex;align-items:center;gap:14px;border:2px solid #e5e5e5;border-radius:16px;padding:16px}
+.att-fire{font-size:44px}
+.att-card b{font-size:20px;color:#ff9600;display:block}.att-card small{color:#777;font-size:13.5px}
+.att-btn{width:100%;margin:14px 0;background:#58cc02;color:#fff;border-radius:14px;padding:14px;font-size:16px;font-weight:800;box-shadow:0 4px 0 #58a700}
+.att-btn.done{background:#e5e5e5;color:#afafaf;box-shadow:0 4px 0 #cecece}
+.att-cal{border:2px solid #e5e5e5;border-radius:16px;padding:14px}
+.att-cal>b{font-size:17px}.att-cal>small{display:block;color:#777;font-size:13px;margin-bottom:8px}
+.att-dow,.att-grid{display:grid;grid-template-columns:repeat(7,1fr);text-align:center}
+.att-dow span{font-size:11px;color:#afafaf;font-weight:700;padding-bottom:4px}
+.att-grid span{aspect-ratio:1;display:grid;place-items:center;font-size:13px;color:#afafaf;font-weight:600}
+.att-grid .ad.on{background:#fff3d6;border-radius:50%;font-size:16px}
+.att-grid .ad.today{outline:2px solid #ff9600;border-radius:50%;color:#ff9600}
+.att-rw{margin-top:14px;border:2px solid #e5e5e5;border-radius:16px;padding:14px}
+.att-rw>b{display:block;font-size:16px;margin-bottom:8px}
+.att-rw div{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid #f0f0f0;font-size:14px}
+.att-rw span{font-weight:800;width:44px}.att-rw em{font-style:normal;flex:1}.att-rw i{font-style:normal;color:#afafaf;font-weight:700;font-size:12.5px}
+.att-rw .got i{color:#58cc02}
+.dict-h b{font-size:22px;display:block}.dict-h small{color:#777}
+.dict-u{margin:16px 0 6px;font-weight:800;color:#58cc02}
+.dict-row{display:flex;justify-content:space-between;gap:10px;padding:10px 12px;border:2px solid #e5e5e5;border-radius:12px;margin-bottom:6px;font-size:14.5px}
+.dict-row b{color:#8b5a2b}.dict-row span{color:#555;text-align:right}
+
 .toast{position:absolute;top:64px;left:50%;transform:translateX(-50%);background:rgba(30,30,36,.94);color:#fff;padding:10px 16px;border-radius:14px;font-size:14px;z-index:90;max-width:86%;text-align:center;line-height:1.45}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -965,9 +1095,16 @@ a,img{-webkit-user-drag:none}
       </div>
       <div class="igv" id="igChat" hidden>
         <div class="ch-top"><button class="back" id="chBack" aria-label="뒤로">‹</button><button id="chHead"><span id="chAv"></span><span><b id="chName"></b><small id="chSub"></small></span></button></div>
-        <div class="ch-msgs" id="chMsgs"></div>
+        <div class="ch-msgs" id="chMsgs"></div><div class="ch-typing" id="chTyping" hidden><i></i><i></i><i></i></div>
         <form class="ch-in" id="chForm"><input id="chInput" placeholder="메시지 보내기..." autocomplete="off" aria-label="메시지"><button>보내기</button></form>
       </div>
+      <div class="igv reels" id="igReels" hidden>
+        <video id="rlVid" src="reels.mp4" loop playsinline preload="none"></video>
+        <div class="rl-top"><b>릴스</b></div>
+        <div class="rl-side"><button id="rlLike"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9"><path d="M12 20.5s-7-4.4-9-8.6A4.9 4.9 0 0 1 12 6.6a4.9 4.9 0 0 1 9 5.3c-2 4.2-9 8.6-9 8.6z"/></svg><small>1,024</small></button><button id="rlCm"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linejoin="round"><path d="M20.5 11.6a8.4 8.4 0 0 1-12.4 7.4L3.5 20.5l1.5-4.4A8.4 8.4 0 1 1 20.5 11.6z"/></svg><small>6</small></button><button><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linejoin="round"><path d="M21.5 2.5 2.5 9.8l7.4 3.3 3.3 7.4zM9.9 13.1l11.6-10.6"/></svg><small>공유</small></button></div>
+        <div class="rl-info"><div><span id="rlAv"></span><b data-user="sion.ii">sion.ii</b><button id="rlFollow">팔로우</button></div><p>🐰🐰🐰 I WISH 💚</p><small>♫ 원본 오디오 · sion.ii</small></div>
+      </div>
+      <div class="igcm" id="igCm" hidden><div class="cm-sheet"><div class="cm-grab"></div><div class="cm-h"><b>댓글</b><button id="cmClose" aria-label="닫기">×</button></div><div class="cm-list" id="cmList"></div><form class="cm-in" id="cmForm"><span id="cmMe"></span><input id="cmInput" placeholder="댓글 달기..." autocomplete="off" aria-label="댓글"><button>게시</button></form></div></div>
       <div class="ig-tabs" id="igTabs">
         <button data-v="igHome" aria-label="홈"><svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z"/></svg></button>
         <button data-v="search" aria-label="검색"><svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/></svg></button>
@@ -1104,6 +1241,22 @@ a,img{-webkit-user-drag:none}
       </div>
     </div>
 
+    <div class="sheet light" id="gomlingo" hidden>
+      <div class="status" data-left="clock"></div>
+      <div class="gl-top"><button class="back" data-close aria-label="닫기" style="color:#777">‹</button><span class="gl-flag">ʕ•ᴥ•ʔ</span><span id="glStreakI" class="gl-st">🔥 <b id="glStreak">23</b></span><span class="gl-st gem">💎 <b id="glGems">505</b></span><span class="gl-st heart">❤️ <b id="glHearts">5</b></span></div>
+      <div class="gl-main">
+        <div id="gl-learn" class="gl-pane"></div>
+        <div id="gl-att" class="gl-pane" hidden></div>
+        <div id="gl-dict" class="gl-pane" hidden></div>
+      </div>
+      <div class="gl-tabs" id="glTabs"><button data-t="learn" class="on">🏠<span>학습</span></button><button data-t="att">📅<span>출석체크</span></button><button data-t="dict">📖<span>곰어 사전</span></button></div>
+      <div class="gl-lesson" id="glLesson" hidden>
+        <div class="gl-lt"><button id="glQuit" aria-label="그만하기">×</button><div class="gl-pb"><i id="glProg"></i></div><span>❤️ <b id="glLH">5</b></span></div>
+        <div class="gl-body" id="glBody"></div>
+        <div class="gl-foot" id="glFoot"><div id="glFb"></div><button id="glCheck" disabled>확인</button></div>
+      </div>
+    </div>
+
     <div class="sheet light" id="cal" hidden>
       <div class="status" data-left="clock"></div>
       <div class="topbar"><button class="back" data-close aria-label="닫기" style="color:var(--red)">‹</button><b id="calTitle"></b></div>
@@ -1193,7 +1346,7 @@ a,img{-webkit-user-drag:none}
         <div class="call-top"><span id="callAv"></span><h3 id="callName"></h3><small id="callState"></small></div>
         <div class="call-grid" id="callGrid"><button class="cbtn"><i>🔇</i>소리 끔</button><button class="cbtn"><i>⌗</i>키패드</button><button class="cbtn"><i>🔊</i>스피커</button><button class="cbtn"><i>＋</i>통화 추가</button><button class="cbtn"><i>📹</i>FaceTime</button><button class="cbtn"><i>👤</i>연락처</button></div>
         <button class="call-end" id="callEnd" aria-label="통화 종료"><svg viewBox="0 0 24 24"><path fill="#fff" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .6 3.6 1 1 0 0 1-.25 1z"/></svg></button>
-        <div class="call-in" id="callIn" hidden><div><button class="ci-no" id="ciNo" aria-label="거절"><svg viewBox="0 0 24 24"><path fill="#fff" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .6 3.6 1 1 0 0 1-.25 1z"/></svg></button>거절</div><div><button class="ci-yes" id="ciYes" aria-label="수락"><svg viewBox="0 0 24 24"><path fill="#fff" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .6 3.6 1 1 0 0 1-.25 1z"/></svg></button>수락</div></div>
+        <div class="ftscr" id="ftScr" hidden><video id="ftVid" src="facetime.mp4" loop playsinline preload="none"></video><div class="ft-top"><button id="ftBack" aria-label="통화 화면으로">‹</button><b>오시온♥</b><small>FaceTime</small></div><span class="ft-self" id="ftSelf"></span><div class="ft-bar"><button class="ft-end" id="ftEnd" aria-label="통화 종료"><svg viewBox="0 0 24 24"><path fill="#fff" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .6 3.6 1 1 0 0 1-.25 1z"/></svg></button></div></div><div class="call-in" id="callIn" hidden><div><button class="ci-no" id="ciNo" aria-label="거절"><svg viewBox="0 0 24 24"><path fill="#fff" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .6 3.6 1 1 0 0 1-.25 1z"/></svg></button>거절</div><div><button class="ci-yes" id="ciYes" aria-label="수락"><svg viewBox="0 0 24 24"><path fill="#fff" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .6 3.6 1 1 0 0 1-.25 1z"/></svg></button>수락</div></div>
       </div>
     <button class="nbanner" id="nBanner" hidden><span id="nbIc"></span><div><b id="nbTitle"></b><small id="nbText"></small></div><em>지금</em></button>
     <div class="homebar" id="homebar" role="button" aria-label="홈으로" tabindex="0"></div>
@@ -1303,7 +1456,7 @@ const APPS={
  calculator:{n:"계산기",bg:"#1c1c1e",open:"calc"},
  voice:{n:"음성메모",bg:"#1c1c1e",open:"voice"},
  music:{n:"음악",bg:"linear-gradient(180deg,#ff5e7e,#fa2d48)",open:"music"},
- gomlingo:{n:"곰링고",bg:"linear-gradient(180deg,#7ed957,#4cae2c)"},
+ gomlingo:{n:"곰링고",bg:"linear-gradient(180deg,#7ed957,#4cae2c)",open:"gomlingo"},
  phone:{n:"전화",bg:"linear-gradient(180deg,#5cf07a,#25c244)",open:"phoneapp"},
  sms:{n:"문자",bg:"linear-gradient(180deg,#5cf07a,#25c244)",open:"smsapp"},
  talk:{n:"카톡",bg:"#fee500",open:"talk"},
@@ -1333,7 +1486,7 @@ pages.addEventListener("click",e=>{if(moved){e.preventDefault();e.stopPropagatio
 
 /* 시트 */
 function openSheet(id){closeSheets();$("#"+id).hidden=false;$("#phone").classList.toggle("light-open",$("#"+id).classList.contains("light"));
-  if(id==="talk")scrollChat();if(id==="cal")calOpen();if(id==="youtube")ytOpen();if(id==="music")musicOpen();if(id==="dday")ddayOpen();if(id==="camera")startCam();if(id==="photos")renderPhotos();if(id==="mail")mailHome();if(id==="notes")notesHome();if(id==="safari")sfHome();if(id==="insta"){$("#igStory").hidden=true;$("#pfPic").style.backgroundImage=`url("${IMG.p1}")`;$("#tabAv").style.backgroundImage=`url("${IMG.p1}")`;igHome()}if(id==="clock")clockOpen();if(id==="phoneapp")phOpen();if(id==="contactsapp")contactsOpen();if(id==="smsapp")smsOpen();if(id==="health")healthOpen();if(id==="voice")voiceOpen()}
+  if(id==="talk")scrollChat();if(id==="cal")calOpen();if(id==="youtube")ytOpen();if(id==="music")musicOpen();if(id==="gomlingo")glOpen();if(id==="dday")ddayOpen();if(id==="camera")startCam();if(id==="photos")renderPhotos();if(id==="mail")mailHome();if(id==="notes")notesHome();if(id==="safari")sfHome();if(id==="insta"){$("#igStory").hidden=true;$("#pfPic").style.backgroundImage=`url("${IMG.p1}")`;$("#tabAv").style.backgroundImage=`url("${IMG.p1}")`;igHome()}if(id==="clock")clockOpen();if(id==="phoneapp")phOpen();if(id==="contactsapp")contactsOpen();if(id==="smsapp")smsOpen();if(id==="health")healthOpen();if(id==="voice")voiceOpen()}
 function closeSheets(){try{$("#ytVid").pause()}catch(e){}try{vAudio.pause();endCall()}catch(e){}document.querySelectorAll(".pdetail").forEach(x=>x.remove());typeof ktProf!=="undefined";typeof stTimer!=="undefined"&&clearTimeout(stTimer);$$(".sheet").forEach(s=>s.hidden=true);$("#phone").classList.remove("light-open");stopCam();$("#viewer").hidden=true}
 $$("[data-close]").forEach(b=>b.onclick=closeSheets);
 $("#homebar").onclick=()=>{$$(".sheet").some(s=>!s.hidden)?closeSheets():lockPhone()};
@@ -1365,6 +1518,7 @@ async function loadWx(){
 loadWx();setInterval(loadWx,30*60*1000);
 
 /* 캘린더 */
+const DATED=[{y:2026,mo:11,da:13,len:3,t:"곰리♥",c:"#ff5fa2"}];
 const BDAYS=[
   {mo:8,da:24,t:"보코 생일 🎂",c:"#a5703b"},{mo:5,da:23,t:"지띵 생일 🎂",c:"#ff7aa2"},{mo:7,da:11,t:"은띵 생일 🎂",c:"#6f95ff"},
   {mo:4,da:17,t:"제이 생일 🎂",c:"#ff9f0a"},{mo:5,da:11,t:"시온 생일 🎂",c:"#34c759"},{mo:2,da:4,t:"이로하 생일 🎂",c:"#af52de"}
@@ -1378,7 +1532,7 @@ const WK=["월","화","수","목","금","토","일"];
 function monday(){const n=new Date(),d=new Date(n.getFullYear(),n.getMonth(),n.getDate());d.setDate(d.getDate()-((d.getDay()+6)%7));return d}
 function dayAt(i){const d=monday();d.setDate(d.getDate()+i);return d}
 function todayIdx(){return (new Date().getDay()+6)%7}
-function evOn(i){const dt=dayAt(i);return[...EVENTS.filter(e=>e.all?(i>=e.d&&i<e.d+e.len):e.d===i),...BDAYS.filter(b=>b.mo===dt.getMonth()+1&&b.da===dt.getDate()).map(b=>({...b,all:true}))]}
+function evOn(i){const dt=dayAt(i);return[...datedOn(dt),...EVENTS.filter(e=>e.all?(i>=e.d&&i<e.d+e.len):e.d===i),...BDAYS.filter(b=>b.mo===dt.getMonth()+1&&b.da===dt.getDate()).map(b=>({...b,all:true}))]}
 const hm=h=>`${h<12?"오전":"오후"} ${h%12||12}:00`;
 const evTime=e=>e.all?"하루 종일":`${hm(e.s)} – ${hm(e.e)}`;
 let selDay=todayIdx();
@@ -1932,7 +2086,7 @@ function avHTML(u,size){
   if(u===IGME.id)return`<span class="av28" style="width:${size}px;height:${size}px;background-image:url('${IMG.p1}')"></span>`;
   const p=PEOPLE[u];if(p.img)return`<span class="av28" style="width:${size}px;height:${size}px;background-image:url('${IMG[p.img]}')"></span>`;return`<span class="av28" style="width:${size}px;height:${size}px;background:${p.c};font-size:${size*.42}px">${p.i}</span>`;
 }
-function igShow(v){["igHome","igNoti","igProfile","igPost","igNew","igUser","igDMs","igChat"].forEach(x=>$("#"+x).hidden=x!==v);
+function igShow(v){["igHome","igNoti","igProfile","igPost","igNew","igUser","igDMs","igChat","igReels"].forEach(x=>$("#"+x).hidden=x!==v);
   $("#igTabs").hidden=v==="igNew"||v==="igChat";$$("#igTabs button").forEach(b=>b.classList.toggle("on",b.dataset.v===v))}
 function igHome(){renderStories();renderFeed();igShow("igHome");$("#igHome .ig-scroll").scrollTop=0}
 function renderStories(){
@@ -2598,7 +2752,7 @@ KP.sion.img="s_sion";
 let cmY=new Date().getFullYear(),cmM=new Date().getMonth(),cmSel=null,calMode="month";
 function eventsOn(date){
   const i=(date.getDay()+6)%7,m0=monday(),inWk=date>=m0&&date<new Date(m0.getFullYear(),m0.getMonth(),m0.getDate()+7);
-  return[...(inWk?EVENTS:[]).filter(e=>e.all?(i>=e.d&&i<e.d+e.len):e.d===i),...BDAYS.filter(b=>b.mo===date.getMonth()+1&&b.da===date.getDate()).map(b=>({...b,all:true}))];
+  return[...datedOn(date),...(inWk?EVENTS:[]).filter(e=>e.all?(i>=e.d&&i<e.d+e.len):e.d===i),...BDAYS.filter(b=>b.mo===date.getMonth()+1&&b.da===date.getDate()).map(b=>({...b,all:true}))];
 }
 function calOpen(){calModeShow(calMode)}
 function calModeShow(m){
@@ -2882,6 +3036,225 @@ $("#vFav").onclick=()=>{const a=vList[vIdx],b=$("#vFav");favs.has(a.k)?favs.dele
 $("#vClose").onclick=()=>{$("#viewer").hidden=true;
   if(!$("#phAlbum").hidden&&curAlbum){openAlbum(curAlbum)}else if(!$("#phLib").hidden){const all=albumItems();$("#pgrid").innerHTML=gridHTML(all);bindGrid($("#pgrid"),all)}};
 {let sx=null;const v=$("#vImg");v.addEventListener("touchstart",e=>{sx=e.touches[0].clientX},{passive:true});v.addEventListener("touchend",e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;sx=null;if(dx<-50)$("#vNext").click();if(dx>50)$("#vPrev").click()})}
+
+/* ===== 인스타 좋아요·댓글 ===== */
+PEOPLE["sion.ii"].img="s_sion";
+const POSTREG={};
+const _postHTML=postHTML;
+postHTML=function(p,key){
+  POSTREG[key]=p;
+  let h=_postHTML(p,key);
+  h=h.replace(`<span>${SV.cm}</span>`,`<button class="cmb" data-key="${key}" aria-label="댓글">${SV.cm}</button>`);
+  h=h.replace('<div class="plikes">',`<div class="plikes" data-likes="${key}">`);
+  h=h.replace(/<div class="pmeta">댓글 (\d+)개 모두 보기<\/div>/,`<button class="pmeta cmb" data-key="${key}">댓글 $1개 모두 보기</button>`);
+  h=h.replace('<div class="pimg',`<div data-dbl="${key}" class="pimg`);
+  return h;
+};
+bindLikes=function(){};
+function likeCount(key){const p=POSTREG[key];return(p?p.likes:0)+(liked.has(key)?1:0)}
+function setLike(key,on){
+  on?liked.add(key):liked.delete(key);
+  $$(`#insta .lk[data-key="${CSS.escape(key)}"]`).forEach(b=>{b.classList.toggle("liked",on);if(on){b.classList.remove("pop");void b.offsetWidth;b.classList.add("pop")}});
+  $$(`#insta [data-likes="${CSS.escape(key)}"]`).forEach(d=>d.textContent=`좋아요 ${likeCount(key)}개`);
+}
+let lastTap={k:null,t:0};
+$("#insta").addEventListener("click",e=>{
+  const lk=e.target.closest(".lk");if(lk){e.stopPropagation();setLike(lk.dataset.key,!liked.has(lk.dataset.key));return}
+  const cm=e.target.closest(".cmb");if(cm){e.stopPropagation();openComments(cm.dataset.key);return}
+  const im=e.target.closest("[data-dbl]");
+  if(im){const k=im.dataset.dbl,now=Date.now();
+    if(lastTap.k===k&&now-lastTap.t<350){setLike(k,true);const h=document.createElement("span");h.className="bigheart";h.innerHTML=SV.heart;im.append(h);setTimeout(()=>h.remove(),900);lastTap={k:null,t:0}}
+    else lastTap={k,t:now}}
+});
+const CM_POOL={
+ "gom_0824":["너무 예쁘다 ʕ•ᴥ•ʔ","곰리 최고!!","이거 나야?ㅋㅋㅋ","꿀 먹고 싶다","저장했다 🐻"],
+ "jiin__":["명작","세기의작품","블로그에 박제함","ㅋㅋㅋㅋㅋㅋㅋㅋ","미쳤다 진짜"],
+ "eunttingtting":["딸쥬밀 먹고싶다","곰발사한다!!!","너무 귀엽잖아ㅠㅠ","나도 데려가!!","띵띵~"],
+ "sion.ii":["사랑해 진심이야","곰리 명예 회원 다녀감","너무 좋다~","파이팅~!"],
+ "roha_0505":["엄마 최고!!","나도 갈래!!","예쁘다 ♡"],
+ "_e_j_0.1":["와 분위기 미쳤다","🍀🍀","여기 어디야?","나도 가고 싶어"],
+ "inahdiq":["ㅋㅋㅋㅋ귀여워","🍦","다음에 같이 가자","좋아요 꾹"],
+ "gimbobo05":["대박","감튀 먹으러 가자","🌊🌊","나 이 사진 좋아"],
+ "koiyaa3_":["ㅋㅋㅋㅋ고마워","♡♡","맹견주의"]
+};
+const CM_USERS=Object.keys(CM_POOL);
+const cmExtra={};
+function hashStr(s){let h=7;for(const c of s)h=(h*31+c.charCodeAt(0))>>>0;return h}
+function commentsFor(key){
+  const p=POSTREG[key]||{},owner=p.u||IGME.id,n=Math.min(p.cm||0,8),out=[],seed=hashStr(key);
+  const users=CM_USERS.filter(u=>u!==owner&&u!=="koiyaa3_");
+  for(let i=0;i<n;i++){const u=users[(seed+i*3)%users.length],pool=CM_POOL[u];out.push({u,t:pool[((seed>>3)+i*3)%pool.length],w:`${1+((seed+i*5)%23)}시간`,l:(seed+i)%9})}
+  if(owner===IGME.id&&n>1)out.splice(1,0,{u:IGME.id,t:"ㅋㅋㅋㅋ고마워 ♡",w:"5시간",l:2,re:1});
+  return[...out,...(cmExtra[key]||[])];
+}
+let cmKey=null;
+function openComments(key){
+  cmKey=key;const S=$("#igCm");S.hidden=false;S.classList.remove("in");void S.offsetWidth;S.classList.add("in");
+  $("#cmMe").innerHTML=avHTML(IGME.id,32);drawComments();
+}
+function drawComments(){
+  const list=commentsFor(cmKey);
+  $("#cmList").innerHTML=list.length?list.map((c,i)=>`<div class="cm${c.re?" re":""}"><span data-user="${c.u}">${avHTML(c.u,c.re?26:34)}</span><div><b>${c.u}</b> <small>${c.w}</small><p>${esc(c.t)}</p><small class="cmr">답글 달기</small></div><button class="cmh${cmLiked.has(cmKey+"#"+i)?" on":""}" data-i="${i}" aria-label="댓글 좋아요">${SV.heart}<small>${(c.l||0)+(cmLiked.has(cmKey+"#"+i)?1:0)||""}</small></button></div>`).join(""):`<div class="cm-empty"><b>아직 댓글이 없습니다</b><small>대화를 시작하세요.</small></div>`;
+  $$("#cmList .cmh").forEach(b=>b.onclick=e=>{e.stopPropagation();const k=cmKey+"#"+b.dataset.i;cmLiked.has(k)?cmLiked.delete(k):cmLiked.add(k);drawComments()});
+}
+const cmLiked=new Set();
+$("#cmClose").onclick=()=>$("#igCm").hidden=true;
+$("#igCm").addEventListener("click",e=>{if(e.target.id==="igCm")$("#igCm").hidden=true});
+$("#cmForm").onsubmit=e=>{e.preventDefault();const v=$("#cmInput").value.trim();if(!v)return;(cmExtra[cmKey]=cmExtra[cmKey]||[]).push({u:IGME.id,t:v,w:"방금",l:0});$("#cmInput").value="";drawComments();const c=$("#cmList");c.scrollTop=c.scrollHeight;
+  const meta=$$(`#insta .cmb.pmeta[data-key="${CSS.escape(cmKey)}"]`);const n=commentsFor(cmKey).length;meta.forEach(m=>m.textContent=`댓글 ${n}개 모두 보기`)};
+
+/* ===== 릴스 ===== */
+function openReels(){
+  igShow("igReels");$$("#igTabs button").forEach(b=>b.classList.toggle("on",b.dataset.v==="reels"));$("#igTabs").classList.add("dark");
+  $("#rlAv").innerHTML=avHTML("sion.ii",32);const v=$("#rlVid");v.currentTime=0;v.muted=false;v.play().catch(()=>{v.muted=true;v.play().catch(()=>{})});
+}
+const _igShow=igShow;
+igShow=function(v){_igShow(v);$("#igTabs").classList.toggle("dark",v==="igReels");if(v!=="igReels")try{$("#rlVid").pause()}catch(e){}};
+$$("#igTabs button").forEach(b=>{if(b.dataset.v==="reels")b.onclick=openReels});
+$("#rlVid").onclick=()=>{const v=$("#rlVid");if(v.muted){v.muted=false;return}v.paused?v.play():v.pause()};
+$("#rlLike").onclick=()=>{const b=$("#rlLike"),on=b.classList.toggle("on");b.querySelector("small").textContent=on?"1,025":"1,024"};
+$("#rlCm").onclick=()=>{POSTREG.reel={u:"sion.ii",cm:6};openComments("reel")};
+$("#rlFollow").onclick=e=>{const b=e.currentTarget;b.textContent=b.textContent==="팔로우"?"팔로잉":"팔로우"};
+const _closeSheets=closeSheets;
+closeSheets=function(){try{$("#rlVid").pause();$("#ftVid").pause()}catch(e){}$("#igCm").hidden=true;return _closeSheets()};
+
+/* ===== 인스타 DM 답장 ===== */
+const DM_POOL={
+ "gom_0824":["ㅋㅋㅋㅋㅋ","곰곰곰","보고싶다 ʕ•ᴥ•ʔ","꿀 사줘","화요일에 봐!","제이 최고"],
+ "inahdiq":["ㅋㅋㅋㅋ웅웅","좋아!!","🍦🍦","오 진짜?","다음에 같이 가자"],
+ "gimbobo05":["감튀 먹을래?","ㅋㅋㅋㅋ대박","나 지금 퇴근 중","콜!!","💪"],
+ "_e_j_0.1":["나 아직 공부 중ㅠ","🍀","ㅋㅋㅋㅋㅋ웃겨","시험 끝나고 놀자"],
+ "jiin__":["명작","ㅋㅌㅌㅋㅋㅋㅋ","블로그 봤어?","#전기고문시작"],
+ "eunttingtting":["딸쥬밀!!","곰발사한다!!","ㅋㅋㅋㅋㅋ","선물 사 갈게"],
+ "sion.ii":["사랑해 진심이야","제이 파이팅~","ㅋㅋㅋㅋ","회원증 언제 나와"],
+ "roha_0505":["엄마!!","보고싶어ㅠㅠ","사랑해 엄마","언제 와?"]
+};
+function dmReplyText(u,text){
+  if(/사랑/.test(text))return"나도 사랑해 ♡";
+  if(/보고\s*싶/.test(text))return"나도 보고싶어ㅠㅠ";
+  if(/ㅋㅋ/.test(text)&&Math.random()<.4)return"ㅋㅋㅋㅋㅋㅋㅋ";
+  if(/\?$/.test(text.trim())&&Math.random()<.5)return pick(["몰라 ㅋㅋㅋ","당연하지!","글쎄~","응응"]);
+  return pick(DM_POOL[u]||["ㅋㅋㅋ"]);
+}
+let dmQ={};
+$("#chForm").onsubmit=e=>{
+  e.preventDefault();const v=$("#chInput").value.trim();if(!v)return;const id=chatId,t=threadOf(id);
+  (dmExtra[id]=dmExtra[id]||[]).push({f:"me",t:v});$("#chInput").value="";renderChat2();
+  clearTimeout(dmQ[id]);
+  dmQ[id]=setTimeout(()=>{
+    const who=t.members?[...t.members].sort(()=>Math.random()-.5).slice(0,1+Math.floor(Math.random()*2)):[t.id];
+    $("#chTyping").hidden=!(chatId===id&&!$("#igChat").hidden);
+    let d=0;who.forEach((u,i)=>{d+=1500+Math.random()*2000;setTimeout(()=>{
+      (dmExtra[id]=dmExtra[id]||[]).push({f:u,t:dmReplyText(u,v)});
+      if(i===who.length-1)$("#chTyping").hidden=true;
+      if(chatId===id&&!$("#igChat").hidden&&!$("#insta").hidden){renderChat2();beepNoti()}
+      else{t.unread=true;dmRead.delete(id);if(!$("#insta").hidden&&!$("#igDMs").hidden)openDMs();
+        if(!$("#home").hidden&&$("#insta").hidden)bannerIG(t.members?t.name:u,(t.members?u+": ":"")+dmExtra[id][dmExtra[id].length-1].t,id)}
+    },d)});
+  },700);
+};
+function bannerIG(title,text,id){
+  banner("kakao",title,text,()=>{openSheet("insta");openChat(id)});
+  $("#nbIc").innerHTML=`<span class="ico" style="background:${APPS.instagram.bg}">${IC.instagram}</span>`;
+}
+
+/* ===== 페이스타임 (오시온) ===== */
+const ftBtn=$$("#callGrid .cbtn")[4];
+ftBtn.onclick=()=>{
+  if(callWho!=="오시온♥"){toast("FaceTime을 사용할 수 없어요");return}
+  if(!$("#callIn").hidden)return;
+  const F=$("#ftScr"),v=$("#ftVid");F.hidden=false;v.currentTime=0;v.muted=false;v.play().catch(()=>{v.muted=true;v.play().catch(()=>{})});
+  $("#ftSelf").style.backgroundImage=`url("${IMG.p1}")`;
+};
+$("#ftEnd").onclick=()=>{$("#ftVid").pause();$("#ftScr").hidden=true;endCall()};
+$("#ftBack").onclick=()=>{$("#ftVid").pause();$("#ftScr").hidden=true};
+const _endCall=endCall;
+endCall=function(){try{$("#ftVid").pause()}catch(e){}$("#ftScr").hidden=true;return _endCall()};
+$("#callEnd").onclick=()=>endCall();
+
+/* ===== 벨소리 (마림바) ===== */
+function marimba(f,t0,vol){try{const t=actx.currentTime+t0;[[1,vol||.22,.9],[4,(vol||.22)*.35,.12],[10,(vol||.22)*.08,.05]].forEach(([m,v,len])=>{const o=actx.createOscillator(),g=actx.createGain();o.type="sine";o.frequency.value=f*m;o.connect(g);g.connect(actx.destination);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.005);g.gain.exponentialRampToValueAtTime(.0008,t+len);o.start(t);o.stop(t+len+.05)})}catch(e){}}
+const RING_SEQ=[[1046.5,0],[1318.5,.14],[1568,.28],[2093,.42],[1568,.62],[1318.5,.76],[1568,.9],[1760,1.1],[1568,1.24],[1318.5,1.38],[1046.5,1.52],[1174.7,1.72],[1318.5,1.86]];
+ring=function(){try{mu.pause()}catch(e){}ensureAudio();stopRing();
+  const pat=()=>{if(actx)RING_SEQ.forEach(([f,t])=>marimba(f,t));try{navigator.vibrate&&navigator.vibrate([400,200,400])}catch(e){}};
+  pat();ringInt=setInterval(pat,2600)};
+
+/* ===== 날짜 지정 일정 ===== */
+function datedOn(dt){return DATED.filter(e=>{const s=new Date(e.y,e.mo-1,e.da),x=new Date(dt.getFullYear(),dt.getMonth(),dt.getDate());return x>=s&&x<new Date(e.y,e.mo-1,e.da+e.len)}).map(e=>({...e,all:true}))}
+
+/* ===== 곰링고 ===== */
+const GOMEO=[
+ {w:"곰",m:"세상에서 제일 귀여운 존재",u:0},{w:"곰곰",m:"생각 중이에요",u:0},{w:"쪼아유",m:"좋아요",u:0},{w:"곰알",m:"느낌 알지?",u:0},{w:"콕!",m:"볼 누르기",u:0},
+ {w:"곰랄라",m:"기분이 아주 좋아요",u:1},{w:"곰발사",m:"진심으로 화났어요",u:1},{w:"행복띠띠",m:"너무 행복해요",u:1},{w:"하.",m:"할 말을 잃었어요",u:1},{w:"(기절)",m:"충격받았어요",u:1},
+ {w:"우웅~ 허니~",m:"꿀 주세요",u:2},{w:"곰꿀곰꿀트위스트",m:"신나는 곰 춤",u:2},{w:"띠따띠랄따",m:"노래 부르는 소리",u:2},{w:"곰쉬",m:"숨 쉬어",u:2},{w:"짱땅",m:"최고로 재밌는",u:2},
+ {w:"곰 하 곰 하",m:"심호흡하는 소리",u:3},{w:"곰랄라띵랄라",m:"곰들의 나라",u:3},{w:"딸쥬밀",m:"딸기 쥬얼리 밀크티",u:3},{w:"곰리",m:"곰과 친구들의 모임",u:3},{w:"뉴스편아닌가요",m:"이건 뉴스감이에요",u:3}
+];
+const UNITS=["곰어 기초","감정 표현","곰리 생활","고급 곰어"];
+let gl={xp:340,gems:505,hearts:5,streak:23,today:false,done:{}};
+function glOpen(){glTab("learn")}
+function glBar(){$("#glStreak").textContent=gl.streak+(gl.today?1:0);$("#glGems").textContent=gl.gems;$("#glHearts").textContent=gl.hearts;$("#glStreakI").classList.toggle("lit",gl.today)}
+function glTab(t){
+  $$("#glTabs button").forEach(b=>b.classList.toggle("on",b.dataset.t===t));
+  ["learn","att","dict"].forEach(x=>$("#gl-"+x).hidden=x!==t);$("#glLesson").hidden=true;glBar();
+  if(t==="learn")glPath();if(t==="att")glAtt();if(t==="dict")glDict();
+}
+$$("#glTabs button").forEach(b=>b.onclick=()=>glTab(b.dataset.t));
+function glPath(){
+  let h="";UNITS.forEach((u,ui)=>{
+    h+=`<div class="gl-unit" style="--uc:${["#58cc02","#ce82ff","#ff9600","#1cb0f6"][ui]}"><small>${ui+1}단원</small><b>${u}</b></div><div class="gl-nodes">`;
+    for(let n=0;n<4;n++){const id=ui+"-"+n,done=gl.done[id]||(ui===0&&n<2),locked=!done&&!glUnlocked(ui,n),off=[0,40,-40,20][n];
+      h+=`<button class="gl-node${done?" done":""}${locked?" lock":""}" data-u="${ui}" data-n="${n}" style="--uc:${["#58cc02","#ce82ff","#ff9600","#1cb0f6"][ui]};transform:translateX(${off}px)">${done?"✓":locked?"🔒":n===3?"🏆":"★"}</button>`}
+    h+="</div>"});
+  $("#gl-learn").innerHTML=h;
+  $$("#gl-learn .gl-node").forEach(b=>b.onclick=()=>{if(b.classList.contains("lock")){toast("앞 단계를 먼저 끝내 주세요");return}glStart(+b.dataset.u)});
+}
+function glUnlocked(ui,n){if(ui===0&&n<=2)return true;const prev=n>0?ui+"-"+(n-1):(ui-1)+"-3";return!!gl.done[prev]||(ui===0&&n<=2)}
+let les=null;
+function glStart(ui){
+  const pool=GOMEO.filter(x=>x.u<=ui),cur=GOMEO.filter(x=>x.u===ui).sort(()=>Math.random()-.5);
+  const qs=cur.slice(0,5).map((x,i)=>{const dir=i%2===0,wrong=pool.filter(y=>y!==x).sort(()=>Math.random()-.5).slice(0,3);
+    const ans=dir?x.m:x.w;return{q:dir?`“${x.w}”의 뜻은?`:`“${x.m}”를 곰어로 하면?`,ans,opts:[ans,...wrong.map(y=>dir?y.m:y.w)].sort(()=>Math.random()-.5),word:x}});
+  les={ui,qs,i:0,right:0,sel:null,checked:false};$("#glLesson").hidden=false;glQ();
+}
+function glQ(){
+  const q=les.qs[les.i];les.sel=null;les.checked=false;
+  $("#glProg").style.width=(les.i/les.qs.length*100)+"%";$("#glLH").textContent=gl.hearts;
+  $("#glBody").innerHTML=`<small class="gl-new">새 단어</small><h3>${esc(q.q)}</h3><div class="gl-bear">ʕ•ᴥ•ʔ<span>${esc(q.q.includes("뜻")?q.word.w:"곰어로 말해 봐!")}</span></div><div class="gl-opts">${q.opts.map((o,i)=>`<button data-i="${i}">${esc(o)}</button>`).join("")}</div>`;
+  $$("#glBody .gl-opts button").forEach(b=>b.onclick=()=>{if(les.checked)return;$$("#glBody .gl-opts button").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");les.sel=q.opts[+b.dataset.i];$("#glCheck").disabled=false});
+  $("#glFoot").className="gl-foot";$("#glFb").innerHTML="";$("#glCheck").textContent="확인";$("#glCheck").disabled=true;
+}
+$("#glCheck").onclick=()=>{
+  if(les.finished){glTab("learn");return}
+  const q=les.qs[les.i];
+  if(!les.checked){les.checked=true;const ok=les.sel===q.ans;if(ok)les.right++;else gl.hearts=Math.max(0,gl.hearts-1);
+    $("#glFoot").className="gl-foot "+(ok?"ok":"bad");
+    $("#glFb").innerHTML=ok?`<b>${pick(["곰랄라! 정답이에요","훌륭해요!","완벽해요!"])}</b>`:`<b>정답:</b> ${esc(q.ans)}`;
+    $$("#glBody .gl-opts button").forEach(b=>{const o=q.opts[+b.dataset.i];if(o===q.ans)b.classList.add("right");else if(b.classList.contains("sel"))b.classList.add("wrong")});
+    try{ensureAudio();ok?(tone(880,0,.12),tone(1320,.1,.2)):tone(220,0,.3)}catch(e){}
+    $("#glCheck").textContent="계속";$("#glLH").textContent=gl.hearts;return}
+  les.i++;if(les.i<les.qs.length){glQ();return}
+  $("#glProg").style.width="100%";const xp=10+les.right*2;gl.xp+=xp;gl.gems+=5;
+  const n=[0,1,2,3].find(k=>!gl.done[les.ui+"-"+k]&&!(les.ui===0&&k<2));if(n!==undefined)gl.done[les.ui+"-"+n]=true;
+  if(!gl.today){gl.today=true}
+  $("#glBody").innerHTML=`<div class="gl-end"><div class="gl-trophy">🏆</div><h3>레슨 완료!</h3><p>${les.right}/${les.qs.length} 정답</p><div class="gl-stats"><div><small>획득 XP</small><b>+${xp}</b></div><div><small>연속 학습</small><b>🔥 ${gl.streak+1}</b></div></div><div class="gl-bear big">ʕ•ᴥ•ʔ 곰랄라~!</div></div>`;
+  $("#glFoot").className="gl-foot";$("#glFb").innerHTML="";$("#glCheck").textContent="계속하기";les.finished=true;
+};
+$("#glQuit").onclick=()=>glTab("learn");
+function glAtt(){
+  const t=today0(),y=t.getFullYear(),m=t.getMonth(),first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate();
+  const streak=gl.streak,att=d=>{const dt=new Date(y,m,d),diff=Math.round((t-dt)/864e5);return(diff>=1&&diff<=streak)||(diff===0&&gl.today)};
+  let g="";for(let i=0;i<first;i++)g+="<span></span>";
+  for(let d=1;d<=days;d++){const isT=d===t.getDate(),a=att(d);g+=`<span class="ad${a?" on":""}${isT?" today":""}">${a?"🐾":d}</span>`}
+  const cnt=Array.from({length:days},(_,i)=>att(i+1)).filter(Boolean).length;
+  $("#gl-att").innerHTML=`<div class="att-card"><div class="att-fire">🔥</div><div><b>${streak+(gl.today?1:0)}일 연속 출석</b><small>${gl.today?"오늘도 출석 완료! 곰랄라~":"오늘 출석하면 "+(streak+1)+"일째예요"}</small></div></div>
+   <button class="att-btn${gl.today?" done":""}" id="attBtn">${gl.today?"출석 완료 ✓":"오늘 출석하기"}</button>
+   <div class="att-cal"><b>${m+1}월 출석부</b><small>이번 달 ${cnt}일 출석</small><div class="att-dow"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div><div class="att-grid">${g}</div></div>
+   <div class="att-rw"><b>연속 출석 보상</b>${[[7,"💎 50"],[14,"💎 100"],[30,"🍯 꿀단지 배지"],[100,"👑 곰어 마스터"]].map(([d,r])=>`<div class="${streak+(gl.today?1:0)>=d?"got":""}"><span>${d}일</span><em>${r}</em><i>${streak+(gl.today?1:0)>=d?"받음":"D-"+(d-streak-(gl.today?1:0))}</i></div>`).join("")}</div>`;
+  $("#attBtn").onclick=()=>{if(gl.today)return;gl.today=true;gl.gems+=10;try{ensureAudio();tone(988,0,.12);tone(1318,.12,.25)}catch(e){}toast("출석 완료! 💎 10개를 받았어요");glBar();glAtt()};
+}
+function glDict(){
+  $("#gl-dict").innerHTML=`<div class="dict-h"><b>곰어 사전</b><small>단어 ${GOMEO.length}개</small></div>`+UNITS.map((u,ui)=>`<div class="dict-u">${u}</div>`+GOMEO.filter(x=>x.u===ui).map(x=>`<div class="dict-row"><b>${esc(x.w)}</b><span>${esc(x.m)}</span></div>`).join("")).join("");
+}
 
 let tt;function toast(s){$(".toast")?.remove();const d=document.createElement("div");d.className="toast";d.innerHTML=esc(s).replace(/\n/g,"<br>");$("#phone").append(d);clearTimeout(tt);tt=setTimeout(()=>d.remove(),2200)}
 </script>
