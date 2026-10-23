@@ -220,6 +220,37 @@ a,img{-webkit-user-drag:none}
 .cambar{display:flex;justify-content:center;padding:22px 0 calc(34px + env(safe-area-inset-bottom,0px))}
 .shutter{width:70px;height:70px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px #000,0 0 0 7px #fff}
 
+/* mail */
+#mail{background:#000}
+.mv{flex:1;display:flex;flex-direction:column;min-height:0}
+.mback{color:#0a84ff;font-weight:400;font-size:17px;display:flex;align-items:center;gap:2px}
+.mback b{font-size:28px;font-weight:400;line-height:1}
+.mboxes{margin:4px 16px;background:#1c1c1e;border-radius:12px;overflow:hidden}
+.mboxes button{display:flex;align-items:center;gap:12px;width:100%;padding:13px 16px;font-size:16px;text-align:left}
+.mboxes button+button{border-top:1px solid #38383a}
+.mboxes svg{width:22px;height:22px;flex:none}
+.mboxes .cnt{margin-left:auto;color:#8e8e93;font-variant-numeric:tabular-nums}
+.mboxes .chev{color:#636366;font-size:18px}
+.mlist{flex:1;overflow-y:auto;padding-bottom:calc(24px + env(safe-area-inset-bottom,0px))}
+.mrow{position:relative;display:block;width:100%;text-align:left;padding:10px 16px 11px 28px;border-bottom:1px solid #2c2c2e}
+.mrow .udot{position:absolute;left:10px;top:16px;width:9px;height:9px;border-radius:50%;background:#0a84ff}
+.mtop{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.mtop b{font-size:15.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mtop small{color:#8e8e93;font-size:13px;flex:none}
+.msub{font-size:14.5px;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mpre{font-size:13.5px;color:#8e8e93;margin-top:2px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mread{flex:1;overflow-y:auto;padding:4px 18px calc(30px + env(safe-area-inset-bottom,0px));user-select:text}
+.mhead{display:flex;gap:12px;align-items:center;padding-bottom:12px;border-bottom:1px solid #2c2c2e}
+.mav{width:40px;height:40px;border-radius:50%;background:linear-gradient(180deg,#a1a1a6,#6c6c70);display:grid;place-items:center;font-weight:700;flex:none}
+.mhead div{min-width:0;font-size:13px;color:#8e8e93;line-height:1.5}
+.mhead div b{display:block;color:#fff;font-size:16px}
+.mtitle{font-size:21px;font-weight:700;margin:16px 0 6px;line-height:1.35}
+.mdate{font-size:13px;color:#8e8e93;margin-bottom:18px}
+.mbody{font-size:15.5px;line-height:1.75;white-space:pre-wrap;word-break:keep-all}
+.poke{display:inline-block;font-size:17px;padding:0 2px}
+.poke.wig{animation:wig .5s}
+@keyframes wig{25%{transform:rotate(-14deg) scale(1.2)}75%{transform:rotate(14deg) scale(1.2)}}
+
 .toast{position:absolute;top:64px;left:50%;transform:translateX(-50%);background:rgba(30,30,36,.94);color:#fff;padding:10px 16px;border-radius:14px;font-size:14px;z-index:90;max-width:86%;text-align:center;line-height:1.45}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -294,6 +325,27 @@ a,img{-webkit-user-drag:none}
       <div class="topbar"><button class="back" data-close aria-label="닫기">‹</button>친구</div>
       <div class="msgs" id="msgs"></div>
       <form class="compose" id="compose"><input id="msgInput" placeholder="메시지 입력" autocomplete="off"><button>전송</button></form>
+    </div>
+
+    <div class="sheet" id="mail" hidden>
+      <div class="status" data-left="clock"></div>
+      <div class="mv" id="mvBoxes">
+        <div class="topbar"><button class="back" data-close aria-label="닫기" style="color:#0a84ff">‹</button></div>
+        <div class="big-title">메일함</div>
+        <div class="mboxes">
+          <button data-box="in"><svg viewBox="0 0 24 24" fill="none" stroke="#0a84ff" stroke-width="1.8" stroke-linejoin="round"><path d="M3 13.5 5.5 5h13l2.5 8.5V19H3z"/><path d="M3 13.5h5l1.5 2.5h5l1.5-2.5h5"/></svg>받은 편지함<span class="cnt" id="inCnt"></span><span class="chev">›</span></button>
+          <button data-box="sent"><svg viewBox="0 0 24 24" fill="none" stroke="#0a84ff" stroke-width="1.8" stroke-linejoin="round"><path d="M21 3 3 10.5l7.5 2.9L13.4 21z"/><path d="m10.5 13.4 4-4"/></svg>보낸 편지함<span class="cnt" id="sentCnt"></span><span class="chev">›</span></button>
+        </div>
+      </div>
+      <div class="mv" id="mvList" hidden>
+        <div class="topbar"><button class="mback" id="mToBoxes"><b>‹</b>메일함</button></div>
+        <div class="big-title" id="mListTitle"></div>
+        <div class="mlist" id="mList"></div>
+      </div>
+      <div class="mv" id="mvRead" hidden>
+        <div class="topbar"><button class="mback" id="mToList"><b>‹</b><span id="mBackLbl"></span></button></div>
+        <div class="mread" id="mRead"></div>
+      </div>
     </div>
 
     <div class="sheet light" id="cal" hidden>
@@ -433,7 +485,7 @@ const IC={
 };
 const APPS={
  youtube:{n:"유튜브",bg:"linear-gradient(160deg,#ff3b3b,#d60000)",url:"https://www.youtube.com"},
- mail:{n:"메일",bg:"linear-gradient(180deg,#3fa4ff,#0a68f5)"},
+ mail:{n:"메일",bg:"linear-gradient(180deg,#3fa4ff,#0a68f5)",open:"mail"},
  calendar:{n:"캘린더",bg:"#fff",open:"cal"},
  reminders:{n:"미리알림",bg:"#fff",open:"rem"},
  notes:{n:"메모",bg:"#fff",open:"notes"},
@@ -474,7 +526,7 @@ pages.addEventListener("click",e=>{if(moved){e.preventDefault();e.stopPropagatio
 
 /* 시트 */
 function openSheet(id){closeSheets();$("#"+id).hidden=false;$("#phone").classList.toggle("light-open",$("#"+id).classList.contains("light"));
-  if(id==="talk")scrollChat();if(id==="cal")renderWeek();if(id==="camera")startCam();if(id==="photos")renderPhotos()}
+  if(id==="talk")scrollChat();if(id==="cal")renderWeek();if(id==="camera")startCam();if(id==="photos")renderPhotos();if(id==="mail")mailHome()}
 function closeSheets(){$$(".sheet").forEach(s=>s.hidden=true);$("#phone").classList.remove("light-open");stopCam();$("#viewer").hidden=true}
 $$("[data-close]").forEach(b=>b.onclick=closeSheets);
 $("#homebar").onclick=()=>{$$(".sheet").some(s=>!s.hidden)?closeSheets():lockPhone()};
@@ -606,6 +658,241 @@ $("#shutter").onclick=()=>{
   const c=document.createElement("canvas");c.width=v.videoWidth;c.height=v.videoHeight;c.getContext("2d").drawImage(v,0,0);
   shots.unshift(c.toDataURL("image/jpeg",.85));toast("사진에 저장했어요");
 };
+
+/* 메일 */
+const ME="조제이";
+const INBOX=[
+ {f:"곰",s:"화요일 미팅 장소",d:"2026-10-23T15:24",b:`제이야!
+
+화요일 1시 미팅 장소 학교 앞 카페 어때?
+창가 자리 맡아둘게.
+
+늦으면 꿀 사줘야 됨 ʕ•ᴥ•ʔ
+
+- 곰`},
+ {f:"곰링고",s:"오늘의 곰어 수업이 기다리고 있어요",d:"2026-10-23T09:00",b:`안녕하세요, 제이 님!
+
+연속 학습 24일째예요. 정말 대단해요!
+
+오늘 배울 표현
+· 곰곰 = 생각 중이에요
+· 곰랄라 = 기분이 아주 좋아요
+· 곰발사 = 진심으로 화났어요
+
+딱 5분만 투자하면 연속 기록을 지킬 수 있어요.
+곰이 기다리고 있어요. 지금 바로 수업을 시작해 보세요!
+
+곰링고 드림`},
+ {f:"학과 사무실",s:"[공지] 문화유적답사와필드 과제 제출 안내",d:"2026-10-22T11:30",b:`안녕하세요, 학과 사무실입니다.
+
+문화유적답사와필드 과제 제출 관련하여 안내드립니다.
+
+· 제출 기한: 다음 주 월요일 23:59까지
+· 제출 형식: PDF 파일
+· 파일명: 학번_이름_답사보고서
+· 분량: A4 5장 이상 (사진 포함)
+
+기한이 지난 과제는 받지 않으니 꼭 시간 안에 제출해 주세요.
+
+감사합니다.`},
+ {f:"로하",s:"엄마!!",d:"2026-10-21T21:05",b:`엄마!!! 메일 이제 봤어ㅠㅠ
+
+나도 엄마 너무 보고 싶어!!
+언제 와?? 진짜 꼭 와야 돼!!
+
+올 때 맛있는 거 사 와야 돼. 약속!
+사랑해 엄마 ♥
+
+- 엄마 딸 로하가`},
+ {f:"지인",s:"Re: 지인이에게",d:"2026-10-20T18:40",b:`아 뭐야ㅋㅋㅋㅋㅋ
+곰 볼 눌렀는데 아무 일도 안 일어나잖아!!
+
+연어들은 어떻게 됐는데?
+곰들은 왜 날뛰는데??
+
+다음 편 빨리 보내. 궁금해서 잠 못 자.`},
+ {f:"곰리 운영진",s:"[곰리] 이번 주말 곰리♥ 일정 안내",d:"2026-10-19T10:00",b:`곰리 회원 여러분 안녕하세요!
+
+이번 주 금요일부터 일요일까지 곰리♥ 일정이 진행됩니다.
+
+준비물
+· 꿀 (필수)
+· 편한 신발
+· 웃는 얼굴
+· 곰꿀곰꿀트위스트 연습
+
+모두 즐거운 곰리 보내세요. 곰랄라!
+
+곰리 운영진 드림`},
+ {f:"은정",s:"Re: 은정이에게",d:"2026-10-18T23:12",b:`아 발사하지 마ㅠㅠㅠ
+
+나도 너 사랑해!! 일본에서 너 생각 엄청 했어.
+곰 키링 사 갈게. 진짜 귀여운 걸로 골랐어.
+
+돌아가면 바로 만나자 띵띵~`},
+ {f:"시온",s:"Re: To.시오니",d:"2026-10-16T19:47",b:`제이야ㅠㅠ 메일 보고 감동받았어.
+
+나도 너 진짜 사랑해!
+곰리 명예 회원 너무 영광이다ㅋㅋ
+회원증은 언제 줘??
+
+너도 항상 파이팅!!`},
+ {f:"중앙도서관",s:"도서 반납 예정일 안내",d:"2026-10-14T09:00",b:`조제이 님, 안녕하세요.
+
+대출하신 도서의 반납 예정일을 안내드립니다.
+
+· 도서명: 한국 문화유산 입문
+· 반납 예정일: 10월 28일
+
+기한 내 반납 부탁드립니다.
+연장은 도서관 홈페이지에서 1회 가능합니다.`},
+ {f:"사진 동아리",s:"MT 사진 공유합니다",d:"2026-10-11T14:20",b:`다들 MT 고생 많았어요!
+
+찍은 사진 모아서 공유 폴더에 올려 두었어요.
+마음에 드는 사진 있으면 각자 받아 가세요.
+
+다음 출사는 해운대에서 할 예정이에요.
+날짜는 투표로 정할게요!`},
+ {f:"곰곰마켓",s:"주문하신 상품이 배송 완료되었어요",d:"2026-10-09T16:03",b:`조제이 님, 주문하신 상품이 도착했어요!
+
+· 상품: 왕 큰 곰 인형 (갈색)
+· 수량: 1개
+· 배송 장소: 문 앞
+
+곰이 문 앞에서 기다리고 있어요.
+얼른 안아 주세요!`},
+ {f:"곰",s:"보고 싶다",d:"2026-10-05T22:31",b:`그냥.
+
+갑자기 보고 싶어서 메일 보내 봄.
+내일 보자!
+
+ʕ•ᴥ•ʔ`},
+ {f:"학생지원팀",s:"2학기 중간고사 일정 안내",d:"2026-10-02T10:00",b:`안녕하세요, 학생지원팀입니다.
+
+2학기 중간고사 일정을 안내드립니다.
+
+· 기간: 10월 중순 ~ 10월 말
+· 과목별 일정은 각 수업 공지를 확인해 주세요.
+
+시험 기간 동안 도서관 열람실은 24시간 운영됩니다.
+모두 좋은 결과 있기를 바랍니다!`},
+ {f:"곰링고",s:"곰링고에 오신 것을 환영해요!",d:"2026-09-24T08:00",b:`환영해요, 제이 님!
+
+이제 하루 5분으로 곰어를 배울 수 있어요.
+
+첫 번째 표현
+· 곰 = 세상에서 제일 귀여운 존재
+
+매일 조금씩, 곰과 함께 성장해 봐요!
+
+곰링고 드림`},
+ {f:"곰리 운영진",s:"곰리 명예 회원 가입을 축하합니다",d:"2026-09-15T12:00",b:`조제이 님, 곰리 가입을 축하드립니다!
+
+이제 조제이 님은 곰리의 정식 회원입니다.
+
+회원 혜택
+· 곰 볼 콕 무제한
+· 곰꿀곰꿀트위스트 우선 참여권
+· 주말 곰리♥ 초대
+
+앞으로 함께 곰랄라 해요!`}
+];
+const SENT=[
+ {to:"곰",s:"곰 사랑하는 법",d:"2026-10-22T00:47",b:`곰 사랑하는 법
+
+곰을 사랑하는 데에는 자격증이 필요 없다.
+하지만 몇 가지 규칙은 꼭 지켜야 한다.
+
+1. 꿀은 언제나 넉넉하게
+곰은 배가 고프면 예민해진다.
+가방 속에 꿀 한 병, 아니면 꿀맛 과자 하나는 꼭 챙겨 두자.
+
+2. 볼은 하루 세 번 콕
+곰의 볼은 말랑함을 지키기 위해 정기 점검이 필요하다.
+아침, 점심, 저녁으로 한 번씩 콕 눌러 주면 된다.
+
+3. 겨울잠은 방해하지 않는다
+곰이 낮잠을 잘 때는 조용히 담요를 덮어 주고 옆에서 같이 잔다.
+억지로 깨우면 곰이 운다.
+
+4. 연어를 잡으면 크게 칭찬한다
+곰이 뭔가를 해냈을 땐 박수를 쳐 준다.
+아주 작은 일이어도 괜찮다. 곰은 칭찬을 먹고 자란다.
+
+5. 포옹은 곰 사이즈로
+곰은 작은 포옹을 포옹으로 인정하지 않는다.
+꽉, 오래, 숨 막히기 직전까지 안아 준다.
+
+6. 곰이 심술 나면 꿀곰꿀트위스트
+말로 안 풀릴 땐 춤이 답이다.
+같이 추면 효과가 두 배다. 띠따띠랄따.
+
+7. 사진은 많이, 자주
+곰은 사진에 찍힐 때마다 귀여움이 1씩 올라간다.
+오늘도 한 장, 내일도 한 장.
+
+8. 곰의 생일은 절대 잊지 않는다
+8월 24일. 휴대폰 암호로 해 두면 절대 안 까먹는다.
+
+9. 곰이 말할 땐 끝까지 들어 준다
+곰은 곰곰이 생각하는 중일 수도 있다.
+재촉하지 말고 기다려 준다.
+
+10. 매일 말해 준다
+"사랑해, 곰."
+
+이 열 가지만 잘 지키면
+곰은 평생 옆에 있어 준다.
+
+곰리 공식 인증 ʕ•ᴥ•ʔ
+
+- 곰을 세상에서 제일 사랑하는 제이가`},
+ {to:"지인",s:"지인이에게",d:"2026-10-17T13:10",b:`안녕! 지인아 이 편지는 곰랄라띵랄라 나라에서 최초로 시작되어, 21년째 수많은 사람들에게 보내지고 있다. 2005년 8월 24일 곰의 탄생 이후 천재지변이 일어나 연어들이 하늘을 날아다니고 곰들은 날뛰기 시작했다. 다음 내용이 궁금하다면 곰의 볼을 누르도록. 콕! ʕ•ᴥ•ʔ`},
+ {to:"은정",s:"은정이에게",d:"2026-10-12T22:05",b:`안녕~ 은띵띵~ 너 나 사랑해? 근데 왜 일본 갔어!!! 곰발사한다!!! 곰곰곰!!`},
+ {to:"곰",s:"우리 곰에게♥",d:"2026-08-24T00:00",b:`넌 태초부터 곰이었다. 곰랄라. 우웅~ 허니~ 곰꿀곰꿀트위스트 춰요. ♬ 띠따띠랄따`},
+ {to:"시온",s:"To.시오니",d:"2026-07-12T16:40",b:`안녕. 시온아. 나 널 사랑해. 진심이야. 항상 파이팅~ 너도 곰리 명예 회원이야~`},
+ {to:"로하",s:"내 딸 로하에게",d:"2026-05-05T10:15",b:`로하야~ 엄마야! 엄마가 항상 사랑하는 거 알지? 보고싶당 꼭 보러 갈게!`}
+];
+INBOX.forEach((m,i)=>m.id="i"+i);SENT.forEach((m,i)=>m.id="s"+i);
+let mRead=new Set(store.get("jay-mail-read",[]));
+let mBox="in";
+function mDate(iso,full){
+  const d=new Date(iso),n=new Date(),h=d.getHours(),t=`${h<12?"오전":"오후"} ${h%12||12}:${pad2(d.getMinutes())}`;
+  if(full)return`${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일 (${DOW[d.getDay()]}) ${t}`;
+  const day=x=>new Date(x.getFullYear(),x.getMonth(),x.getDate()).getTime();
+  const diff=Math.round((day(n)-day(d))/864e5);
+  if(diff===0)return t;if(diff===1)return"어제";
+  if(diff>1&&diff<7)return DOW[d.getDay()]+"요일";
+  return d.getFullYear()===n.getFullYear()?`${d.getMonth()+1}월 ${d.getDate()}일`:`${d.getFullYear()}. ${d.getMonth()+1}. ${d.getDate()}.`;
+}
+function mShow(v){["mvBoxes","mvList","mvRead"].forEach(x=>$("#"+x).hidden=x!==v)}
+function mailHome(){
+  const un=INBOX.filter(m=>!mRead.has(m.id)).length;
+  $("#inCnt").textContent=un||"";$("#sentCnt").textContent="";mShow("mvBoxes");
+}
+$$("[data-box]").forEach(b=>b.onclick=()=>{mBox=b.dataset.box;renderMailList();mShow("mvList")});
+$("#mToBoxes").onclick=mailHome;
+$("#mToList").onclick=()=>{renderMailList();mShow("mvList")};
+function renderMailList(){
+  const sent=mBox==="sent",list=sent?SENT:INBOX;
+  $("#mListTitle").textContent=sent?"보낸 편지함":"받은 편지함";
+  $("#mList").innerHTML=list.map(m=>`<button class="mrow" data-m="${m.id}">${!sent&&!mRead.has(m.id)?'<span class="udot"></span>':""}
+    <div class="mtop"><b>${sent?ME:esc(m.f)}</b><small>${mDate(m.d)} ›</small></div>
+    <div class="msub">${esc(m.s)}</div><div class="mpre">${esc(m.b.replace(/\s+/g," "))}</div></button>`).join("");
+  $$("#mList .mrow").forEach(b=>b.onclick=()=>openMail(b.dataset.m));
+  $("#mList").scrollTop=0;
+}
+function openMail(id){
+  const sent=id[0]==="s",m=(sent?SENT:INBOX).find(x=>x.id===id);
+  if(!sent){mRead.add(id);store.set("jay-mail-read",[...mRead])}
+  const from=sent?ME:m.f,to=sent?m.to:"나";
+  $("#mBackLbl").textContent=sent?"보낸 편지함":"받은 편지함";
+  const body=esc(m.b).replace(/ʕ•ᴥ•ʔ/g,'<button class="poke" aria-label="곰 볼 누르기">ʕ•ᴥ•ʔ</button>');
+  $("#mRead").innerHTML=`<div class="mhead"><span class="mav">${esc(from[0])}</span><div><b>${esc(from)}</b>받는 사람: ${esc(to)}</div></div>
+    <div class="mtitle">${esc(m.s)}</div><div class="mdate">${mDate(m.d,true)}</div><div class="mbody">${body}</div>`;
+  $$("#mRead .poke").forEach(p=>p.onclick=()=>{p.classList.remove("wig");void p.offsetWidth;p.classList.add("wig")});
+  $("#mRead").scrollTop=0;mShow("mvRead");
+}
 
 let tt;function toast(s){$(".toast")?.remove();const d=document.createElement("div");d.className="toast";d.innerHTML=esc(s).replace(/\n/g,"<br>");$("#phone").append(d);clearTimeout(tt);tt=setTimeout(()=>d.remove(),2200)}
 </script>
