@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>제이의 iPhone</title>
+<meta name="theme-color" content="#0b0b12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300;500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+*{box-sizing:border-box}body{margin:0;font-size:14px}[hidden]{display:none!important}
+/* Layout: one phone screen, full-bleed on mobile, framed device on desktop. Single dark look by choice. */
+:root{
+  --ground:#0b0b12;
+  --frame:#1c1c22;
+  --glass:rgba(255,255,255,.16);
+  --glass-strong:rgba(255,255,255,.26);
+  --ink:#ffffff;
+  --ink-dim:rgba(255,255,255,.72);
+  --chat-bg:#b9cbdc;
+  --chat-me:#ffe44d;
+  --chat-them:#ffffff;
+  --chat-ink:#1a1a1a;
+  --danger:#ff4d5e;
+  --display:"Gothic A1","Noto Sans KR",system-ui,sans-serif;
+  --body:"Noto Sans KR","Apple SD Gothic Neo",system-ui,sans-serif;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{background:var(--ground);color:var(--ink);font-family:var(--body);display:grid;place-items:center;overflow:hidden;
+  padding-left:max(0px,env(safe-area-inset-left,0px));padding-right:max(0px,env(safe-area-inset-right,0px));-webkit-tap-highlight-color:transparent;user-select:none}
+.phone{position:relative;width:100%;height:100%;overflow:hidden;background:#000}
+@media (min-width:600px) and (min-height:700px){
+  .phone{width:390px;height:844px;border-radius:54px;border:12px solid var(--frame);box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 2px #2c2c34}
+  .island{display:block!important}
+}
+.island{display:none;position:absolute;top:10px;left:50%;transform:translateX(-50%);width:120px;height:34px;border-radius:20px;background:#000;z-index:50}
+.wall{position:absolute;inset:0;background-size:cover;background-position:center;transition:filter .4s}
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;transition:opacity .35s,transform .35s}
+.screen[hidden]{display:none!important}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:2px solid #fff;outline-offset:3px;border-radius:12px}
+
+.status{display:flex;justify-content:space-between;align-items:center;padding:16px 30px 0;font-size:15px;font-weight:700;height:50px;position:relative;z-index:5}
+.status .icons{display:flex;gap:6px;align-items:center}
+.bat{width:24px;height:12px;border:1.5px solid var(--ink-dim);border-radius:4px;padding:1.5px;position:relative}
+.bat::after{content:"";position:absolute;right:-4px;top:3px;width:2px;height:4px;background:var(--ink-dim);border-radius:1px}
+.bat i{display:block;height:100%;width:78%;background:#fff;border-radius:2px}
+
+/* lock */
+#lock{text-align:center;touch-action:none}
+#lock .wall{filter:brightness(.85)}
+.lock-top{position:relative;margin-top:20px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.dnd{display:inline-flex;align-items:center;gap:6px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:5px 12px;border-radius:20px;font-size:13px;margin-bottom:10px}
+.date{font-size:20px;font-weight:500;opacity:.9}
+.clock{font-family:var(--display);font-weight:700;font-size:96px;line-height:1;letter-spacing:-2px;font-variant-numeric:tabular-nums}
+.owner{margin-top:8px;font-size:14px;color:var(--ink-dim)}
+.lock-bottom{margin-top:auto;position:relative;padding-bottom:calc(18px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;align-items:center;gap:14px}
+.hint{font-size:15px;color:var(--ink-dim);animation:bob 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.bar{width:134px;height:5px;border-radius:3px;background:#fff}
+
+/* passcode */
+#pass{align-items:center;background:rgba(0,0,0,.25)}
+#pass .wall{filter:blur(22px) brightness(.55);transform:scale(1.15)}
+.pass-inner{position:relative;margin-top:70px;display:flex;flex-direction:column;align-items:center;gap:22px;width:100%}
+.pass-title{font-size:20px}
+.dots{display:flex;gap:20px}
+.dots span{width:13px;height:13px;border-radius:50%;border:1.5px solid #fff;transition:background .1s}
+.dots span.on{background:#fff}
+.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-12px)}40%,80%{transform:translateX(12px)}}
+.pad{display:grid;grid-template-columns:repeat(3,78px);gap:16px 24px;margin-top:20px}
+.key{width:78px;height:78px;border-radius:50%;background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:background .1s}
+.key:active{background:var(--glass-strong)}
+.key b{font-size:34px;font-weight:400;line-height:1}
+.key small{font-size:10px;letter-spacing:2px;margin-top:2px}
+.pass-foot{position:relative;margin-top:auto;width:100%;display:flex;justify-content:space-between;padding:0 44px calc(30px + env(safe-area-inset-bottom,0px));font-size:16px}
+
+/* home */
+.grid{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:26px 0;padding:24px 18px 0}
+.app{display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none;color:var(--ink);font-size:12px;text-shadow:0 1px 3px rgba(0,0,0,.4)}
+.app:active .ico{filter:brightness(.8)}
+.ico{width:62px;height:62px;border-radius:15px;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.ico svg{width:60%;height:60%}
+.i-talk{background:#fee500}
+.i-tube{background:linear-gradient(160deg,#ff3b3b,#d60000)}
+.i-wall{background:conic-gradient(from 200deg,#ff7aa2,#ffc46b,#7ee0b0,#6aa8ff,#b88bff,#ff7aa2)}
+.i-empty{background:rgba(255,255,255,.12);border:1.5px dashed rgba(255,255,255,.45);box-shadow:none}
+.i-empty svg{width:40%;height:40%}
+.widget{position:relative;margin:18px 18px 0;padding:16px 18px;border-radius:22px;background:var(--glass);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);display:flex;justify-content:space-between;align-items:center}
+.widget .big{font-family:var(--display);font-size:42px;font-weight:300;line-height:1;font-variant-numeric:tabular-nums}
+.widget .lbl{font-size:13px;color:var(--ink-dim)}
+.widget .dday{text-align:right}
+.dock{position:relative;margin:auto 12px calc(12px + env(safe-area-inset-bottom,0px));padding:16px 0;border-radius:32px;background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:grid;grid-template-columns:repeat(4,1fr)}
+.dock .app span{display:none}
+.homebar{position:absolute;bottom:calc(6px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#fff;z-index:30}
+
+/* app sheets */
+.sheet{position:absolute;inset:0;z-index:20;display:flex;flex-direction:column;animation:pop .28s cubic-bezier(.2,.9,.3,1.1)}
+@keyframes pop{from{transform:scale(.6);opacity:0}}
+.sheet[hidden]{display:none!important}
+.topbar{display:flex;align-items:center;gap:10px;padding:8px 16px 12px;font-weight:700;font-size:17px}
+.back{font-size:26px;line-height:1;padding:0 8px 0 0}
+
+#talk{background:var(--chat-bg);color:var(--chat-ink)}
+#talk .status{color:var(--chat-ink)}
+#talk .bat{border-color:#333}#talk .bat::after{background:#333}#talk .bat i{background:#222}
+.msgs{flex:1;overflow-y:auto;padding:8px 14px;display:flex;flex-direction:column;gap:8px;user-select:text}
+.day{align-self:center;font-size:12px;background:rgba(0,0,0,.12);padding:3px 12px;border-radius:12px;color:#333}
+.row{display:flex;gap:8px;align-items:flex-end;max-width:80%}
+.row.me{align-self:flex-end;flex-direction:row-reverse}
+.av{width:38px;height:38px;border-radius:14px;background:#8fb3d9;display:grid;place-items:center;font-weight:700;color:#fff;flex:none;align-self:flex-start}
+.who{font-size:12px;color:#333;margin-bottom:3px}
+.bub{padding:8px 11px;border-radius:14px;background:var(--chat-them);font-size:14px;line-height:1.45;word-break:break-word}
+.me .bub{background:var(--chat-me)}
+.t{font-size:10px;color:#555;flex:none}
+.compose{display:flex;gap:8px;padding:8px 10px calc(20px + env(safe-area-inset-bottom,0px));background:#fff}
+.compose input{flex:1;min-width:0;border:0;background:#f2f2f2;border-radius:18px;padding:9px 14px;font:inherit;font-size:15px;color:#111;color-scheme:light}
+.compose button{background:#fee500;color:#222;border-radius:18px;padding:0 16px;font-weight:700}
+
+#wallapp{background:#16161c}
+.wl-body{flex:1;overflow-y:auto;padding:6px 18px 30px;display:flex;flex-direction:column;gap:16px}
+.wl-preview{align-self:center;width:150px;aspect-ratio:9/19.5;max-width:100%;border-radius:22px;background-size:cover;background-position:center;border:3px solid #2e2e36}
+.swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.sw{aspect-ratio:9/16;border-radius:14px;background-size:cover;border:3px solid transparent}
+.sw.sel{border-color:#fff}
+.upload{display:block;text-align:center;padding:13px;border-radius:14px;background:#2a2a33;font-weight:500;cursor:pointer}
+.upload input{display:none}
+.note{font-size:12px;color:var(--ink-dim);text-align:center;line-height:1.5}
+.toast{position:absolute;top:60px;left:50%;transform:translateX(-50%);background:rgba(30,30,36,.92);padding:10px 16px;border-radius:14px;font-size:14px;z-index:60;white-space:nowrap}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+</head>
+<body>
+<div class="phone" id="phone">
+  <div class="island"></div>
+
+  <!-- 잠금화면 -->
+  <section class="screen" id="lock">
+    <div class="wall"></div>
+    <div class="status"><span id="carrier">SKT</span><span class="icons">5G <span class="bat"><i></i></span></span></div>
+    <div class="lock-top">
+      <div class="dnd"><svg width="12" height="12" viewBox="0 0 24 24" fill="#c9a7ff"><path d="M21 14.5A9 9 0 0 1 9.5 3a9 9 0 1 0 11.5 11.5z"/></svg>방해금지 모드</div>
+      <div class="date" id="lDate"></div>
+      <div class="clock" id="lClock">9:41</div>
+      <div class="owner">제이의 iPhone</div>
+    </div>
+    <div class="lock-bottom">
+      <button class="hint" id="openBtn">위로 쓸어올려서 열기</button>
+      <div class="bar"></div>
+    </div>
+  </section>
+
+  <!-- 암호 -->
+  <section class="screen" id="pass" hidden>
+    <div class="wall"></div>
+    <div class="pass-inner">
+      <div class="pass-title" id="passTitle">암호 입력</div>
+      <div class="dots" id="dots"><span></span><span></span><span></span><span></span></div>
+      <div class="pad" id="pad"></div>
+    </div>
+    <div class="pass-foot"><button id="sos">긴급 상황</button><button id="cancel">취소</button></div>
+  </section>
+
+  <!-- 홈 -->
+  <section class="screen" id="home" hidden>
+    <div class="wall"></div>
+    <div class="status"><span id="hClock">9:41</span><span class="icons">5G <span class="bat"><i></i></span></span></div>
+    <div class="widget">
+      <div><div class="big" id="wClock">9:41</div><div class="lbl" id="wDate"></div></div>
+      <div class="dday"><div class="lbl">8월 24일까지</div><div class="big" id="dday">D-0</div></div>
+    </div>
+    <div class="grid">
+      <button class="app" data-open="talk"><div class="ico i-talk"><svg viewBox="0 0 24 24"><path fill="#3a1d1d" d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.8 5.3 4.6 6.7l-1 3.6c-.1.4.3.6.6.4l4.2-2.8c.5.1 1.1.1 1.6.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></div><span>카톡</span></button>
+      <a class="app" href="https://www.youtube.com" target="_blank" rel="noopener"><div class="ico i-tube"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="#fff" stroke-width="2"/><path fill="#fff" d="M10 8.5v7l6-3.5z"/></svg></div><span>유튜브</span></a>
+      <button class="app" data-open="wallapp"><div class="ico i-wall"><svg viewBox="0 0 24 24"><path fill="#fff" d="M4 5h16v14H4zM6 17h12l-4-5-3 3.5-2-2z" fill-rule="evenodd"/></svg></div><span>배경화면</span></button>
+      <button class="app soon"><div class="ico i-empty"><svg viewBox="0 0 24 24"><path stroke="#fff" stroke-width="2.5" stroke-linecap="round" d="M12 5v14M5 12h14"/></svg></div><span>준비 중</span></button>
+    </div>
+    <div class="dock">
+      <button class="app" data-open="talk"><div class="ico i-talk"><svg viewBox="0 0 24 24"><path fill="#3a1d1d" d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.8 5.3 4.6 6.7l-1 3.6c-.1.4.3.6.6.4l4.2-2.8c.5.1 1.1.1 1.6.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></div><span>카톡</span></button>
+      <a class="app" href="https://www.youtube.com" target="_blank" rel="noopener"><div class="ico i-tube"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="#fff" stroke-width="2"/><path fill="#fff" d="M10 8.5v7l6-3.5z"/></svg></div><span>유튜브</span></a>
+      <button class="app" data-open="wallapp"><div class="ico i-wall"><svg viewBox="0 0 24 24"><path fill="#fff" d="M4 5h16v14H4zM6 17h12l-4-5-3 3.5-2-2z"/></svg></div><span>배경화면</span></button>
+      <button class="app" id="lockBtn" aria-label="잠그기"><div class="ico" style="background:#2b2b33"><svg viewBox="0 0 24 24"><path fill="#fff" d="M7 10V7a5 5 0 0 1 10 0v3h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1zm2 0h6V7a3 3 0 0 0-6 0z"/></svg></div><span>잠그기</span></button>
+    </div>
+
+    <!-- 카톡 -->
+    <div class="sheet" id="talk" hidden>
+      <div class="status"><span class="clk">9:41</span><span class="icons">5G <span class="bat"><i></i></span></span></div>
+      <div class="topbar"><button class="back" data-close>‹</button>친구</div>
+      <div class="msgs" id="msgs"></div>
+      <form class="compose" id="compose"><input id="msgInput" placeholder="메시지 입력" autocomplete="off"><button>전송</button></form>
+    </div>
+
+    <!-- 배경화면 -->
+    <div class="sheet" id="wallapp" hidden>
+      <div class="status"><span class="clk">9:41</span><span class="icons">5G <span class="bat"><i></i></span></span></div>
+      <div class="topbar"><button class="back" data-close>‹</button>배경화면</div>
+      <div class="wl-body">
+        <div class="wl-preview" id="wlPreview"></div>
+        <div class="swatches" id="swatches"></div>
+        <label class="upload">내 사진으로 바꾸기<input type="file" id="photo" accept="image/*"></label>
+        <p class="note">고른 배경화면은 이 기기에서만 기억돼요.</p>
+      </div>
+    </div>
+    <div class="homebar" id="homebar"></div>
+  </section>
+</div>
+
+<script>
+const CODE = "0824";
+const $ = s => document.querySelector(s);
+const store = {
+  get(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}
+};
+
+/* 배경화면 */
+const PRESETS = [
+  "radial-gradient(circle at 20% 20%,#ff9a8b 0,transparent 55%),radial-gradient(circle at 80% 70%,#6a5cff 0,transparent 60%),linear-gradient(160deg,#2a1b4d,#120d24)",
+  "linear-gradient(180deg,#0f2027,#203a43 50%,#2c5364)",
+  "radial-gradient(circle at 70% 25%,#ffd27a 0,transparent 45%),linear-gradient(170deg,#ff7e5f,#b6416e 55%,#3b1c4a)",
+  "radial-gradient(circle at 30% 80%,#5ee7c3 0,transparent 50%),linear-gradient(200deg,#0b3d5c,#06182a)",
+  "radial-gradient(circle at 50% 30%,#ffc0e0 0,transparent 55%),linear-gradient(180deg,#ff8fb8,#a77bff)",
+  "linear-gradient(160deg,#232526,#414345)"
+];
+let wall = store.get("jay-wall", PRESETS[0]);
+function bgOf(w){return w.startsWith("data:")?`url("${w}")`:w}
+function applyWall(){
+  document.querySelectorAll(".wall").forEach(el=>el.style.backgroundImage=bgOf(wall));
+  $("#wlPreview").style.backgroundImage=bgOf(wall);
+  document.querySelectorAll(".sw").forEach((el,i)=>el.classList.toggle("sel",PRESETS[i]===wall));
+}
+PRESETS.forEach(p=>{const b=document.createElement("button");b.className="sw";b.style.backgroundImage=p;b.setAttribute("aria-label","배경화면 선택");
+  b.onclick=()=>{wall=p;store.set("jay-wall",p);applyWall()};$("#swatches").append(b)});
+$("#photo").onchange=e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const img=new Image(), r=new FileReader();
+  r.onload=()=>{img.onload=()=>{
+    const c=document.createElement("canvas"),s=Math.min(1,1200/Math.max(img.width,img.height));
+    c.width=img.width*s;c.height=img.height*s;c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+    wall=c.toDataURL("image/jpeg",.82);
+    if(!store.set("jay-wall",wall)) toast("사진이 커서 다음에 열 땐 기본 배경으로 돌아가요");
+    applyWall();
+  };img.src=r.result};
+  r.readAsDataURL(f);
+};
+applyWall();
+
+/* 시계 */
+const DAYS=["일","월","화","수","목","금","토"];
+function tick(){
+  const n=new Date(), h=n.getHours()%12||12, m=String(n.getMinutes()).padStart(2,"0"), t=`${h}:${m}`;
+  $("#lClock").textContent=t;$("#hClock").textContent=t;$("#wClock").textContent=t;
+  document.querySelectorAll(".clk").forEach(e=>e.textContent=t);
+  const d=`${n.getMonth()+1}월 ${n.getDate()}일 ${DAYS[n.getDay()]}요일`;
+  $("#lDate").textContent=d;$("#wDate").textContent=d;
+  let target=new Date(n.getFullYear(),7,24); const today=new Date(n.getFullYear(),n.getMonth(),n.getDate());
+  if(target<today) target=new Date(n.getFullYear()+1,7,24);
+  const dd=Math.round((target-today)/864e5); $("#dday").textContent=dd===0?"D-DAY":`D-${dd}`;
+}
+tick();setInterval(tick,10000);
+
+/* 화면 전환 */
+function show(id){["lock","pass","home"].forEach(s=>$("#"+s).hidden=s!==id)}
+let swipeY=null;
+const lock=$("#lock");
+lock.addEventListener("pointerdown",e=>{swipeY=e.clientY});
+lock.addEventListener("pointerup",e=>{if(swipeY!==null&&swipeY-e.clientY>60) openPass(); swipeY=null});
+$("#openBtn").onclick=openPass;
+function openPass(){entered="";drawDots();$("#passTitle").textContent="암호 입력";show("pass")}
+
+/* 키패드 */
+let entered="";
+const LETTERS={2:"ABC",3:"DEF",4:"GHI",5:"JKL",6:"MNO",7:"PQRS",8:"TUV",9:"WXYZ"};
+[1,2,3,4,5,6,7,8,9,"",0,""].forEach(k=>{
+  if(k===""){$("#pad").append(document.createElement("span"));return}
+  const b=document.createElement("button");b.className="key";
+  b.innerHTML=`<b>${k}</b><small>${LETTERS[k]||"&nbsp;"}</small>`;
+  b.onclick=()=>press(String(k));$("#pad").append(b);
+});
+function drawDots(){[...$("#dots").children].forEach((d,i)=>d.classList.toggle("on",i<entered.length))}
+function press(k){
+  if(entered.length>=4) return;
+  entered+=k;drawDots();
+  if(entered.length===4) setTimeout(()=>{
+    if(entered===CODE){show("home")}
+    else{const d=$("#dots");d.classList.remove("shake");void d.offsetWidth;d.classList.add("shake");
+      $("#passTitle").textContent="다시 시도하세요";entered="";setTimeout(drawDots,350)}
+  },150);
+}
+document.addEventListener("keydown",e=>{if(!$("#pass").hidden){if(/^\d$/.test(e.key))press(e.key);if(e.key==="Backspace"){entered=entered.slice(0,-1);drawDots()}}});
+$("#cancel").onclick=()=>show("lock");
+$("#sos").onclick=()=>toast("긴급 상황 화면은 장식이에요");
+$("#lockBtn").onclick=()=>{closeSheets();show("lock")};
+
+/* 앱 열기 */
+function closeSheets(){document.querySelectorAll(".sheet").forEach(s=>s.hidden=true)}
+document.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>{closeSheets();$("#"+b.dataset.open).hidden=false;if(b.dataset.open==="talk")scrollChat()});
+document.querySelectorAll("[data-close]").forEach(b=>b.onclick=closeSheets);
+$("#homebar").onclick=closeSheets;
+document.querySelectorAll(".soon").forEach(b=>b.onclick=()=>toast("여기에 들어갈 앱은 아직 정하는 중이에요"));
+
+/* 카톡 */
+const SAMPLE=[
+  {me:false,text:"제이야 뭐해?",t:"오후 4:12"},
+  {me:true,text:"그냥 폰 꾸미는 중 ㅎㅎ",t:"오후 4:13"},
+  {me:false,text:"오 다 하면 보여줘!",t:"오후 4:13"}
+];
+let msgs=store.get("jay-msgs",SAMPLE);
+function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function renderChat(){
+  $("#msgs").innerHTML=`<div class="day">예시 대화</div>`+msgs.map(m=>m.me
+    ?`<div class="row me"><div class="bub">${esc(m.text)}</div><span class="t">${m.t}</span></div>`
+    :`<div class="row"><div class="av">친</div><div><div class="who">친구</div><div style="display:flex;gap:6px;align-items:flex-end"><div class="bub">${esc(m.text)}</div><span class="t">${m.t}</span></div></div></div>`).join("");
+  scrollChat();
+}
+function scrollChat(){const m=$("#msgs");m.scrollTop=m.scrollHeight}
+$("#compose").onsubmit=e=>{
+  e.preventDefault();const v=$("#msgInput").value.trim();if(!v)return;
+  const n=new Date(),h=n.getHours(),t=`${h<12?"오전":"오후"} ${h%12||12}:${String(n.getMinutes()).padStart(2,"0")}`;
+  msgs.push({me:true,text:v,t});$("#msgInput").value="";store.set("jay-msgs",msgs);renderChat();
+};
+renderChat();
+
+let tt;function toast(s){document.querySelector(".toast")?.remove();const d=document.createElement("div");d.className="toast";d.textContent=s;$("#phone").append(d);clearTimeout(tt);tt=setTimeout(()=>d.remove(),2200)}
+</script>
+
+</body>
+</html>
