@@ -3581,6 +3581,62 @@ function scheduleSpont(){clearTimeout(spontT);spontT=setTimeout(()=>{
 const _onUnlock=onUnlock;
 onUnlock=function(){_onUnlock();if(!spontT)scheduleSpont()};
 
+/* ===== 말투 (곰리 카톡 기반) ===== */
+// 주님(지띵): 띄어쓰기 거의 없음, 느낌표 폭탄, 긴 ㅋㅋㅋ, 소설체 내레이션, 해시태그, "아시발/와씨발"
+// 보코: "꺄아앙", "하...", "히히", "~", 마침표 하나로 끝내기, 엉뚱한 한 줄
+// 은띵: 띄어쓰기 없음, ".." 말끝, 딸쥬밀, 짧고 단호한 한마디
+Object.assign(POOL,{
+ jin:["ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ","아시발ㅋㅋㅋㅋㅋ","와씨발미쳤다","명작","세기의작품","다음블로그에박제","#전기고문시작","아니이거개웃기네","이거웃기네진짜","꺄아아아아아아악!!!!!!!","너누구야너누구야!!!!","구라니온","아니..","하..........","ㅁㅊ","곰♡나","♡제이♡은띵","보코를해방하라","우리만나면이거찍자","피식- 하고 지띵이가 웃었다","지띵이가 당황했다","아니이건..이건내가병신인거잖아","시발","후..","진짜웃겨서눈물남","곰도.","왜냐면곰이니까.","나만즐겨서어떻해"],
+ bok:["꺄아앙아아아아","하...","히히","쪼아유","아놔","이건 또 뭐야","뉴스편아닌가요","아닠ㅋㅋㅋㅋㅋㅋㅋ","허어","그냥 가만히","다죽자.","흠","ㅎ..","내가 왜그랬을까","이거 너무 귀욥자나","허오","셋다 엎드려.","짱좋지롱","후훗^^~ 당연하지","얘들아 빌어줘...","나 안해 시방봉","어떻게 하는거야","으아아아!!","짱땅 잼잇다"],
+ eun:["필사적으로무시했건만..","놀랍게도..","딸쥬밀 동맹만들자","너 나 끝","개깜놀","하사망","곰주곰나죠","헐 좋은카페 위대한카페","아놔ㅋㅋㅋㅋ","니들은이런거하지마라..","진짜하지마셈","제이가우리추억영끌하고이써","정탈이머임?","나..","눈썹..","곰발사한다!!!","띵띵~","ㅇㅈ"]
+});
+Object.assign(FOLLOW,{
+ jin:["제이","제이야","제이야!!!!!!","읽씹?","대답해라","너누구야!!!!","블로그업.데.이.트.했는데","왜.안.봐.","#전기고문시작","시발나만웃겨?","ㅋ","ㅋㅋ","ㅋㅈㅋ"],
+ bok:["제이야?","하...","읽씹하냐 ʕ•ᴥ•ʔ","얘들아...","히히 뭐해","곰곰...","꺄아앙","나 심심해..."],
+ eun:["야","야야","답장해라..","곰발사한다!!!","딸쥬밀먹으러가자","너 나 끝","..."]
+});
+Object.assign(STK_FAV,{jin:["lol","what","faint","love","angry"],bok:["ha","faint","happy","honey","hi","cry"],eun:["angry","lol","love","cry","ok"]});
+const STYLE={
+ jin:{love:["곰♡나 ♡제이♡은띵","나도사랑해!!!!!!!","너네가 내 생일선물이다"],miss:["나도보고싶어!!!!!!","어떡해.뛰어가서안아줄수도없고","시발 우리가만날수있을때까지 버텨"],lol:["ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ","아시발ㅋㅋㅋㅋㅋㅋㅋㅋ","ㅋ\nㅋㅋ\nㅋㅈㅋ\nㅋ ㅋㄱㄱㅋ"],q:["구라니온","몰라시발ㅋㅋㅋ","당연하지!!!!!!","아니..?"],gom:["곰도.","왜냐면곰이니까.","보코를해방하라"],sad:["어떡해.뛰어가서안아줄수도없고","너 거기서 스트레스 진짜 많이 받나봐","꼭결과좋게나올꺼야.."],tired:["후..","다죽자..","하.........."]},
+ bok:{love:["히히 쪼아유","후훗^^~ 당연하지 난 김보코거든","이거 너무 귀욥자나"],miss:["나두ㅠㅠ","꺄아앙 보고싶어"],lol:["아닠ㅋㅋㅋㅋㅋㅋㅋㅋ","ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ"],q:["흠","허어","ㅎ..","그냥 가만히"],gom:["하...","곰 하 곰 하","곰, 곰쉬."],sad:["제이 전에도 분명 보통 사람보다 열심히 살았어","얘들아 빌어줘..."],tired:["다죽자.","나 안해 시방봉","하..."]},
+ eun:{love:["곰주곰나죠","♡","딸쥬밀♡나♡은띵"],miss:["나도..","빨리만나자.."],lol:["아놔ㅋㅋㅋㅋㅋ","ㅋㅋㅋㅋㅋ개깜놀"],q:["정탈이머임?","몰루..","ㅇㅈ"],gom:["곰주곰나죠","지띵제띵곰 너희셋 빨리엎드려."],sad:["놀랍게도..","진짜하지마셈.."],tired:["하사망","너 나 끝"]}
+};
+function styleReply(f,text){
+  const S=STYLE[f];
+  const k=/사랑|♡|❤/.test(text)?"love":/보고\s*싶/.test(text)?"miss":/ㅋㅋ|ㅎㅎ|웃겨/.test(text)?"lol":/곰|보코/.test(text)?"gom":/힘들|ㅠ|슬퍼|우울|스트레스/.test(text)?"sad":/피곤|졸려|과제|시험|싫어/.test(text)?"tired":/\?$/.test(text.trim())?"q":null;
+  if(S&&k&&Math.random()<.85)return pick(S[k]);
+  if(/부산/.test(text))return f==="jin"?"부산!!!!!!!바다사진보내":f==="bok"?"돼지국밥 먹어~":"부산..부럽";
+  if(/곰리/.test(text))return f==="jin"?"곰리최고!!!!!!!":f==="bok"?"꺄아앙 곰리":"곰리..♡";
+  return pick(POOL[f]||["ㅋㅋㅋ"]);
+}
+const _replyPlan=replyPlan;
+replyPlan=function(id,text){
+  const r=KROOMS.find(x=>x.id===id);
+  if(id==="gomri"&&busanPending()){
+    const ms=ktAll(r).filter(m=>!m.d);ms[ms.length-1].ans=true;const T=(text||"").trim();
+    if(/^(아니|ㄴㄴ|노노|아냐|놉)/.test(T))return[{f:"eun",t:"아놔..스토리보고부산인줄.."},{f:"jin",t:"은띵또혼자착각함ㅋㅋㅋㅋㅋㅋㅋㅋ"},{f:"bok",t:"하..."}];
+    if(/^(응|ㅇㅇ|ㅇ|웅|어|엉|맞|그렇|ㅇㅋ)|부산/.test(T))return[{f:"eun",t:"헐..부럽다ㅠㅠ"},{f:"bok",t:"꺄아앙 돼지국밥 먹어~"},{f:"jin",t:"바다사진보내!!!!!!!"},{f:"jin",t:"시발나도데려가"}];
+    return[{f:"eun",t:"부산이냐고.."},{f:"jin",t:"대답해라ㅋㅋㅋㅋㅋ"}];
+  }
+  const styled=r.mem.filter(f=>STYLE[f]);
+  if(!styled.length)return _replyPlan(id,text);
+  const who=r.mem.length===1?r.mem:[...r.mem].sort(()=>Math.random()-.5).slice(0,1+Math.floor(Math.random()*2));
+  const out=[];
+  who.forEach(f=>{
+    if(!STYLE[f]){out.push({f,t:pick(POOL[f]||["ㅋㅋㅋ"])});return}
+    const t=styleReply(f,text||"");
+    const quote=text&&text.length>2&&Math.random()<.3;
+    out.push(quote?{f,t,re:{to:"제이",t:text}}:{f,t});
+    if(f==="jin"&&Math.random()<.5)out.push({f,t:pick(["!!!!!!!","ㅋㅋㅋㅋㅋㅋㅋㅋ","아시발","진짜","미쳤다"])});
+  });
+  return out;
+};
+Object.assign(DM_POOL,{
+ "gom_0824":["꺄아앙","하...","히히 쪼아유","아닠ㅋㅋㅋㅋㅋ","이건 또 뭐야","짱좋지롱"],
+ "jiin__":["ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ","명작","아시발ㅋㅋㅋㅋ","#전기고문시작","블로그에박제","너누구야!!!!"],
+ "eunttingtting":["곰주곰나죠","딸쥬밀..","개깜놀","하사망","너 나 끝","곰발사한다!!!"]
+});
+
 let tt;function toast(s){$(".toast")?.remove();const d=document.createElement("div");d.className="toast";d.innerHTML=esc(s).replace(/\n/g,"<br>");$("#phone").append(d);clearTimeout(tt);tt=setTimeout(()=>d.remove(),2200)}
 </script>
 
