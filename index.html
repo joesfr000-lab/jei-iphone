@@ -388,6 +388,43 @@ a,img{-webkit-user-drag:none}
 .np-thumb{width:64px;height:64px;background:#eee center/cover;flex:none;border-radius:4px}
 .np-cap textarea{flex:1;min-width:0;border:0;resize:none;font:inherit;font-size:15px;color:#000;background:transparent;color-scheme:light;outline:none;height:90px}
 
+/* ig profile of others, DM */
+.ph[data-user]{cursor:pointer}
+.pf-btns .fol{background:#0095f6;color:#fff}
+.dm-search{margin:2px 14px 12px;background:#efefef;border-radius:10px;padding:9px 12px;color:#737373;font-size:14px;display:flex;gap:8px;align-items:center}
+.dm-search svg{width:16px;height:16px}
+.dm-lbl{display:flex;justify-content:space-between;padding:4px 16px 6px;font-weight:700;font-size:15px}
+.dm-lbl span{color:#737373;font-weight:600;font-size:14px}
+.dm-row{display:flex;gap:12px;align-items:center;padding:8px 16px;width:100%;text-align:left}
+.dm-row>div{flex:1;min-width:0}
+.dm-row b{display:block;font-weight:500;font-size:14.5px}
+.dm-row small{display:block;color:#737373;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.dm-row.unread b,.dm-row.unread small{font-weight:700;color:#000}
+.dm-dot{width:9px;height:9px;border-radius:50%;background:#0095f6;flex:none}
+.gav{position:relative;flex:none;display:block}
+.gav .av28{position:absolute;box-shadow:0 0 0 2px #fff}
+.gav .av28:first-child{top:0;left:0}.gav .av28:last-child{bottom:0;right:0}
+.dm-badge{position:absolute;top:-2px;right:-4px;min-width:17px;height:17px;border-radius:9px;background:#ff3040;color:#fff;font-size:10.5px;font-weight:700;display:grid;place-items:center;padding:0 4px;border:1.5px solid #fff}
+.dm-badge[hidden]{display:none}
+.ch-top{display:flex;align-items:center;gap:10px;padding:2px 14px 8px;border-bottom:1px solid #efefef;flex:none}
+.ch-top .back{color:#000}
+#chHead{display:flex;align-items:center;gap:10px;text-align:left;min-width:0}
+#chHead b{display:block;font-size:15px}
+#chHead small{display:block;font-size:12px;color:#737373}
+.ch-msgs{flex:1;overflow-y:auto;padding:8px 12px 12px;display:flex;flex-direction:column;gap:3px;user-select:text;min-height:0}
+.ch-day{align-self:center;color:#737373;font-size:12px;margin:14px 0 8px}
+.ch-row{display:flex;gap:7px;align-items:flex-end;max-width:78%}
+.ch-row.me{align-self:flex-end}
+.ch-row>span[data-user]{cursor:pointer;flex:none}
+.ch-sp{width:28px;flex:none}
+.ch-name{font-size:11.5px;color:#737373;margin:8px 0 2px 36px}
+.ch-bub{padding:8px 12px;border-radius:20px;background:#efefef;font-size:14.5px;line-height:1.4;word-break:break-word}
+.me .ch-bub{background:#3797f0;color:#fff}
+.ch-img{display:block;width:170px;aspect-ratio:4/3;border-radius:16px;background:#eee center/cover}
+.ch-in{display:flex;align-items:center;gap:8px;margin:6px 12px calc(24px + env(safe-area-inset-bottom,0px));border:1px solid #dbdbdb;border-radius:22px;padding:4px 6px 4px 16px;flex:none}
+.ch-in input{flex:1;min-width:0;border:0;font:inherit;font-size:15px;background:transparent;color:#000;color-scheme:light;outline:none;padding:6px 0}
+.ch-in button{color:#0095f6;font-weight:700;padding:6px 10px}
+
 .toast{position:absolute;top:64px;left:50%;transform:translateX(-50%);background:rgba(30,30,36,.94);color:#fff;padding:10px 16px;border-radius:14px;font-size:14px;z-index:90;max-width:86%;text-align:center;line-height:1.45}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -518,7 +555,7 @@ a,img{-webkit-user-drag:none}
     <div class="sheet" id="insta" hidden>
       <div class="status" data-left="clock"></div>
       <div class="igv" id="igHome">
-        <div class="ig-top"><h2>Instagram</h2><button class="ig-ic" id="igNotiBtn" aria-label="알림"><svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.9"><path d="M12 20.5s-7-4.4-9-8.6A4.9 4.9 0 0 1 12 6.6a4.9 4.9 0 0 1 9 5.3c-2 4.2-9 8.6-9 8.6z"/></svg><span class="ig-badge" id="igBadge"></span></button><button class="ig-ic" data-close aria-label="닫기" style="font-size:26px">×</button></div>
+        <div class="ig-top"><h2>Instagram</h2><button class="ig-ic" id="igNotiBtn" aria-label="알림"><svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.9"><path d="M12 20.5s-7-4.4-9-8.6A4.9 4.9 0 0 1 12 6.6a4.9 4.9 0 0 1 9 5.3c-2 4.2-9 8.6-9 8.6z"/></svg><span class="ig-badge" id="igBadge"></span></button><button class="ig-ic" id="igDMBtn" aria-label="메시지"><svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.9" stroke-linejoin="round"><path d="M21.5 2.5 2.5 9.8l7.4 3.3 3.3 7.4zM9.9 13.1l11.6-10.6"/></svg><span class="dm-badge" id="dmBadge" hidden></span></button><button class="ig-ic" data-close aria-label="닫기" style="font-size:26px">×</button></div>
         <div class="ig-scroll"><div class="stories" id="igStories"></div><div id="igFeed"></div></div>
       </div>
       <div class="igv" id="igNoti" hidden>
@@ -535,7 +572,7 @@ a,img{-webkit-user-drag:none}
         </div>
       </div>
       <div class="igv" id="igPost" hidden>
-        <div class="ig-top"><button class="back" id="igPostBack" aria-label="뒤로">‹</button><h2 style="font-size:17px;flex-direction:column;align-items:flex-start;gap:0"><small style="font-size:12px;color:#737373;font-weight:500">koiyaa3_</small>게시물</h2></div>
+        <div class="ig-top"><button class="back" id="igPostBack" aria-label="뒤로">‹</button><h2 style="font-size:17px;flex-direction:column;align-items:flex-start;gap:0"><small style="font-size:12px;color:#737373;font-weight:500" id="igPostOwner">koiyaa3_</small>게시물</h2></div>
         <div class="ig-scroll" id="igPostBody"></div>
       </div>
       <div class="igv" id="igNew" hidden>
@@ -549,6 +586,26 @@ a,img{-webkit-user-drag:none}
           <div class="np-bar"><button id="npBack" style="font-size:26px;font-weight:400" aria-label="뒤로">‹</button><span>새 게시물</span><button class="blue" id="npShare">공유</button></div>
           <div class="np-cap"><span class="np-thumb" id="npThumb"></span><textarea id="npCap" placeholder="문구를 작성하세요..."></textarea></div>
         </div>
+      </div>
+      <div class="igv" id="igUser" hidden>
+        <div class="ig-top"><button class="back" id="uBack" aria-label="뒤로">‹</button><h2 style="font-size:20px" id="uTitle"></h2></div>
+        <div class="ig-scroll">
+          <div class="pf-top"><span class="pf-pic" id="uPic"></span><div class="pf-stats"><div><b id="uPosts">0</b>게시물</div><div><b id="uF">0</b>팔로워</div><div><b id="uG">0</b>팔로잉</div></div></div>
+          <div class="pf-bio" id="uBio"></div>
+          <div class="pf-btns"><button id="uFollow">팔로잉</button><button id="uMsg">메시지</button></div>
+          <div class="pf-grid" id="uGrid"></div>
+        </div>
+      </div>
+      <div class="igv" id="igDMs" hidden>
+        <div class="ig-top"><button class="back" id="dmBack" aria-label="뒤로">‹</button><h2 style="font-size:20px">koiyaa3_</h2></div>
+        <div class="dm-search"><svg viewBox="0 0 24 24" fill="none" stroke="#737373" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/></svg>검색</div>
+        <div class="dm-lbl">메시지<span>요청</span></div>
+        <div class="ig-scroll" id="dmList"></div>
+      </div>
+      <div class="igv" id="igChat" hidden>
+        <div class="ch-top"><button class="back" id="chBack" aria-label="뒤로">‹</button><button id="chHead"><span id="chAv"></span><span><b id="chName"></b><small id="chSub"></small></span></button></div>
+        <div class="ch-msgs" id="chMsgs"></div>
+        <form class="ch-in" id="chForm"><input id="chInput" placeholder="메시지 보내기..." autocomplete="off" aria-label="메시지"><button>보내기</button></form>
       </div>
       <div class="ig-tabs" id="igTabs">
         <button data-v="igHome" aria-label="홈"><svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z"/></svg></button>
@@ -1355,8 +1412,8 @@ function avHTML(u,size){
   if(u===IGME.id)return`<span class="av28" style="width:${size}px;height:${size}px;background-image:url('${IMG.p1}')"></span>`;
   const p=PEOPLE[u];if(p.img)return`<span class="av28" style="width:${size}px;height:${size}px;background-image:url('${IMG[p.img]}')"></span>`;return`<span class="av28" style="width:${size}px;height:${size}px;background:${p.c};font-size:${size*.42}px">${p.i}</span>`;
 }
-function igShow(v){["igHome","igNoti","igProfile","igPost","igNew"].forEach(x=>$("#"+x).hidden=x!==v);
-  $("#igTabs").hidden=v==="igNew";$$("#igTabs button").forEach(b=>b.classList.toggle("on",b.dataset.v===v))}
+function igShow(v){["igHome","igNoti","igProfile","igPost","igNew","igUser","igDMs","igChat"].forEach(x=>$("#"+x).hidden=x!==v);
+  $("#igTabs").hidden=v==="igNew"||v==="igChat";$$("#igTabs button").forEach(b=>b.classList.toggle("on",b.dataset.v===v))}
 function igHome(){renderStories();renderFeed();igShow("igHome");$("#igHome .ig-scroll").scrollTop=0}
 function renderStories(){
   const mine=`<button class="st" data-s="me"><span class="ring${seen.has("me")?" seen":""}"><div style="background-image:url('${IMG.p1}')"></div></span><span>내 스토리</span></button>`;
@@ -1366,7 +1423,7 @@ function renderStories(){
 function postHTML(p,key){
   const u=p.u||IGME.id,img=(p.k||p.src)?`<div class="pimg" style="background-image:url('${IMG[p.k]||p.src}')"></div>`:`<div class="pimg txt" style="background:${p.bg}">${esc(p.txt).replace(/\n/g,"<br>")}</div>`;
   const on=liked.has(key),likes=p.likes+(on?1:0);
-  return`<article class="post"><div class="ph">${avHTML(u,32)}${u}</div>${img}
+  return`<article class="post"><div class="ph" data-user="${u}">${avHTML(u,32)}${u}</div>${img}
   <div class="pact"><button class="lk${on?" liked":""}" data-key="${key}" aria-label="좋아요">${SV.heart}</button><span>${SV.cm}</span><span>${SV.send}</span><span class="save">${SV.save}</span></div>
   <div class="plikes">좋아요 ${likes}개</div><div class="pcap"><b>${u}</b>${esc(p.cap||"")}</div>${p.cm?`<div class="pmeta">댓글 ${p.cm}개 모두 보기</div>`:""}<div class="pmeta">${p.w}</div></article>`;
 }
@@ -1471,6 +1528,166 @@ $("#npShare").onclick=()=>{
   newPosts.unshift(p);store.set("jay-ig-posts",newPosts.filter(x=>x.k).map(({k,cap,ts})=>({k,cap,ts})));
   renderProfile();igShow("igProfile");toast("게시물을 공유했어요");
 };
+
+/* ===== 다른 사람 프로필 ===== */
+const USERS={
+ "_e_j_0.1":{f:27,g:42,bio:"🍀"},
+ "inahdiq":{f:28,g:64,bio:"🍦"},
+ "gimbobo05":{f:250,g:240,bio:"🌊"}
+};
+let curUser=null,postBackUser=null;
+function userPosts(u){return FEED_ORDER.filter(k=>FP[k]&&FP[k].u===u)}
+function openUser(u){
+  if(u===IGME.id){renderProfile();igShow("igProfile");return}
+  const d=USERS[u];if(!d)return;curUser=u;
+  $("#uTitle").textContent=u;
+  $("#uPic").style.backgroundImage=`url("${IMG[PEOPLE[u].img]}")`;
+  const ks=userPosts(u);
+  $("#uPosts").textContent=ks.length;$("#uF").textContent=d.f;$("#uG").textContent=d.g;$("#uBio").textContent=d.bio;
+  $("#uGrid").innerHTML=ks.map(k=>`<button data-fp="${k}" style="background-image:url('${IMG[k]}')" aria-label="게시물 보기"></button>`).join("");
+  $$("#uGrid button").forEach(b=>b.onclick=()=>openFPost(b.dataset.fp));
+  $("#uFollow").textContent="팔로잉";$("#uFollow").classList.remove("fol");
+  igShow("igUser");$("#igUser .ig-scroll").scrollTop=0;
+}
+function openFPost(k){
+  postBackUser=FP[k].u;const p={...FP[k],k};
+  const draw=()=>{$("#igPostBody").innerHTML=postHTML(p,k);bindLikes("#igPostBody",draw)};draw();
+  $("#igPostOwner").textContent=p.u;igShow("igPost");$("#igPost .ig-scroll").scrollTop=0;
+}
+const _openPost=openPost;
+openPost=function(key){postBackUser=null;$("#igPostOwner").textContent=IGME.id;_openPost(key)};
+$("#igPostBack").onclick=()=>{if(postBackUser)openUser(postBackUser);else{renderProfile();igShow("igProfile")}};
+$("#uBack").onclick=igHome;
+$("#uFollow").onclick=()=>{const b=$("#uFollow"),f=b.classList.toggle("fol");b.textContent=f?"팔로우":"팔로잉"};
+$("#uMsg").onclick=()=>openChat(curUser);
+$("#insta").addEventListener("click",e=>{const t=e.target.closest("[data-user]");if(t&&(USERS[t.dataset.user]||t.dataset.user===IGME.id)){e.stopPropagation();openUser(t.dataset.user)}});
+
+/* ===== DM ===== */
+const T=(f,t)=>({f,t}),D=d=>({day:d}),PIC=(f,k)=>({f,img:k});
+const THREADS=[
+ {id:"hog",name:"호그곰트",members:["_e_j_0.1","inahdiq","gimbobo05"],w:"3분",unread:true,msgs:[
+  D("어제 오후 10:03"),
+  T("gimbobo05","얘들아 이번 주말에 뭐 해"),
+  T("inahdiq","나 과제ㅠㅠ"),
+  T("_e_j_0.1","나도 회계 공부해야 됨"),
+  T("_e_j_0.1","선입선출법 후입선출법 이게 다 뭔데"),
+  T("me","나 주말에 곰리♥ 있음"),
+  T("gimbobo05","아 맞다 곰리 ㅋㅋㅋㅋ"),
+  T("inahdiq","곰리 또 가?? 부럽다"),
+  T("me","다음엔 너네도 데려갈게"),
+  T("_e_j_0.1","진짜지? 약속했다"),
+  T("me","약속 ✌️"),
+  D("오늘 오후 6:40"),
+  PIC("gimbobo05","q10"),
+  T("gimbobo05","이거 언제 또 해"),
+  T("inahdiq","모자 또 만들자 ㅋㅋㅋ"),
+  T("_e_j_0.1","이번엔 곰 모양으로"),
+  T("me","곰 모자 찬성 ʕ•ᴥ•ʔ"),
+  T("gimbobo05","아 갑자기 감자튀김 먹고 싶다"),
+  T("inahdiq","넌 맨날 감튀래"),
+  T("gimbobo05","감튀는 진리야"),
+  T("_e_j_0.1","다음 주 금요일 저녁 어때"),
+  T("inahdiq","좋아"),
+  T("gimbobo05","콜"),
+  T("me","콜콜 장소는 내가 정할게"),
+  T("_e_j_0.1","사미만 믿는다")]},
+ {id:"gom_0824",w:"12분",unread:true,msgs:[
+  D("오늘 오후 5:21"),
+  T("gom_0824","스토리 봤어! 모네 보러 갔구나"),
+  T("me","응 진짜 예뻤어"),
+  T("me","다음엔 같이 가자"),
+  T("gom_0824","좋아 꼭 같이 가"),
+  T("gom_0824","화요일 미팅 끝나고 꿀 먹으러 가자"),
+  T("me","그럼 꿀곰꿀트위스트 춰 줘야 돼"),
+  T("gom_0824","ㅋㅋㅋㅋ 알겠어 ʕ•ᴥ•ʔ")]},
+ {id:"inahdiq",w:"1시간",unread:false,msgs:[
+  D("오늘 오후 3:02"),
+  T("me","아이스크림 사진 뭐야 ㅋㅋㅋ"),
+  T("inahdiq","얼굴 가리기 신공"),
+  T("me","어디서 먹었어? 맛있어 보여"),
+  T("inahdiq","다음에 같이 가자 내가 쏠게"),
+  T("me","오 진짜? 저장했다")]},
+ {id:"gimbobo05",w:"2시간",unread:false,msgs:[
+  D("오늘 오후 1:15"),
+  T("gimbobo05","사미야 내 감튀 사진에 좋아요 눌렀지"),
+  T("me","눌렀지 ㅋㅋ 배고파졌어"),
+  T("gimbobo05","그럼 이번 주에 먹으러 가자"),
+  T("me","좋아 근데 너 출근하잖아"),
+  T("gimbobo05","퇴근하고 가면 되지 💪")]},
+ {id:"_e_j_0.1",w:"5시간",unread:false,msgs:[
+  D("오늘 오전 11:40"),
+  T("_e_j_0.1","재고평가방법 외우다가 머리 터질 것 같아"),
+  T("me","힘내!! 시험 끝나면 놀자"),
+  T("_e_j_0.1","응응 그때 맛있는 거 먹자"),
+  T("me","회계 공부 화이팅 🍀")]},
+ {id:"jiin__",w:"1일",unread:false,msgs:[
+  D("어제 오후 8:10"),
+  T("jiin__","곰 볼 눌렀는데 아무 일도 안 일어남"),
+  T("me","그건 비밀이야"),
+  T("jiin__","다음 편 언제 나와"),
+  T("me","곰랄라띵랄라 나라의 사정상 미정")]},
+ {id:"eunttingtting",w:"2일",unread:false,msgs:[
+  D("10월 21일 오후 9:44"),
+  T("eunttingtting","일본 도착!!"),
+  T("eunttingtting","곰 키링 찾았다"),
+  T("me","왜 나 두고 갔어"),
+  T("eunttingtting","발사하지 마ㅠㅠ 선물 사 갈게")]},
+ {id:"sion.ii",w:"3일",unread:false,msgs:[
+  D("10월 20일 오후 4:30"),
+  T("sion.ii","나 곰리 명예 회원이야??"),
+  T("me","응 공식 인증"),
+  T("sion.ii","회원증은 언제 나와"),
+  T("me","곰이 만드는 중")]},
+ {id:"roha_0505",w:"1주",unread:false,msgs:[
+  D("10월 16일 오후 7:05"),
+  T("roha_0505","엄마 보고 싶어"),
+  T("me","엄마도 보고 싶어 로하야"),
+  T("roha_0505","언제 와?"),
+  T("me","곧 갈게! 맛있는 거 사 갈게")]}
+];
+let dmExtra=store.get("jay-dm-extra",{}),dmRead=new Set(store.get("jay-dm-read",[]));
+function threadOf(id){return THREADS.find(t=>t.id===id)}
+function allMsgs(t){return[...t.msgs,...(dmExtra[t.id]||[])]}
+function lastText(t){const m=allMsgs(t).filter(x=>!x.day).pop();if(!m)return"";const who=m.f==="me"?"회원님: ":(t.members?m.f+": ":"");return who+(m.img?"사진을 보냈습니다.":m.t)}
+function isUnread(t){return t.unread&&!dmRead.has(t.id)}
+function tAv(t,size){
+  if(t.members)return`<span class="gav" style="width:${size}px;height:${size}px">${avHTML(t.members[0],size*.68)}${avHTML(t.members[2],size*.68)}</span>`;
+  return avHTML(t.id,size);
+}
+function openDMs(){
+  $("#dmList").innerHTML=THREADS.map(t=>`<button class="dm-row${isUnread(t)?" unread":""}" data-th="${t.id}">${tAv(t,56)}<div><b>${t.name||t.id}</b><small>${esc(lastText(t))} · ${dmExtra[t.id]?"방금":t.w}</small></div>${isUnread(t)?'<span class="dm-dot"></span>':""}</button>`).join("");
+  $$("#dmList .dm-row").forEach(b=>b.onclick=()=>openChat(b.dataset.th));
+  igShow("igDMs");
+  const n=THREADS.filter(isUnread).length;$("#dmBadge").hidden=!n;$("#dmBadge").textContent=n;
+}
+let chatId=null;
+function openChat(id){
+  const t=threadOf(id);if(!t)return;chatId=id;
+  dmRead.add(id);store.set("jay-dm-read",[...dmRead]);
+  $("#chAv").innerHTML=tAv(t,32);$("#chName").textContent=t.name||t.id;
+  $("#chSub").textContent=t.members?`멤버 ${t.members.length+1}명`:(t.id===IGME.id?"":"활동 중");
+  renderChat2();igShow("igChat");
+}
+function renderChat2(){
+  const t=threadOf(chatId),ms=allMsgs(t),g=!!t.members;let h="";
+  ms.forEach((m,i)=>{
+    if(m.day){h+=`<div class="ch-day">${m.day}</div>`;return}
+    const prev=ms[i-1],next=ms[i+1],firstRun=!prev||prev.day||prev.f!==m.f,lastRun=!next||next.day||next.f!==m.f;
+    const body=m.img?`<span class="ch-img" style="background-image:url('${IMG[m.img]}')"></span>`:`<span class="ch-bub">${esc(m.t)}</span>`;
+    if(m.f==="me"){h+=`<div class="ch-row me">${body}</div>`;return}
+    if(g&&firstRun)h+=`<div class="ch-name">${m.f}</div>`;
+    h+=`<div class="ch-row">${lastRun?`<span data-user="${m.f}">${avHTML(m.f,28)}</span>`:'<span class="ch-sp"></span>'}${body}</div>`;
+  });
+  $("#chMsgs").innerHTML=h;
+  requestAnimationFrame(()=>{const c=$("#chMsgs");c.scrollTop=c.scrollHeight});
+}
+$("#chForm").onsubmit=e=>{e.preventDefault();const v=$("#chInput").value.trim();if(!v)return;
+  (dmExtra[chatId]=dmExtra[chatId]||[]).push({f:"me",t:v});store.set("jay-dm-extra",dmExtra);$("#chInput").value="";renderChat2()};
+$("#chBack").onclick=openDMs;
+$("#dmBack").onclick=igHome;
+$("#igDMBtn").onclick=openDMs;
+$("#chHead").onclick=()=>{const t=threadOf(chatId);if(!t.members&&USERS[t.id])openUser(t.id)};
+{const n=THREADS.filter(isUnread).length;$("#dmBadge").hidden=!n;$("#dmBadge").textContent=n}
 
 let tt;function toast(s){$(".toast")?.remove();const d=document.createElement("div");d.className="toast";d.innerHTML=esc(s).replace(/\n/g,"<br>");$("#phone").append(d);clearTimeout(tt);tt=setTimeout(()=>d.remove(),2200)}
 </script>
