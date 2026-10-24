@@ -1234,6 +1234,36 @@ a,img{-webkit-user-drag:none}
 .sl-switch button.on{background:#ececec;font-weight:600}
 .sl-switch i{position:absolute;right:-4px;top:-10px;width:22px;height:22px;border-radius:50%;background:#a6f07a;font-style:normal;font-size:12px;font-weight:700;display:grid;place-items:center}
 .sl-switch i[hidden]{display:none}
+/* eye laser game */
+#game{background:#ffe3ef;color:#5a2440}
+.gm-title,.gm-end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;background:radial-gradient(circle at 50% 30%,#fff 0,#ffe3ef 45%,#f7b8d3 100%);text-align:center}
+.gm-title .status,.gm-title .back{align-self:stretch}
+.gm-title .back{align-self:flex-start}
+.gm-logo{margin-top:20px;width:250px;height:250px;border-radius:50%;background:#fff;border:6px double #d985ad;box-shadow:0 0 0 10px #fbd3e4,0 10px 30px rgba(176,69,126,.3);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.gm-logo small{color:#d36aa0;font-weight:700;font-size:14px;letter-spacing:4px}
+.gm-logo b{font-family:var(--display);font-size:34px;line-height:1.15;color:#c2407e;text-shadow:2px 2px 0 #ffd1e6}
+.gm-logo span{font-size:22px;color:#8b5a2b;margin-top:4px}
+.gm-how{margin:30px 24px 22px;font-size:14.5px;line-height:1.7;color:#7a3a5a}
+.gm-btn{background:linear-gradient(#ffa9cf,#f06aa6);color:#fff;font-weight:800;font-size:18px;border-radius:30px;padding:14px 44px;box-shadow:0 4px 0 #c2407e,0 6px 16px rgba(194,64,126,.35);margin:6px}
+.gm-btn.sub{background:#fff;color:#c2407e;box-shadow:0 4px 0 #f0b6cf}
+.gm-best{margin-top:16px;font-size:14px;color:#a0577a}
+.gm-play{position:absolute;inset:0;display:flex;flex-direction:column;background:#2d6b4a}
+.gm-hud{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;padding:calc(48px + env(safe-area-inset-top,0px)) 14px 8px;color:#fff;flex:none}
+.gm-hud small{display:block;font-size:11px;opacity:.8}
+.gm-hud b{font-size:20px;letter-spacing:1px;font-variant-numeric:tabular-nums}
+.gm-hud div:last-child{text-align:right}
+#gmHearts{color:#ff8fc4}#gmHearts span{color:rgba(255,255,255,.3)}
+.gm-clock{width:48px;height:48px;border-radius:50%;background:#fff;border:3px solid #e7b9c8;position:relative}
+.gm-clock i{position:absolute;left:50%;top:6px;width:3px;height:18px;margin-left:-1.5px;background:#e8402c;transform-origin:50% 100%;border-radius:2px}
+#gmCanvas{flex:1;width:100%;min-height:0;display:block;touch-action:none;cursor:pointer}
+.gm-quit{position:absolute;right:12px;bottom:calc(20px + env(safe-area-inset-bottom,0px));background:rgba(0,0,0,.35);color:#fff;border-radius:16px;padding:6px 12px;font-size:13px}
+.gm-end{justify-content:center}
+.gm-card{background:#fff;border-radius:28px;padding:28px 24px;width:84%;box-shadow:0 0 0 8px #fbd3e4,0 14px 40px rgba(176,69,126,.3);display:flex;flex-direction:column;align-items:center;gap:6px}
+.gm-card small{color:#d36aa0;font-weight:700;letter-spacing:3px}
+.gm-card>b{font-size:20px;color:#c2407e}
+.gm-big{font-family:var(--display);font-size:52px;font-weight:700;color:#5a2440;font-variant-numeric:tabular-nums}
+.gm-card p{margin:0 0 10px;color:#7a3a5a}
+.gm-new{color:#e8a700;font-weight:800}
 
 .toast{position:absolute;top:64px;left:50%;transform:translateX(-50%);background:rgba(30,30,36,.94);color:#fff;padding:10px 16px;border-radius:14px;font-size:14px;z-index:90;max-width:86%;text-align:center;line-height:1.45}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -1645,6 +1675,26 @@ a,img{-webkit-user-drag:none}
       </div>
     </div>
 
+    <div class="sheet" id="game" hidden>
+      <div class="gm-title" id="gm-title">
+        <div class="status" data-left="clock"></div>
+        <button class="back" data-close aria-label="닫기" style="color:#b0457e;margin:4px 16px">‹</button>
+        <div class="gm-logo"><small>곰리 학원</small><b>눈빛<br>두근두근<br>대작전</b><span>ʕ♥ᴥ♥ʔ</span></div>
+        <p class="gm-how">화면을 꾹 누르면 눈빛 레이저 발사!<br>곰들을 반하게 해서 줄줄이 데려가세요.<br>단, <b>선도부 곰</b>이 볼 때(<b style="color:#ff3b30">!</b>)는 멈추기!</p>
+        <button class="gm-btn" id="gmStart">♥ 시작하기</button>
+        <div class="gm-best">최고 점수 <b id="gmBest">0</b></div>
+      </div>
+      <div class="gm-play" id="gm-play" hidden>
+        <div class="gm-hud"><div><small>하트</small><b id="gmHearts"></b></div><div class="gm-clock"><i id="gmClockH"></i></div><div><small>스코어</small><b id="gmScore">00000000</b></div></div>
+        <canvas id="gmCanvas"></canvas>
+        <button class="gm-quit" id="gmQuit">그만하기</button>
+      </div>
+      <div class="gm-end" id="gm-end" hidden>
+        <div class="gm-card"><small>결과</small><b id="gmERank"></b><div class="gm-big" id="gmEScore">0</div><p>반하게 만든 곰 <b id="gmECaught">0</b>마리</p><div class="gm-new" id="gmENew" hidden>✨ 최고 기록 달성! ✨</div>
+          <button class="gm-btn" id="gmAgain">다시 하기</button><button class="gm-btn sub" id="gmToTitle">타이틀로</button></div>
+      </div>
+    </div>
+
     <div class="sheet light" id="cal" hidden>
       <div class="status" data-left="clock"></div>
       <div class="topbar"><button class="back" data-close aria-label="닫기" style="color:var(--red)">‹</button><b id="calTitle"></b></div>
@@ -1854,6 +1904,7 @@ const IC={
  voice:`<svg viewBox="0 0 24 24" stroke="#ff3b30" stroke-width="2" stroke-linecap="round"><path d="M3 12v0M6 9v6M9 5v14M12 8v8M15 4v16M18 9v6M21 11v2"/></svg>`,
  twitter:`<svg viewBox="0 0 24 24"><text x="12" y="18.5" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="19" fill="#fff">X</text></svg>`,
  setlog:`<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#fbecc0"/><path d="M6.5 13a5.5 5.5 0 0 1 11 0" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="16.2" r="1" fill="#111"/><circle cx="14" cy="16.2" r="1" fill="#111"/></svg>`,
+ eyegame:`<svg viewBox="0 0 24 24"><circle cx="6.5" cy="6.5" r="3" fill="#a5703b"/><circle cx="17.5" cy="6.5" r="3" fill="#a5703b"/><circle cx="12" cy="13" r="8" fill="#b98250"/><path d="M8 12.5c-2-1.4-1-3 0-1.8 1-1.2 2 .4 0 1.8zM16 12.5c-2-1.4-1-3 0-1.8 1-1.2 2 .4 0 1.8z" fill="#ff4fa0" transform="translate(0 -.5) scale(1)"/><ellipse cx="12" cy="16" rx="3.2" ry="2.4" fill="#f6e2c3"/><ellipse cx="12" cy="15.2" rx="1.2" ry=".9" fill="#3a2412"/></svg>`,
  music:`<svg viewBox="0 0 24 24"><path fill="#fff" d="M18.5 3.2v11.6a3 3 0 1 1-1.8-2.75V7.6l-7.4 1.6v7.6a3 3 0 1 1-1.8-2.75V5.6z"/></svg>`,
  gomlingo:`<svg viewBox="0 0 24 24"><circle cx="6" cy="6.5" r="3.2" fill="#8b5a2b"/><circle cx="18" cy="6.5" r="3.2" fill="#8b5a2b"/><circle cx="6" cy="6.5" r="1.5" fill="#f1d3a8"/><circle cx="18" cy="6.5" r="1.5" fill="#f1d3a8"/><circle cx="12" cy="13.5" r="8" fill="#a5703b"/><ellipse cx="12" cy="16.5" rx="3.6" ry="2.7" fill="#f1d3a8"/><ellipse cx="12" cy="15.3" rx="1.4" ry="1" fill="#3a2412"/><circle cx="8.8" cy="11.5" r="1.2" fill="#3a2412"/><circle cx="15.2" cy="11.5" r="1.2" fill="#3a2412"/></svg>`,
  phone:`<svg viewBox="0 0 24 24"><path ${W} d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .6 3.6 1 1 0 0 1-.25 1z"/></svg>`,
@@ -1877,6 +1928,7 @@ const APPS={
  voice:{n:"음성메모",bg:"#1c1c1e",open:"voice"},
  twitter:{n:"트위터",bg:"#000",open:"twitter"},
  setlog:{n:"setlog",bg:"#c9c2f2",open:"sl"},
+ eyegame:{n:"눈빛 대작전",bg:"linear-gradient(180deg,#ffb3d1,#f06aa6)",open:"game"},
  music:{n:"음악",bg:"linear-gradient(180deg,#ff5e7e,#fa2d48)",open:"music"},
  gomlingo:{n:"곰링고",bg:"linear-gradient(180deg,#7ed957,#4cae2c)",open:"gomlingo"},
  phone:{n:"전화",bg:"linear-gradient(180deg,#5cf07a,#25c244)",open:"phoneapp"},
@@ -1890,7 +1942,7 @@ function tile(id){
   return a.url?`<a class="app" href="${a.url}" target="_blank" rel="noopener" draggable="false">${ico}</a>`:`<button class="app" data-app="${id}">${ico}</button>`;
 }
 $("#grid1").innerHTML=["youtube","mail","calendar","reminders","notes","camera","safari","instagram"].map(tile).join("");
-$("#grid2").innerHTML=["clock","contacts","health","calculator","voice","music","gomlingo","twitter","setlog"].map(tile).join("");
+$("#grid2").innerHTML=["clock","contacts","health","calculator","voice","music","gomlingo","twitter","setlog","eyegame"].map(tile).join("");
 $("#dock").innerHTML=["phone","sms","talk","photos"].map(tile).join("");
 $$("[data-app]").forEach(b=>b.onclick=()=>{const a=APPS[b.dataset.app];a.open?openSheet(a.open):toast(`${a.n} 앱은 아직 준비 중이에요`)});
 tick();setInterval(tick,10000);
@@ -1908,8 +1960,8 @@ pages.addEventListener("click",e=>{if(moved){e.preventDefault();e.stopPropagatio
 
 /* 시트 */
 function openSheet(id){closeSheets();$("#"+id).hidden=false;$("#phone").classList.toggle("light-open",$("#"+id).classList.contains("light"));
-  if(id==="talk")scrollChat();if(id==="cal")calOpen();if(id==="youtube")ytOpen();if(id==="music")musicOpen();if(id==="twitter")twOpen();if(id==="sl")slOpen();if(id==="gomlingo")glOpen();if(id==="dday")ddayOpen();if(id==="camera")startCam();if(id==="photos")renderPhotos();if(id==="mail")mailHome();if(id==="notes")notesHome();if(id==="safari")sfHome();if(id==="insta"){$("#igStory").hidden=true;$("#pfPic").style.backgroundImage=`url("${IMG.p1}")`;$("#tabAv").style.backgroundImage=`url("${IMG.p1}")`;igHome()}if(id==="clock")clockOpen();if(id==="phoneapp")phOpen();if(id==="contactsapp")contactsOpen();if(id==="smsapp")smsOpen();if(id==="health")healthOpen();if(id==="voice")voiceOpen()}
-function closeSheets(){try{slCamStop();slPauseAll();$("#slVlogV").pause()}catch(e){}try{$("#ytVid").pause()}catch(e){}try{vAudio.pause();endCall()}catch(e){}document.querySelectorAll(".pdetail").forEach(x=>x.remove());typeof ktProf!=="undefined";typeof stTimer!=="undefined"&&clearTimeout(stTimer);$$(".sheet").forEach(s=>s.hidden=true);$("#phone").classList.remove("light-open");stopCam();$("#viewer").hidden=true}
+  if(id==="talk")scrollChat();if(id==="cal")calOpen();if(id==="youtube")ytOpen();if(id==="music")musicOpen();if(id==="twitter")twOpen();if(id==="sl")slOpen();if(id==="game")gmOpen();if(id==="gomlingo")glOpen();if(id==="dday")ddayOpen();if(id==="camera")startCam();if(id==="photos")renderPhotos();if(id==="mail")mailHome();if(id==="notes")notesHome();if(id==="safari")sfHome();if(id==="insta"){$("#igStory").hidden=true;$("#pfPic").style.backgroundImage=`url("${IMG.p1}")`;$("#tabAv").style.backgroundImage=`url("${IMG.p1}")`;igHome()}if(id==="clock")clockOpen();if(id==="phoneapp")phOpen();if(id==="contactsapp")contactsOpen();if(id==="smsapp")smsOpen();if(id==="health")healthOpen();if(id==="voice")voiceOpen()}
+function closeSheets(){try{gmStop()}catch(e){}try{slCamStop();slPauseAll();$("#slVlogV").pause()}catch(e){}try{$("#ytVid").pause()}catch(e){}try{vAudio.pause();endCall()}catch(e){}document.querySelectorAll(".pdetail").forEach(x=>x.remove());typeof ktProf!=="undefined";typeof stTimer!=="undefined"&&clearTimeout(stTimer);$$(".sheet").forEach(s=>s.hidden=true);$("#phone").classList.remove("light-open");stopCam();$("#viewer").hidden=true}
 $$("[data-close]").forEach(b=>b.onclick=closeSheets);
 $("#homebar").onclick=()=>{$$(".sheet").some(s=>!s.hidden)?closeSheets():lockPhone()};
 
@@ -4313,6 +4365,129 @@ function slSave(c){
   toast("곰리의 일상에 로그를 올렸어요");slCamStop();slHomeShow();slTab("log");slGroup("gomri",g.pages.indexOf(p));
   setTimeout(()=>{slChat.gomri.push({f:"bok",t:"꺄아앙 제이 떴다"});slChat.gomri.push({f:"jin",t:"제이로그!!!!!!!"})},3000);
 }
+
+/* ===== 곰리 학원: 눈빛 두근두근 대작전 ===== */
+const GM={best:0,run:false,raf:0};
+const gmC=$("#gmCanvas"),gx=gmC.getContext("2d");
+let GW=0,GH=0,G=null;
+function gmSize(){const r=gmC.getBoundingClientRect(),d=Math.min(2,window.devicePixelRatio||1);GW=r.width;GH=r.height;gmC.width=GW*d;gmC.height=GH*d;gx.setTransform(d,0,0,d,0,0)}
+function gmOpen(){gmScreen("title");$("#gmBest").textContent=GM.best.toLocaleString()}
+function gmScreen(s){["title","play","end"].forEach(x=>$("#gm-"+x).hidden=x!==s);if(s==="play"){requestAnimationFrame(()=>{gmSize();gmStart()})}else gmStop()}
+function gmStop(){GM.run=false;cancelAnimationFrame(GM.raf)}
+const BEAR_COL=["#b98250","#a5703b","#c99a6a","#8b5a2b"];
+function gmStart(){
+  G={t:0,time:60,score:0,hearts:3,firing:false,bears:[],line:[],combo:0,spawn:0,teacher:null,tSpawn:9,scroll:0,flash:0,msg:null,caught:0,last:performance.now()};
+  GM.run=true;GM.raf=requestAnimationFrame(gmLoop);gmHud();
+}
+function gmHud(){$("#gmScore").textContent=String(G.score).padStart(8,"0");$("#gmHearts").innerHTML="♥".repeat(G.hearts)+'<span>'+"♥".repeat(3-G.hearts)+"</span>";$("#gmClockH").style.transform=`rotate(${(1-G.time/60)*360}deg)`}
+function newBear(){const gold=Math.random()<.12;return{x:GW+40,s:.85+Math.random()*.35,v:28+Math.random()*30,love:0,need:gold?1.6:.7+Math.random()*.5,state:"walk",gold,c:gold?"#e8b923":pick(BEAR_COL),bob:Math.random()*6,fol:0}}
+function gmLoop(now){
+  if(!GM.run)return;const dt=Math.min(.05,(now-G.last)/1000);G.last=now;G.t+=dt;G.time-=dt;
+  if(G.time<=0)return gmEnd();
+  G.scroll+=dt*40;
+  // spawn
+  G.spawn-=dt;if(G.spawn<=0){G.bears.push(newBear());G.spawn=1.1+Math.random()*1.4-(60-G.time)/90}
+  // teacher (선도부 곰)
+  G.tSpawn-=dt;if(!G.teacher&&G.tSpawn<=0){G.teacher={x:GW*.2,y:0,state:"away",tt:1.6+Math.random()*1.5,warn:0,inT:0}}
+  const ex=GW*.3,eyeY=GH*.42;
+  if(G.teacher){const T=G.teacher;T.inT+=dt;T.tt-=dt;
+    if(T.state==="away"&&T.tt<=0){T.state="warn";T.tt=.55}
+    else if(T.state==="warn"&&T.tt<=0){T.state="look";T.tt=1.1+Math.random()*.8}
+    else if(T.state==="look"){if(G.firing&&!G.flash){G.hearts--;G.flash=1;G.combo=0;G.msg={t:"들켰다!!",c:"#ff3b30",life:1.2};try{tone(196,0,.4,.2)}catch(e){}gmHud();if(G.hearts<=0)return gmEnd()}if(T.tt<=0){T.state="away";T.tt=1.2+Math.random()*2}}
+    if(T.inT>9){G.teacher=null;G.tSpawn=5+Math.random()*6}}
+  G.flash=Math.max(0,G.flash-dt);
+  // bears
+  let target=null;
+  for(const b of G.bears){if(b.state==="walk"){b.x-=b.v*dt;if(b.x<ex+20){b.state="gone"}else if(G.firing&&(!target||b.x<target.x))target=b}}
+  if(target&&G.firing){target.love+=dt/target.need;if(target.love>=1){target.state="love";G.combo++;const pts=(target.gold?500:100)*Math.min(G.combo,10);G.score+=pts;G.caught++;G.msg={t:`+${pts}${G.combo>1?"  콤보 x"+G.combo:""}`,c:"#ff4fa0",life:.9};G.line.push(target);try{ensureAudio();tone(1046,0,.08,.12);tone(1568,.08,.15,.12)}catch(e){}gmHud()}}
+  G.bears=G.bears.filter(b=>b.state==="walk"||b.state==="love");
+  G.bears.forEach(b=>{if(b.state==="love"){const i=G.line.indexOf(b),tx=ex-75-i*38;b.x+=(tx-b.x)*Math.min(1,dt*4)}});
+  if(G.line.length>8){const old=G.line.shift();G.bears.splice(G.bears.indexOf(old),1)}
+  if(G.msg){G.msg.life-=dt;if(G.msg.life<=0)G.msg=null}
+  gmDraw(ex,eyeY,target);
+  if(Math.floor(G.t*4)%2===0)gmHud();
+  GM.raf=requestAnimationFrame(gmLoop);
+}
+function rr(x,y,w,h,r,f){gx.beginPath();gx.roundRect?gx.roundRect(x,y,w,h,r):gx.rect(x,y,w,h);gx.fillStyle=f;gx.fill()}
+function drawBear(b,y,face){
+  const s=b.s*GH/620*(b.state==="love"?.8:1),x=b.x;gx.save();gx.translate(x,y+Math.sin(G.t*8+b.bob)*2*s);gx.scale(s,s);
+  gx.fillStyle="rgba(0,0,0,.12)";gx.beginPath();gx.ellipse(0,150,34,8,0,0,7);gx.fill();
+  rr(-26,40,52,95,22,b.c);rr(-24,120,18,32,8,b.c);rr(6,120,18,32,8,b.c);
+  rr(-16,55,32,40,14,"#f1d3a8");
+  gx.fillStyle=b.c;[[-24,-22],[24,-22]].forEach(([ex,ey])=>{gx.beginPath();gx.arc(ex,ey,13,0,7);gx.fill()});
+  gx.fillStyle="#f1d3a8";[[-24,-22],[24,-22]].forEach(([ex,ey])=>{gx.beginPath();gx.arc(ex,ey,6,0,7);gx.fill()});
+  gx.fillStyle=b.c;gx.beginPath();gx.arc(0,5,36,0,7);gx.fill();
+  gx.fillStyle="#f6e2c3";gx.beginPath();gx.ellipse(0,18,14,11,0,0,7);gx.fill();
+  gx.fillStyle="#3a2412";gx.beginPath();gx.ellipse(0,13,5,3.6,0,0,7);gx.fill();
+  if(b.state==="love"){gx.fillStyle="#ff4fa0";[-13,13].forEach(hx=>{gx.save();gx.translate(hx,0);gx.beginPath();gx.moveTo(0,4);gx.bezierCurveTo(-9,-4,-5,-12,0,-6);gx.bezierCurveTo(5,-12,9,-4,0,4);gx.fill();gx.restore()})}
+  else{gx.fillStyle="#3a2412";[-13,13].forEach(hx=>{gx.beginPath();gx.arc(hx*(face||1)<0?hx:hx,-2,4,0,7);gx.fill()})}
+  if(b.gold&&b.state!=="love"){gx.fillStyle="#fff";gx.font="bold 18px sans-serif";gx.textAlign="center";gx.fillText("★",0,-38)}
+  if(b.love>0&&b.state==="walk"){rr(-26,-56,52,8,4,"rgba(0,0,0,.2)");rr(-26,-56,52*b.love,8,4,"#ff4fa0")}
+  if(b.state==="love"&&b.love<1.3){b.love+=.02}
+  gx.restore();
+}
+function drawGirl(x,y,firing){
+  const s=GH/620*1.3;gx.save();gx.translate(x,y);gx.scale(s,s);
+  gx.fillStyle="rgba(0,0,0,.12)";gx.beginPath();gx.ellipse(0,150,30,8,0,0,7);gx.fill();
+  rr(-9,105,8,45,4,"#f2d5c4");rr(3,105,8,45,4,"#f2d5c4");rr(-11,140,12,10,4,"#2a2a5a");rr(1,140,12,10,4,"#2a2a5a");
+  gx.fillStyle="#3b3f8f";gx.beginPath();gx.moveTo(-24,108);gx.lineTo(24,108);gx.lineTo(16,70);gx.lineTo(-16,70);gx.closePath();gx.fill();
+  rr(-17,30,34,45,10,"#ffffff");gx.fillStyle="#3b3f8f";gx.beginPath();gx.moveTo(-8,30);gx.lineTo(0,46);gx.lineTo(8,30);gx.fill();
+  gx.fillStyle="#e8402c";gx.beginPath();gx.moveTo(-4,38);gx.lineTo(4,38);gx.lineTo(0,46);gx.fill();
+  gx.fillStyle="#f2d5c4";gx.beginPath();gx.arc(0,0,26,0,7);gx.fill();
+  gx.fillStyle="#7a3b1c";gx.beginPath();gx.arc(0,-4,29,Math.PI*1.02,Math.PI*1.98);gx.fill();rr(-30,-6,12,52,6,"#7a3b1c");rr(18,-6,12,52,6,"#7a3b1c");
+  gx.beginPath();gx.moveTo(-26,-8);gx.quadraticCurveTo(0,6,26,-8);gx.lineTo(26,-16);gx.lineTo(-26,-16);gx.fill();
+  gx.fillStyle=firing?"#ff4fa0":"#2b1d14";[[-9,2],[9,2]].forEach(([a,b])=>{gx.beginPath();gx.ellipse(a,b,firing?4.5:3.2,firing?2:4,0,0,7);gx.fill()});
+  gx.fillStyle="#ff9fb4";[[-15,10],[15,10]].forEach(([a,b])=>{gx.beginPath();gx.ellipse(a,b,5,2.8,0,0,7);gx.fill()});
+  gx.fillStyle="#c0505a";gx.beginPath();gx.arc(0,13,3,0,Math.PI);gx.fill();
+  gx.restore();
+}
+function drawTeacher(T,y){
+  const s=GH/620,x=GW*.12;gx.save();gx.translate(x,y);gx.scale(s,s);
+  rr(-30,40,60,100,22,"#5b4632");rr(-22,120,18,32,8,"#5b4632");rr(4,120,18,32,8,"#5b4632");
+  rr(-30,60,60,14,4,"#e8402c");gx.fillStyle="#fff";gx.font="bold 11px sans-serif";gx.textAlign="center";gx.fillText("선도부",0,71);
+  gx.fillStyle="#5b4632";gx.beginPath();gx.arc(-26,-22,13,0,7);gx.arc(26,-22,13,0,7);gx.fill();gx.beginPath();gx.arc(0,5,38,0,7);gx.fill();
+  if(T.state==="look"){rr(-26,-8,52,13,6,"#111");gx.fillStyle="#fff";gx.fillRect(-20,-5,6,3)}
+  else{gx.fillStyle="#2a1a0e";gx.beginPath();gx.arc(-12,-2,3.5,0,7);gx.arc(12,-2,3.5,0,7);gx.fill()}
+  gx.fillStyle="#f6e2c3";gx.beginPath();gx.ellipse(0,18,14,11,0,0,7);gx.fill();gx.fillStyle="#2a1a0e";gx.beginPath();gx.ellipse(0,13,5,3.6,0,0,7);gx.fill();
+  if(T.state==="warn"||T.state==="look"){gx.fillStyle="#ff3b30";gx.font="bold 40px sans-serif";gx.fillText("!",0,-48)}
+  gx.restore();
+}
+function gmDraw(ex,eyeY,target){
+  const W=GW,H=GH,floor=H*.62;
+  const g=gx.createLinearGradient(0,0,0,floor);g.addColorStop(0,"#fde6ee");g.addColorStop(1,"#f6d3df");gx.fillStyle=g;gx.fillRect(0,0,W,floor);
+  const off=-(G.scroll%220);
+  for(let x=off;x<W+220;x+=220){rr(x+20,H*.16,90,H*.24,6,"#fff7fa");gx.strokeStyle="#e7b9c8";gx.lineWidth=3;gx.strokeRect(x+20,H*.16,90,H*.24);gx.beginPath();gx.moveTo(x+65,H*.16);gx.lineTo(x+65,H*.4);gx.stroke();rr(x+140,H*.2,60,floor-H*.2,4,"#e9c3cf")}
+  gx.fillStyle="#efe6dc";gx.fillRect(0,floor,W,H-floor);gx.strokeStyle="#e0d4c8";gx.lineWidth=1;
+  for(let x=off*1.4%80;x<W;x+=80){gx.beginPath();gx.moveTo(x,floor);gx.lineTo(x-60,H);gx.stroke()}
+  const by=floor-H*.17;
+  [...G.bears].sort((a,b)=>a.x-b.x).forEach(b=>drawBear(b,by));
+  if(G.teacher)drawTeacher(G.teacher,by-6);
+  drawGirl(ex,by-4-GH*.03,G.firing);
+  if(G.firing){const s=GH/620*1.3,ey=by-4+2*s,end=target?target.x-12:W;
+    gx.save();gx.shadowColor="#ff2d95";gx.shadowBlur=16*s;
+    [[-9,0],[9,0]].forEach(([dx])=>{const gr=gx.createLinearGradient(ex,0,end,0);gr.addColorStop(0,"#ff2d95");gr.addColorStop(1,"rgba(255,80,170,.75)");
+      gx.strokeStyle=gr;gx.lineWidth=(6+Math.sin(G.t*40)*2)*s;gx.lineCap="round";gx.beginPath();gx.moveTo(ex+dx*s+6*s,ey);gx.lineTo(end,ey-6*s);gx.stroke()});
+    gx.restore();
+    if(target){gx.fillStyle="rgba(255,79,160,.9)";gx.font=`bold ${22*s}px sans-serif`;gx.textAlign="center";gx.fillText("♥",target.x+(Math.random()-.5)*20,by-20*s+(Math.random()-.5)*20)}}
+  if(G.flash>0){gx.fillStyle=`rgba(255,0,0,${G.flash*.25})`;gx.fillRect(0,0,W,H)}
+  if(G.msg){gx.globalAlpha=Math.min(1,G.msg.life*2);gx.fillStyle=G.msg.c;gx.font=`bold ${Math.round(H*.045)}px "Noto Sans KR",sans-serif`;gx.textAlign="center";gx.fillText(G.msg.t,W/2,H*.12);gx.globalAlpha=1}
+  if(G.t<2.5){gx.fillStyle="rgba(0,0,0,.55)";rr(W*.08,H*.72,W*.84,H*.13,16,"rgba(0,0,0,.55)");gx.fillStyle="#fff";gx.font=`bold ${Math.round(H*.024)}px "Noto Sans KR",sans-serif`;gx.textAlign="center";gx.fillText("화면을 누르고 있으면 눈빛 레이저 발사!",W/2,H*.77);gx.fillText("선도부 곰이 볼 때(!)는 손을 떼세요",W/2,H*.81)}
+}
+function gmEnd(){
+  gmStop();const s=G.score;const nb=s>GM.best;if(nb)GM.best=s;
+  $("#gmEScore").textContent=s.toLocaleString();$("#gmECaught").textContent=G.caught;
+  $("#gmERank").textContent=s>=30000?"전설의 곰 사냥꾼 👑":s>=15000?"곰리 학원 인기 1위 💘":s>=6000?"두근두근 신입생 💓":"아직은 수줍은 눈빛 🙈";
+  $("#gmENew").hidden=!nb;$("#gmBest").textContent=GM.best.toLocaleString();
+  ["title","play"].forEach(x=>$("#gm-"+x).hidden=true);$("#gm-end").hidden=false;
+}
+const gmFire=on=>{if(G&&GM.run)G.firing=on};
+gmC.addEventListener("pointerdown",e=>{e.preventDefault();gmFire(true)});
+["pointerup","pointercancel","pointerleave"].forEach(ev=>gmC.addEventListener(ev,()=>gmFire(false)));
+$("#gmStart").onclick=()=>{ensureAudio();gmScreen("play")};
+$("#gmAgain").onclick=()=>gmScreen("play");
+$("#gmToTitle").onclick=()=>gmOpen();
+$("#gmQuit").onclick=()=>{gmStop();gmOpen()};
+window.addEventListener("resize",()=>{if(GM.run)gmSize()});
 
 let tt;function toast(s){$(".toast")?.remove();const d=document.createElement("div");d.className="toast";d.innerHTML=esc(s).replace(/\n/g,"<br>");$("#phone").append(d);clearTimeout(tt);tt=setTimeout(()=>d.remove(),2200)}
 </script>
